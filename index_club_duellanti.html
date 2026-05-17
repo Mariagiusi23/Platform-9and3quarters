@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <!-- Meta e risorse principali -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Platform 9¾ - Club dei Duellanti Avanzato</title>
+    <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("pf_theme") || "dark");</script>
+
+  <link rel="stylesheet" href="css/style.css?v=home-adventure-title-1">
+  <link rel="stylesheet" href="css/style_club_duellanti.css">
+
+  <script src="jss/guardia.js?v=i18n-1"></script>
+    <link rel="stylesheet" href="css/harmony.css?v=6">
+    <link rel="stylesheet" href="css/responsive.css?v=home-adventure-title-1">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="homepage.html" class="logo"><span class="navbar-logo-mark" role="button" aria-label="Mostra logo ingrandito" tabindex="0"><img src="logo.jpg" alt="" loading="eager"></span>Platform 9 ¾</a>
+
+    <ul class="nav-links">
+      <li><a href="homepage.html" data-i18n="nav_home">Home</a></li>
+      <li><a href="gazzetta.html" data-i18n="nav_gazzetta">Gazzetta</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Test ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="smistamento.html">Smistamento</a></li>
+          <li><a href="test.html">Bacchetta</a></li>
+        </ul>
+      </li>
+      <li><a href="pensatoio.html" data-i18n="nav_pensatoio">Pensatoio</a></li>
+      <li><a href="olivander.html" data-i18n="nav_olivander">Olivander</a></li>
+      <li><a href="guferia.html" data-i18n="nav_guferia">Guferia</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Minigiochi ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="index_legilimanzia.html">Legilimanzia</a></li>
+          <li><a href="index_pozioni.html">Pozioni</a></li>
+          <li><a href="index_club_duellanti.html">Club Duellanti</a></li>
+          <li><a href="index_quidditch.html">Quidditch</a></li>
+        </ul>
+      </li>
+      <li><a href="index_archivio.html" data-i18n="nav_archivio">Archivio</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <div class="settings-wrapper">
+        <button class="settings-btn" type="button" aria-label="Impostazioni" title="Impostazioni" aria-expanded="false">⚙️</button>
+      </div>
+      <a href="posta.html" class="nav-icon-btn nav-mail-btn" data-i18n-title="nav_posta" aria-label="Posta" title="Posta">✉️</a>
+      <a href="profilo.html" class="profile-btn" aria-label="Profilo" title="Profilo">
+        <span id="nav-username">🧙‍♂️</span>
+      </a>
+    </div>
+  </div>
+</nav>
+<div id="snapeIntro" class="snapeIntro">
+  <div class="snape-card">
+    <div class="snape-layout">
+      <div class="snape-figure">
+        <img src="images/snape.png" class="snape-img" alt="Professor Piton">
+        <div class="snape-face"></div>
+        <div class="snape-robe"></div>
+        <div class="snape-wand"></div>
+      </div>
+      <div class="dialogue">
+        <h2>Professor Piton</h2>
+        <p id="snapeText">Prima di umiliarti davanti all’intera aula, dimmi: sai almeno come si duella?</p>
+        <div id="snapeChoice" class="controls" role="group" aria-label="Scelte introduzione">
+          <!-- type="button" evita l'invio implicito in caso il markup venga inserito in un form -->
+          <button type="button" class="gold" onclick="showTutorial()">No, spiegami le regole</button>
+          <button type="button" onclick="skipTutorial()">Sì, sono pronto</button>
+        </div>
+        <div id="tutorial" class="hidden">
+          <p>Ascolta attentamente. Non lo ripeterò due volte.</p>
+          <div class="tutorial-list">
+            <div><strong>Q</strong> Stupefy: molto danno</div>
+            <div><strong>W</strong> Expelliarmus: danno medio e combo</div>
+            <div><strong>E</strong> Glacius: rallenta e colpisce</div>
+            <div><strong>R</strong> Protego: riduce il prossimo colpo</div>
+            <div><strong>A / D</strong> Schivata: movimento difensivo</div>
+            <div><strong>Energia</strong> le magie la consumano</div>
+          </div>
+          <p>In modalità 2 giocatori, il secondo duellante usa I, O, P, L e le frecce.</p>
+          <div class="controls">
+            <button type="button" class="gold" onclick="skipTutorial()">Ho capito, inizia</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <header class="hero">
+    <span class="badge">Platform 9¾</span>
+    <h1>Club dei Duellanti</h1>
+    <p>Duello avanzato con comandi da tastiera, energia, Protego, schivate, combo e una lezione severissima del professor Piton.</p>
+  </header>
+
+  <section id="menu" class="screen">
+    <h2>Preparazione al duello</h2>
+    <p>Seleziona modalità e mago. In modalità 1 giocatore sfidi una CPU aggressiva.</p>
+
+  <!-- Griglia menu: modalità a sinistra, selezione duellante a destra -->
+  <div class="menu-grid">
+      <div class="card">
+        <h3>Modalità</h3>
+        <p>Scegli se affrontare la CPU o giocare in due sullo stesso computer.</p>
+        <div class="mode-buttons" style="margin-top:14px" role="group" aria-label="Selezione modalità">
+          <button type="button" class="gold" onclick="setMode(1)">👤 1 giocatore</button>
+          <button type="button" onclick="setMode(2)">👥 2 giocatori</button>
+        </div>
+        <p id="modeText" style="margin-top:12px">Modalità selezionata: <strong>1 giocatore</strong></p>
+      </div>
+
+      <div class="card">
+        <h3>Duellante</h3>
+        <p>Scegli il tuo personaggio. Ogni scelta cambia il colore della sciarpa e dell’arena.</p>
+        <p class="photo-note">Nella cartella del progetto crea <strong>images</strong> e aggiungi: <strong>snape.png</strong>, <strong>harry.png</strong>, <strong>draco.png</strong>, <strong>luna.png</strong>, <strong>cedric.png</strong>.</p>
+        <div class="char-grid" style="margin-top:14px" role="list">
+          <!-- Oggetti selezionabili: manteniamo onclick per compatibilità, aggiungiamo ruoli ARIA -->
+          <div role="listitem" class="char selected" onclick="selectChar('Harry Potter · Grifondoro','#b91c1c','🦁','images/harry.png',this)"><span class="face">🦁</span><strong>Harry Potter</strong><span>Grifondoro · coraggio</span></div>
+          <div role="listitem" class="char" onclick="selectChar('Draco Malfoy · Serpeverde','#15803d','🐍','images/draco.png',this)"><span class="face">🐍</span><strong>Draco Malfoy</strong><span>Serpeverde · precisione</span></div>
+          <div role="listitem" class="char" onclick="selectChar('Luna Lovegood · Corvonero','#2563eb','🦅','images/luna.png',this)"><span class="face">🦅</span><strong>Luna Lovegood</strong><span>Corvonero · strategia</span></div>
+          <div role="listitem" class="char" onclick="selectChar('Cedric Diggory · Tassorosso','#ca8a04','🦡','images/cedric.png',this)"><span class="face">🦡</span><strong>Cedric Diggory</strong><span>Tassorosso · lealtà</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="keymap">
+      <div class="key"><strong>Q</strong><span>Stupefy</span></div>
+      <div class="key"><strong>W</strong><span>Expelliarmus</span></div>
+      <div class="key"><strong>E</strong><span>Glacius</span></div>
+      <div class="key"><strong>R</strong><span>Protego</span></div>
+      <div class="key"><strong>A / D</strong><span>Schivata</span></div>
+    </div>
+
+    <div class="controls" style="margin-top:18px">
+      <button type="button" class="gold" onclick="startGame()">Inizia duello</button>
+      <button type="button" class="soft" onclick="openSnape()">Rivedi istruzioni di Piton</button>
+    </div>
+  </section>
+
+  <section id="game" class="screen hidden">
+  <!-- HUD: salute, energia e stato turno -->
+  <div class="hud">
+      <div class="hpbox">
+        <div class="name" id="p1name">Player 1</div>
+        <div class="bar"><div id="hp1fill" class="fill" aria-hidden="true"></div></div>
+        <div class="energy" aria-hidden="true"><span id="en1fill"></span></div>
+      </div>
+      <div class="centerHud">
+        <div class="round" id="roundText">DUELLO</div>
+        <div class="status" id="turnText">Pronto</div>
+      </div>
+      <div class="hpbox right">
+        <div class="name" id="p2name">Avversario</div>
+        <div class="bar"><div id="hp2fill" class="fill" aria-hidden="true"></div></div>
+        <div class="energy" aria-hidden="true"><span id="en2fill"></span></div>
+      </div>
+    </div>
+
+    <div id="arena" class="arena">
+      <div class="torches"><span class="torch t1"></span><span class="torch t2"></span></div>
+      <div id="wiz1" class="wizard left" style="--house:#b91c1c" aria-label="Player 1">
+        <div class="faceTxt" id="txt1">Player 1</div>
+        <img class="head-img" id="face1" src="images/harry.png" alt="Duellante Grifondoro">
+        <div class="hair"></div><div class="head"></div><div class="body"></div><div class="scarf"></div><div class="arm"></div><div class="wand"></div><div class="legs"></div>
+      </div>
+      <div id="wiz2" class="wizard right" style="--house:#15803d" aria-label="Player 2">
+        <div class="faceTxt" id="txt2">CPU</div>
+        <img class="head-img" id="face2" src="images/draco.png" alt="Duellante Serpeverde">
+        <div class="hair"></div><div class="head"></div><div class="body"></div><div class="scarf"></div><div class="arm"></div><div class="wand"></div><div class="legs"></div>
+      </div>
+    </div>
+
+    <div class="spellbar" role="toolbar" aria-label="Barra incantesimi">
+      <button type="button" class="spellbtn red" onclick="playerSpell('stupefy')">Q · Stupefy</button>
+      <button type="button" class="spellbtn gold" onclick="playerSpell('expelliarmus')">W · Expelliarmus</button>
+      <button type="button" class="spellbtn blue" onclick="playerSpell('glacius')">E · Glacius</button>
+      <button type="button" class="spellbtn green" onclick="playerSpell('protego')">R · Protego</button>
+      <button type="button" class="spellbtn soft" onclick="playerDodge()">A/D · Schivata</button>
+      <button type="button" class="spellbtn soft" onclick="resetGame()">Ricomincia</button>
+  <!-- Pulsante per tornare indietro di una mossa (undo) e per abbandonare il duello -->
+  <button type="button" class="spellbtn soft" onclick="showConfirmExit()">Abbandona</button>
+    </div>
+
+    <div class="keys">
+      Player 1: Q W E R + A/D. Player 2: I O P L + frecce. L’energia si rigenera automaticamente.
+    </div>
+  <div id="log" class="log" role="status" aria-live="polite">Scegli il primo incantesimo. Protego riduce il prossimo danno.</div>
+  </section>
+</div>
+
+<div id="finish" class="finish hidden">
+  <div class="finish-card">
+    <h2 id="winnerTitle">Vittoria!</h2>
+    <p id="winnerText">Hai vinto il duello.</p>
+    <div class="controls" style="justify-content:center;margin-top:18px">
+      <button type="button" class="gold" onclick="closeFinish();resetGame()">Nuovo duello</button>
+      <button type="button" class="soft" onclick="backMenu()">Cambia modalità</button>
+    </div>
+  </div>
+</div>
+
+<!-- Conferma di uscita in stile Piton: fuori da #finish, altrimenti resta nascosta -->
+<div id="confirmExit" class="confirm-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+  <div class="confirm-card">
+    <h2 id="confirmTitle">Professor Piton</h2>
+    <p id="confirmExitText">Sei sicuro di voler abbandonare il duello? Preferisci cambiare modalità e affrontare la responsabilità in maniera meno... coraggiosa?</p>
+    <div class="controls" style="justify-content:center;margin-top:14px">
+      <button type="button" class="red" onclick="confirmExit()">Sì, abbandono</button>
+      <button type="button" class="soft" onclick="hideConfirmExit()">No, resto</button>
+    </div>
+  </div>
+</div>
+    <div id="howler-modal" class="howler-overlay hidden">
+        <div id="howler-envelope" class="howler-envelope">
+            <div class="howler-seal">M</div>
+            <p>Aperta da <span id="howler-sender"></span>...</p>
+            <p class="click-to-open">Clicca per aprirla prima che esploda!</p>
+        </div>
+        <div id="howler-ashes" class="hidden">🔥 La lettera si è incenerita... 🔥</div>
+    </div>
+<script src="script.js?v=home-adventure-title-1"></script>
+<script src="jss/script_club_duellanti.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casella di Posta - Platform 9 ¾</title>
+    <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("pf_theme") || "dark");</script>
+
+    <link rel="stylesheet" href="css/style.css?v=home-adventure-title-1">
+    <link rel="stylesheet" href="css/posta.css?v=home-adventure-title-1">
+
+    <script src="jss/guardia.js?v=i18n-1"></script>
+    <link rel="stylesheet" href="css/harmony.css?v=6">
+    <link rel="stylesheet" href="css/responsive.css?v=home-adventure-title-1">
+</head>
+<body class="posta-page">
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="homepage.html" class="logo"><span class="navbar-logo-mark" role="button" aria-label="Mostra logo ingrandito" tabindex="0"><img src="logo.jpg" alt="" loading="eager"></span>Platform 9 ¾</a>
+
+    <ul class="nav-links">
+      <li><a href="homepage.html" data-i18n="nav_home">Home</a></li>
+      <li><a href="gazzetta.html" data-i18n="nav_gazzetta">Gazzetta</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Test ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="smistamento.html">Smistamento</a></li>
+          <li><a href="test.html">Bacchetta</a></li>
+        </ul>
+      </li>
+      <li><a href="pensatoio.html" data-i18n="nav_pensatoio">Pensatoio</a></li>
+      <li><a href="olivander.html" data-i18n="nav_olivander">Olivander</a></li>
+      <li><a href="guferia.html" data-i18n="nav_guferia">Guferia</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Minigiochi ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="index_legilimanzia.html">Legilimanzia</a></li>
+          <li><a href="index_pozioni.html">Pozioni</a></li>
+          <li><a href="index_club_duellanti.html">Club Duellanti</a></li>
+          <li><a href="index_quidditch.html">Quidditch</a></li>
+        </ul>
+      </li>
+      <li><a href="index_archivio.html" data-i18n="nav_archivio">Archivio</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <div class="settings-wrapper">
+        <button class="settings-btn" type="button" aria-label="Impostazioni" title="Impostazioni" aria-expanded="false">⚙️</button>
+      </div>
+      <a href="posta.html" class="nav-icon-btn nav-mail-btn" data-i18n-title="nav_posta" aria-label="Posta" title="Posta">✉️</a>
+      <a href="profilo.html" class="profile-btn" aria-label="Profilo" title="Profilo">
+        <span id="nav-username">🧙‍♂️</span>
+      </a>
+    </div>
+  </div>
+</nav>
+    <main class="posta-container">
+        <header class="posta-header">
+            <h1>La tua Casella di Posta</h1>
+            <p>Le Strillettere rosse non sono ancora esplose... attento ad aprirle!</p>
+        </header>
+
+        <div id="mailbox-grid" class="mailbox-grid">
+            <!-- Le lettere appariranno qui -->
+        </div>
+    </main>
+
+    <!-- TRAPPOLA DELLA STRILLETTERA (Per farla urlare qui dentro) -->
+    <div id="howler-modal" class="howler-overlay hidden">
+        <div id="howler-envelope" class="howler-envelope">
+            <div class="howler-seal">M</div>
+            <p>Aperta da <span id="howler-sender"></span>...</p>
+        </div>
+        <div id="howler-ashes" class="hidden">🔥 La lettera si è incenerita... 🔥</div>
+    </div>
+
+    <!-- MODALE SILENZIOSA (Per leggere le ceneri delle vecchie lettere) -->
+    <div id="ash-modal" class="howler-overlay hidden">
+        <div class="ash-content">
+            <button class="close-ash" onclick="document.getElementById('ash-modal').classList.add('hidden')">✖</button>
+            <h3>Lettera Incenerita da <span id="ash-sender"></span></h3>
+            <p id="ash-text" style="font-family: Georgia, serif; font-style: italic;"></p>
+        </div>
+    </div>
+    <script src="script.js?v=home-adventure-title-1"></script>
+    <script src="jss/posta.js"></script>
+</body>
+</html>

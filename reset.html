@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform 9 ¾ - Nuova Parola d'Ordine</title>
+    <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("pf_theme") || "dark");</script>
+
+    <link rel="stylesheet" href="css/test.css?v=home-adventure-title-1">
+    <link rel="stylesheet" href="css/harmony.css?v=6">
+    <link rel="stylesheet" href="css/responsive.css?v=home-adventure-title-1">
+</head>
+<body class="olivander-page">
+    <main style="max-width: 400px; margin: 2rem auto; background: rgba(24,20,39,0.72); padding: 2rem; border: 2px solid gold; border-radius: 10px;">
+        <h2 style="color: gold; text-align: center;">Nuova Parola d'Ordine</h2>
+        <form id="reset-form">
+            <input type="password" id="new-password" placeholder="Inserisci nuova password" required minlength="8" pattern="(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,}" title="Minimo 8 caratteri, una maiuscola e un carattere speciale" style="width: 100%; padding: 10px; margin-bottom: 15px;">
+            <button type="submit" class="quiz-btn" style="width: 100%;">Conferma</button>
+        </form>
+        <p id="msg" style="color: white; text-align: center; margin-top: 15px;"></p>
+    </main>
+
+    <script>
+        document.getElementById('reset-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            // Prende il token dalla barra degli indirizzi (URL)
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            const newPassword = document.getElementById('new-password').value;
+            const msg = document.getElementById('msg');
+
+            if (!token) {
+                msg.innerText = "Link di recupero mancante o non valido.";
+                msg.style.color = "#f44336";
+                return;
+            }
+
+            if (newPassword.length < 8 || !/[A-Z]/.test(newPassword) || !/[^A-Za-z0-9]/.test(newPassword)) {
+                msg.innerText = "La parola d'ordine deve avere almeno 8 caratteri, una maiuscola e un carattere speciale.";
+                msg.style.color = "#f44336";
+                return;
+            }
+
+            const res = await fetch('php/reset_password.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ token, newPassword })
+            });
+            const data = await res.json();
+            msg.innerText = data.message;
+            msg.style.color = data.success ? "#4CAF50" : "#f44336";
+            
+            if(data.success) {
+                setTimeout(() => window.location.href = "index.html", 3000);
+            }
+        });
+    </script>
+</body>
+</html>

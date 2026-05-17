@@ -1,0 +1,59 @@
+.posta-page {
+    background: radial-gradient(circle at top, #2a2146, #151224);
+    color: #f3e3c2;
+    min-height: 100vh;
+}
+
+.posta-container {
+    padding: 2rem 2rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.posta-header { text-align: center; margin-bottom: 3rem; }
+.posta-header h1 { font-family: 'Cinzel', serif; color: #d4af37; font-size: 3rem; }
+
+.mailbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Stile base delle lettere nella griglia */
+.mail-item {
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 2px solid;
+}
+
+/* Lettera NON LETTA (Rossa, minacciosa e tremante) */
+.mail-unread {
+    background: #8b0000;
+    border-color: #ff0000;
+    color: white;
+    box-shadow: 0 0 15px rgba(255,0,0,0.5);
+}
+.mail-unread:hover { animation: rage-shake 0.1s infinite; transform: scale(1.05); }
+
+/* Lettera LETTA (Cenere, innocua) */
+.mail-read {
+    background: #2a2a2a;
+    border-color: #555;
+    color: #888;
+}
+.mail-read:hover { background: #333; }
+
+.ash-content {
+    background: #1a1a1a;
+    border: 1px solid #555;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    text-align: center;
+    color: #aaa;
+    position: relative;
+}
+.close-ash { position: absolute; top: 10px; right: 15px; background: none; border: none; color: #fff; cursor: pointer; font-size: 1.2rem; }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Guferia - Invia una Strillettera</title>
+    <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("pf_theme") || "dark");</script>
+
+    <link rel="stylesheet" href="css/style.css?v=home-adventure-title-1">
+    <link rel="stylesheet" href="css/guferia.css?v=home-adventure-title-1">
+
+    <script src="jss/guardia.js?v=i18n-1"></script>
+    <link rel="stylesheet" href="css/harmony.css?v=6">
+    <link rel="stylesheet" href="css/responsive.css?v=home-adventure-title-1">
+</head>
+<body class="guferia-page">
+
+    <nav class="navbar">
+  <div class="nav-container">
+    <a href="homepage.html" class="logo"><span class="navbar-logo-mark" role="button" aria-label="Mostra logo ingrandito" tabindex="0"><img src="logo.jpg" alt="" loading="eager"></span>Platform 9 ¾</a>
+
+    <ul class="nav-links">
+      <li><a href="homepage.html" data-i18n="nav_home">Home</a></li>
+      <li><a href="gazzetta.html" data-i18n="nav_gazzetta">Gazzetta</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Test ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="smistamento.html">Smistamento</a></li>
+          <li><a href="test.html">Bacchetta</a></li>
+        </ul>
+      </li>
+      <li><a href="pensatoio.html" data-i18n="nav_pensatoio">Pensatoio</a></li>
+      <li><a href="olivander.html" data-i18n="nav_olivander">Olivander</a></li>
+      <li><a href="guferia.html" data-i18n="nav_guferia">Guferia</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Minigiochi ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="index_legilimanzia.html">Legilimanzia</a></li>
+          <li><a href="index_pozioni.html">Pozioni</a></li>
+          <li><a href="index_club_duellanti.html">Club Duellanti</a></li>
+          <li><a href="index_quidditch.html">Quidditch</a></li>
+        </ul>
+      </li>
+      <li><a href="index_archivio.html" data-i18n="nav_archivio">Archivio</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <div class="settings-wrapper">
+        <button class="settings-btn" type="button" aria-label="Impostazioni" title="Impostazioni" aria-expanded="false">⚙️</button>
+      </div>
+      <a href="posta.html" class="nav-icon-btn nav-mail-btn" data-i18n-title="nav_posta" aria-label="Posta" title="Posta">✉️</a>
+      <a href="profilo.html" class="profile-btn" aria-label="Profilo" title="Profilo">
+        <span id="nav-username">🧙‍♂️</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+    <main class="guferia-container">
+        <header class="guferia-header">
+            <h1>La Guferia</h1>
+            <p>"Scegli un gufo robusto, le Strillettere sono pesanti da trasportare!"</p>
+        </header>
+
+        <div class="desk">
+            <div class="red-envelope-form">
+                <h2>Scrivi la tua Strillettera</h2>
+                <form id="form-howler">
+                    <div class="input-group">
+                        <label for="howler-to">Destinatario (Username esatto):</label>
+                        <input type="text" id="howler-to" placeholder="Es. DracoMalfoy99" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="howler-text">Il tuo messaggio furioso:</label>
+                        <textarea id="howler-text" rows="5" placeholder="COME HAI OSATO RUBARE LA MACCHINA?!..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" id="btn-send-howler" class="magic-btn danger-btn">
+                        🦉 Affida al Gufo
+                    </button>
+                </form>
+                <div id="howler-status" class="status-msg hidden"></div>
+            </div>
+        </div>
+        <!-- MODALE STRILLETTERA -->
+        <div id="howler-modal" class="howler-overlay hidden">
+            <div id="howler-envelope" class="howler-envelope">
+             <div class="howler-seal">M</div>
+                <p>Aperta da <span id="howler-sender"></span>...</p>
+                <p class="click-to-open">Clicca per aprirla prima che esploda!</p>
+            </div>
+    <!-- Qui apparirà la cenere -->
+        <div id="howler-ashes" class="hidden">🔥 La lettera si è incenerita... 🔥</div>
+</div>
+    </main>
+
+    <script src="script.js?v=home-adventure-title-1"></script>
+    <script src="jss/guferia.js"></script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+/* RESET GLOBALE: Assicura che padding e bordi non aumentino la larghezza/altezza totale degli elementi */
+* {
+  box-sizing: border-box;
+}
+
+/* VARIABILI GLOBALI: Definizione della palette di colori a tema "Hogwarts/Magia" */
+:root {
+  /* Colori estratti dalla Mappa 3D */
+  --gold: #f1c76a; /* Oro principale per testi e bordi */
+  --gold-soft: rgba(241, 199, 106, .38); /* Oro semitrasparente per effetti hover */
+  --glass-border: rgba(241, 199, 106, .24); /* Bordo delicato per i pannelli effetto vetro */
+  --text: #f8ecd1; /* Colore del testo primario, una tinta panna/pergamena */
+}
+
+/* Lumos overrides for Archivio */
+html[data-theme="light"] {
+  --gold: #9a6514;
+  --gold-soft: rgba(154,101,20,0.28);
+  --glass-border: rgba(112,78,24,0.24);
+  --text: #241706;
+}
+
+html[data-theme="light"] body {
+  color: #241706;
+  background:
+    radial-gradient(circle at 50% 49%, rgba(255,225,165,.28), rgba(106,83,121,.12) 22%, rgba(33,42,66,.08) 47%, #f7f2df 82%),
+    linear-gradient(135deg, #fff8df 0%, #ead39b 45%, #f7f2df 100%) !important;
+}
+
+/* STILE DELLA PAGINA BASE */
+body {
+  margin: 0;
+  overflow: auto; /* Permette lo scorrimento se il contenuto supera lo schermo (diverso dalla mappa 3D principale che era hidden) */
+  font-family: Georgia, 'Times New Roman', serif; /* Font classico e formale */
+  color: var(--text);
+  /* Sfondo identico a quello della mappa interattiva (gradienti circolari e lineari scuri e magici) */
+  background:
+    radial-gradient(circle at 50% 49%, rgba(216, 158, 124, .58) 0%, rgba(106, 83, 121, .45) 22%, rgba(33, 42, 66, .55) 47%, rgba(6, 8, 13, .98) 82%),
+    linear-gradient(135deg, #06080d 0%, #111827 45%, #2b1b1e 100%);
+}
+
+/* CANVAS: Il contenitore per eventuali rendering 3D di sfondo
+   (posizionato sotto la navbar) */
+canvas {
+  position: absolute;
+  top: var(--navbar-height);
+  left: 0;
+  width: 100%;
+  height: calc(100vh - var(--navbar-height));
+  z-index: 1; /* Lo tiene dietro agli elementi dell'interfaccia */
+}
+
+/* SIGILLO (Bottone di apertura in basso a sinistra) */
+#archiveTrigger {
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+  width: 70px; /* Bottone quadrato/rotondo a seconda dei contenuti */
+
+  /* Gradiente dorato ripreso dai bottoni della mappa */
+  background: linear-gradient(90deg, #af7627, #f1c76a, #8f5d1f);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: #1d1204; /* Colore scuro per l'icona/testo interno per contrastare col fondo oro */
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,.45), inset 0 0 0 2px rgba(255,255,255,.1); /* Ombra esterna e leggero bagliore interno */
+  transition: 0.3s; /* Animazione fluida al passaggio del mouse */
+  z-index: 5;
+}
+
+/* Effetto al passaggio del mouse sul bottone di apertura: si ingrandisce e ruota leggermente */
+#archiveTrigger:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 12px 30px rgba(0,0,0,.55), 0 0 20px rgba(241,199,106,.4);
+}
+
+/* OVERLAY: Lo sfondo scuro che copre lo schermo quando si apre l'archivio
+   Manteniamo lo spazio visivo sotto la navbar con padding-top */
+#archiveOverlay {
+  position: fixed;
+  inset: 0; /* Copre tutto lo schermo (top, left, right, bottom: 0) */
+  background: rgba(0, 0, 0, .52);
+  backdrop-filter: blur(8px); /* Effetto sfocatura su ciò che sta dietro */
+  display: flex;
+  justify-content: center; /* Centra orizzontalmente il libro */
+  align-items: center; /* Centra verticalmente il libro */
+  padding-top: var(--navbar-height); /* Ensure overlay content appears below the navbar visually */
+  z-index: 20; /* Deve stare sopra a tutto il resto */
+}
+
+/* Classe di utilità per nascondere forzatamente gli elementi tramite JS */
+.hidden {
+  display: none !important;
+}
+
+/* LIBRO: Il contenitore principale dell'archivio (Stile Glassmorphism) */
+.book {
+  width: 900px;
+  height: 550px;
+  display: flex; /* Dispone le pagine affiancate */
+  border-radius: 22px;
+  border: 1px solid var(--glass-border);
+  background: linear-gradient(145deg, rgba(14, 17, 22, .85), rgba(10, 10, 10, .75)); /* Sfondo scuro e vetroso */
+  box-shadow: 0 22px 70px rgba(0,0,0,.6), 0 0 26px rgba(241,199,106,.10);
+  position: relative;
+  overflow: visible; /* Permette alla X di chiusura di uscire leggermente dai bordi, se necessario */
+}
+
+/* PAGINE: Impostazioni comuni per la colonna di sinistra e di destra */
+.page {
+  width: 50%; /* Esattamente metà larghezza per pagina */
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* Pagina di sinistra (Menu e Titolo) */
+.left {
+  border-right: 1px solid rgba(255, 255, 255, 0.05); /* Linea di divisione centrale stile "rilegatura" */
+  background: linear-gradient(90deg, rgba(0,0,0,.3), transparent); /* Ombra per dare l'idea della piega del libro */
+  display: flex;
+  flex-direction: column;
+  overflow: auto; /* Scroll interno se il menu è troppo lungo */
+}
+
+/* Pagina di destra (Contenuti generati) */
+.right {
+  background: linear-gradient(-90deg, rgba(0,0,0,.3), transparent); /* Ombra speculare per la piega */
+  display: flex;
+  flex-direction: column;
+  overflow: auto; /* Scroll interno per l'elenco dei personaggi/oggetti */
+}
+
+/* Titolo principale "Archivio" o simile */
+h1 {
+  margin: 0;
+  font-size: 42px;
+  color: var(--gold);
+  text-shadow: 0 0 24px rgba(241,199,106,.18); /* Leggero bagliore dorato sul testo */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Sottotitolo descrittivo */
+.subtitle {
+  font-family: Arial, sans-serif;
+  font-style: italic;
+  margin-bottom: 30px;
+  color: rgba(255,255,255,.86);
+}
+
+/* CATEGORIE: Contenitore dei pulsanti del menu */
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Spazio tra i bottoni */
+}
+
+/* Singolo bottone del menu laterale (es. "Studenti", "Professori") */
+.category {
+  padding: 12px 16px;
+  border: 1px solid rgba(241,199,106,.14);
+  border-radius: 10px;
+  background: rgba(255,255,255,.045);
+  color: rgba(255,255,255,.92);
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  transition: 0.2s; /* Transizione fluida per l'hover */
+}
+
+/* Effetto al passaggio del mouse sui bottoni del menu */
+.category:hover {
+  color: var(--gold);
+  background: rgba(241,199,106,.10);
+  border-color: var(--glass-border);
+}
+
+/* upload button removed from markup */
+
+/* Piccola barra di stato o di messaggi in fondo al menu */
+.status {
+  margin-top: 12px;
+  padding: 8px 10px;
+  background: rgba(0,0,0,0.25);
+  border-radius: 8px;
+  color: #ffd;
+  font-size: 13px;
+  min-height: 34px;
+}
+
+/* DESTRA (Contenuto): Titolo della sezione attualmente aperta */
+.right h2 {
+  margin-top: 0;
+  color: var(--gold);
+}
+
+/* L'area dove vengono iniettate le schede da JS */
+#contentArea {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr; /* single column: one entry per row (una colonna singola) */
+  gap: 12px; /* Spazio tra una scheda e l'altra */
+  font-family: Arial, sans-serif;
+  color: rgba(255,255,255,.86);
+  line-height: 1.6;
+  overflow-y: auto; /* Scroll verticale per leggere tutto l'elenco */
+}
+
+/* Paragrafi di testo generici dentro l'area dei contenuti */
+#contentArea p {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  margin: 0;
+}
+
+/* entries with captions: Stile della singola scheda personaggio/oggetto */
+.entry {
+  padding: 10px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.04); /* Linea di separazione tra le voci */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+/* Nome del personaggio/oggetto */
+.entry .name {
+  font-weight: 700;
+  color: #fffce8;
+}
+/* Sottotitolo (es. "Professore di Pozioni") */
+.entry .caption {
+  font-size: 13px;
+  color: rgba(255,255,255,0.78);
+  font-style: italic;
+}
+
+/* Testo di descrizione lungo */
+.entry .description {
+  margin-top: 8px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.45;
+}
+
+/* Pulsante dorato per aprire il modello 3D o il video */
+.preview {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: linear-gradient(180deg, #9b661e, #f1c76a);
+  color: #2a1404;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+}
+/* Effetto sollevamento al passaggio del mouse sul pulsante */
+.preview:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+/* CHIUDI: La "X" per chiudere la schermata dell'archivio/libro */
+#closeArchive {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  border: none;
+  background: none;
+  font-size: 28px;
+  color: var(--gold);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* La "X" brilla e si ingrandisce se le passi sopra col mouse */
+#closeArchive:hover {
+  transform: scale(1.1);
+  text-shadow: 0 0 15px var(--gold);
+}
+
+/* Modal 3D: Il contenitore che si sovrappone a tutto per mostrare video/3D */
+#modelModal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999; /* Z-index altissimo per essere l'elemento più in primo piano in assoluto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Classe usata da JS per nascondere la modale 3D */
+#modelModal.hidden {
+  display: none !important;
+}
+
+/* Sfondo scuro sfocato dietro il modello 3D/Video */
+#modelBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+}
+
+/* Il riquadro contenitore effettivo del modello 3D o del video */
+.model-box {
+  position: relative;
+  width: 85vw; /* Occupa grande parte dello schermo */
+  max-width: 1100px; /* Limite massimo di larghezza su schermi giganti */
+  height: 80vh;
+  background: radial-gradient(circle at center, #202020, #050505); /* Sfondo grigio scuro con punto luce al centro */
+  border: 2px solid rgba(241, 199, 106, 0.6); /* Bordo dorato */
+  border-radius: 22px;
+  overflow: hidden;
+  z-index: 2;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+/* Il tag <model-viewer> di Google per i file 3D */
+#modelViewer {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* Il contenitore che avvolge i tag <video> */
+.media-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1; /* keep below model-viewer so 3D interactions work (Sta sotto al visualizzatore 3D) */
+  pointer-events: none; /* don't block pointer events when empty (Permette di cliccare attraverso di esso se non c'è un video) */
+}
+
+/* Il tag <video> vero e proprio */
+.media-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Assicura che il video non venga tagliato o deformato */
+  background: #000;
+}
+
+/* Pulsante [X] per chiudere solo la finestra del modello 3D / Video */
+#closeModel {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  z-index: 5;
+  background: transparent;
+  border: none;
+  color: #f1c76a;
+  font-size: 34px;
+  cursor: pointer;
+}

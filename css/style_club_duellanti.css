@@ -1,0 +1,320 @@
+/* Variabili CSS (Custom Properties) per centralizzare e gestire palette dei colori e stili ricorrenti */
+:root{
+  --bg:#05020a;--bg2:#14081f;--gold:#ffd76b;--gold2:#b97816;--text:#fff4d8;--muted:#d8c9a5;
+  --panel:rgba(255,255,255,.085);--border:rgba(255,215,111,.22);--violet:#7c3aed;--red:#ef4444;
+  --blue:#60a5fa;--green:#22c55e;--shadow:0 32px 90px rgba(0,0,0,.58)
+}
+
+/* Lumos overrides for Club dei Duellanti */
+html[data-theme="light"] {
+  --bg: #f7f2df;
+  --bg2: #ead39b;
+  --gold: #9a6514;
+  --gold2: #c88b2b;
+  --text: #241706;
+  --muted: #5b4630;
+  --panel: rgba(255, 250, 232, 0.9);
+  --border: rgba(112,78,24,0.24);
+  --shadow: 0 24px 70px rgba(80,52,16,0.18);
+}
+
+html[data-theme="light"] body {
+  color: #241706;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255,215,111,.12), transparent 24%),
+    radial-gradient(circle at 86% 12%, rgba(124,58,237,.06), transparent 28%),
+    linear-gradient(135deg, #fff8df, #ead39b 42%, #f7f2df) !important;
+}
+
+/* Reset base del box model e font principale per coerenza */
+*{box-sizing:border-box;margin:0;padding:0;font-family:Georgia,'Times New Roman',serif}
+
+/* Stile del corpo della pagina, include uno sfondo con gradienti per ricreare un ambiente notturno magico */
+body{
+  min-height:100vh;
+  color:var(--text);
+  padding: calc(var(--navbar-height) + 28px);
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(255,215,111,.16),transparent 24%),
+    radial-gradient(circle at 86% 12%,rgba(124,58,237,.24),transparent 28%),
+    radial-gradient(circle at 50% 100%,rgba(28,11,58,.82),transparent 52%),
+    linear-gradient(145deg,var(--bg2),var(--bg));
+}
+
+/* Pseudo-elemento aggiunto al body per creare l'effetto delle stelle scintillanti a schermo intero */
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.38;background-image:
+radial-gradient(1px 1px at 30px 40px,#fff,transparent),radial-gradient(1px 1px at 190px 110px,#ffe6a3,transparent),
+radial-gradient(2px 2px at 330px 170px,#fff,transparent),radial-gradient(1px 1px at 580px 70px,#d9c6ff,transparent);
+background-size:720px 270px;animation:stars 8s linear infinite alternate}
+@keyframes stars{to{opacity:.62;transform:translateY(-10px)}} /* Leggero movimento parallax dello sfondo */
+
+/* Layout container principale centrato */
+.page{width:min(1260px,100%);margin:auto;position:relative;z-index:1}
+
+/* Stile in comune dei pannelli dell'interfaccia (vetro / blur background / glassmorphism) */
+.hero,.screen{border:1px solid var(--border);border-radius:34px;background:linear-gradient(180deg,rgba(255,255,255,.115),rgba(255,255,255,.04));box-shadow:var(--shadow);backdrop-filter:blur(14px)}
+.hero{text-align:center;padding:32px 22px;margin-bottom:20px;overflow:hidden;position:relative}
+
+/* Effetto di luce circolare che gira in background nell'header hero */
+.hero:before{content:"";position:absolute;inset:-70%;background:conic-gradient(from 0deg,transparent,rgba(255,215,111,.12),transparent,rgba(96,165,250,.1),transparent);animation:spin 13s linear infinite}
+.hero>*{position:relative}
+
+/* Stili di tipografia e badges informativi */
+.badge{display:inline-block;padding:8px 18px;border-radius:999px;background:rgba(0,0,0,.32);border:1px solid rgba(255,215,111,.34);color:#ffe5a2;font-weight:900;letter-spacing:.13em;text-transform:uppercase;font-size:.78rem}
+h1{font-size:clamp(2.3rem,6vw,5.2rem);color:var(--gold);text-shadow:0 0 34px rgba(255,215,111,.35);margin:8px 0}
+h2,h3{color:var(--gold)}p{color:var(--muted);line-height:1.55}.screen{padding:22px;margin-top:18px}
+
+/* Layout a griglia per il Menu principale */
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.card{border:1px solid rgba(255,255,255,.14);border-radius:26px;background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.34));padding:18px;position:relative;overflow:hidden}
+
+/* Effetto hover di retroilluminazione sulle card */
+.card:before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle,rgba(255,215,111,.12),transparent 35%);opacity:0;transition:.35s}
+.card:hover:before{opacity:1}.card>*{position:relative}
+
+/* Gestione flex per layout di vari elementi affiancati */
+.mode-buttons,.char-grid,.controls,.spellbar{display:flex;gap:10px;flex-wrap:wrap}
+
+/* Stile base pulsanti con varianti di colore */
+button{border:0;border-radius:999px;padding:13px 18px;color:white;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#7c3aed,#32105e);box-shadow:0 14px 30px rgba(0,0,0,.34);transition:.2s}
+button:hover{transform:translateY(-2px);filter:brightness(1.12)}
+button.soft{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.14);box-shadow:none}
+button.gold{background:linear-gradient(135deg,#d99625,#6a3306)}
+button.red{background:linear-gradient(135deg,#ef4444,#571111)}
+button.blue{background:linear-gradient(135deg,#2563eb,#172554)}
+button.green{background:linear-gradient(135deg,#16a34a,#052e16)}
+
+/* Pulsanti di selezione personaggio: transizione e stili del bordo */
+.char{min-width:145px;flex:1;border-radius:20px;padding:14px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.24);cursor:pointer;transition:.2s;text-align:center}
+.char:hover,.char.selected{border-color:rgba(255,215,111,.68);box-shadow:0 0 28px rgba(255,215,111,.18);transform:translateY(-3px)}
+.char .face{font-size:2.5rem;display:block;margin-bottom:6px}.char strong{display:block;color:#fff2bd}.char span{font-size:.82rem;color:#cdbb96}
+
+/* Classe di utilità universale per nascondere nodi del DOM */
+.hidden{display:none!important}
+
+/* Stile dell'Heads-Up Display (barre della vita in cima all'arena) */
+.hud{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;margin-bottom:14px}
+.hpbox{border:1px solid rgba(255,255,255,.13);border-radius:20px;background:rgba(0,0,0,.25);padding:12px}
+.hpbox.right{text-align:right}.name{font-weight:900;color:#fff2bd;margin-bottom:7px}
+
+/* Barre di ricarica: sfondo e riempimento visivo colorato */
+.bar{height:16px;background:rgba(255,255,255,.12);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.fill{height:100%;width:100%;border-radius:999px;background:linear-gradient(90deg,#22c55e,#facc15,#ef4444);transition:.28s}
+
+/* Contatore dei round al centro */
+.centerHud{text-align:center;min-width:170px}.round{font-size:1.9rem;color:var(--gold);font-weight:900}.status{font-size:.88rem;color:#d8c9a5;margin-top:3px}
+
+/* Barre energia sottostanti */
+.energy{height:9px;margin-top:8px;background:rgba(255,255,255,.12);border-radius:999px;overflow:hidden}.energy span{display:block;height:100%;width:100%;background:linear-gradient(90deg,#60a5fa,#c084fc,#ffd76b);transition:.2s}
+
+/* CSS per costruire l'Arena da Combattimento. Usa dei gradienti incrociati e radiali per costruire la prospettiva */
+.arena{
+  position:relative;height:580px;border-radius:32px;overflow:hidden;border:2px solid rgba(255,215,111,.36);
+  background:
+  linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px),
+  linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+  radial-gradient(ellipse at 50% 80%,rgba(255,215,111,.18),transparent 32%),
+  radial-gradient(circle at 50% 25%,rgba(111,66,193,.24),transparent 35%),
+  linear-gradient(180deg,#0a0611 0%,#140a20 45%,#050208 100%);
+  background-size:80px 80px,80px 80px,auto,auto,auto;
+  box-shadow:inset 0 0 110px rgba(0,0,0,.72),0 26px 70px rgba(0,0,0,.42);
+  perspective:900px;
+}
+
+/* L'anello di combattimento disegnato sul pavimento tramite trasformazione 3D (rotateX) */
+.arena:before{content:"";position:absolute;left:50%;bottom:52px;width:82%;height:220px;border-radius:50%;transform:translateX(-50%) rotateX(62deg);background:radial-gradient(ellipse,rgba(255,215,111,.13),rgba(255,215,111,.05) 42%,transparent 70%);border:1px solid rgba(255,215,111,.14)}
+
+/* Disegno a mano libera in CSS delle torce che appaiono in background e l'animazione della fiamma */
+.torches{position:absolute;inset:0;pointer-events:none}.torch{position:absolute;top:72px;width:28px;height:130px;background:linear-gradient(#44200a,#120703);border-radius:20px;box-shadow:0 0 20px rgba(255,126,32,.4)}.torch:before{content:"";position:absolute;left:50%;top:-38px;width:44px;height:58px;transform:translateX(-50%);border-radius:50% 50% 45% 45%;background:radial-gradient(circle,#fff4a8 0 12%,#ffb020 34%,#ef4444 58%,transparent 72%);filter:blur(2px);animation:flame .45s infinite alternate}.t1{left:9%}.t2{right:9%}
+@keyframes flame{to{transform:translateX(-50%) scale(.86,1.12) rotate(4deg)}}
+
+/* Body dei Maghi posizionato assoluto */
+.wizard{position:absolute;bottom:82px;width:190px;height:290px;transition:.18s ease;filter:drop-shadow(0 24px 26px rgba(0,0,0,.55));z-index:4}
+.wizard.left{left:10%}
+/* Il mago di destra specchiato sul suo asse */
+.wizard.right{right:10%;transform:scaleX(-1)}
+
+/* Trigger delle animazioni di danno, cast e scudo applicati tramite JS */
+.wizard.hit{animation:hit .36s ease}.wizard.cast{animation:cast .45s ease}.wizard.shielding{filter:drop-shadow(0 24px 26px rgba(0,0,0,.55)) drop-shadow(0 0 32px rgba(96,165,250,.9))}
+@keyframes hit{35%{transform:translateX(-25px) rotate(-5deg)}70%{transform:translateX(18px) rotate(3deg)}}
+@keyframes cast{50%{transform:translateY(-8px) scale(1.04)}}
+
+/* Animazioni specifiche gestite per il player a destra visto che la div è specchiata */
+.wizard.right.hit{animation:hitRight .36s ease}.wizard.right.cast{animation:castRight .45s ease}
+@keyframes hitRight{35%{transform:scaleX(-1) translateX(-25px) rotate(-5deg)}70%{transform:scaleX(-1) translateX(18px) rotate(3deg)}}
+
+/* Piccoli miglioramenti per avatar e label testuali dentro i .wizard */
+.head-img{width:58px;height:58px;border-radius:8px;border:2px solid rgba(255,255,255,.06);display:inline-block;vertical-align:middle;margin-right:8px}
+.faceTxt{font-weight:800;color:#fff2bd;margin-bottom:6px}
+
+/* Stili per overlay di conferma (Piton-style) */
+.confirm-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(3,2,6,.64);z-index:1000}
+.confirm-card{width:min(720px,92%);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid rgba(255,215,111,.14);padding:22px;border-radius:18px;box-shadow:0 24px 80px rgba(0,0,0,.7);text-align:center}
+.confirm-card h2{color:var(--gold);margin-bottom:6px}
+.confirm-card p{color:var(--muted);line-height:1.5}
+
+/* Animazione di comparsa per il dialog: leggera scala e fade */
+.confirm-overlay .confirm-card{transform:scale(.96);opacity:0;transition:transform .22s ease,opacity .22s ease}
+.confirm-overlay:not(.hidden) .confirm-card{transform:scale(1);opacity:1}
+
+/* Undo button piccolo e coerente */
+#undoBtn{padding:10px 14px;font-size:.92rem}
+@keyframes castRight{50%{transform:scaleX(-1) translateY(-8px) scale(1.04)}}
+
+/* Componenti corporei e abiti del mago generati in puro CSS */
+.head{position:absolute;left:58px;top:24px;width:72px;height:86px;border-radius:46% 46% 48% 48%;background:linear-gradient(#f0d1ad,#b88663);z-index:3}
+.hair{position:absolute;left:45px;top:12px;width:96px;height:106px;border-radius:50% 50% 45% 45%;background:#171318;z-index:2}
+.body{position:absolute;left:28px;top:100px;width:132px;height:170px;border-radius:48% 48% 12% 12%;background:linear-gradient(90deg,#050506,#17151c 50%,#050506);z-index:2}
+.scarf{position:absolute;left:48px;top:104px;width:92px;height:18px;border-radius:999px;background:var(--house);z-index:5;box-shadow:0 0 12px var(--house)}
+.arm{position:absolute;right:-22px;top:128px;width:112px;height:18px;background:#0a090c;border-radius:999px;transform:rotate(-22deg);z-index:6}
+.wand{position:absolute;right:-95px;top:129px;width:112px;height:6px;border-radius:999px;background:linear-gradient(90deg,#4b2509,#b7791f);transform:rotate(-22deg);z-index:7}
+.wand:after{content:"";position:absolute;right:-7px;top:50%;width:15px;height:15px;border-radius:50%;background:#fff7b7;transform:translateY(-50%);box-shadow:0 0 22px #ffd76b}
+.legs{position:absolute;left:48px;bottom:0;width:38px;height:52px;background:#050506;border-radius:0 0 12px 12px;box-shadow:54px 0 0 #050506}
+
+/* Testo sopra la testa per indicare chi è il Mago */
+.faceTxt{position:absolute;left:50%;top:-32px;transform:translateX(-50%);white-space:nowrap;font-weight:900;color:#ffe9a3;text-shadow:0 0 14px #000;font-size:.9rem}
+
+/* Grafica ed animazione della magia che sfreccia (proiettile) da un Mago all'altro */
+.spell-projectile{position:absolute;height:12px;width:42px;border-radius:999px;z-index:9;box-shadow:0 0 24px currentColor,0 0 60px currentColor;animation:spellFly .5s linear forwards}
+.spell-projectile:before,.spell-projectile:after{content:"";position:absolute;top:50%;width:80px;height:2px;background:currentColor;opacity:.7}.spell-projectile:before{right:28px}.spell-projectile:after{left:28px}
+@keyframes spellFly{to{transform:translateX(var(--travel)) scale(1.18)}}
+
+/* Animazione esplosione grafica sull'avversario quando colpito */
+.impact{position:absolute;width:120px;height:120px;border-radius:50%;z-index:12;pointer-events:none;background:radial-gradient(circle,#fff 0 8%,currentColor 18%,transparent 62%);box-shadow:0 0 70px currentColor;animation:impact .62s ease forwards}
+@keyframes impact{to{opacity:0;transform:scale(1.8)}}
+
+/* Scudo "Protego": generato via CSS e sfumato per farlo sembrare un'onda di energia */
+.shield{position:absolute;width:190px;height:240px;border-radius:50%;z-index:8;border:3px solid rgba(96,165,250,.85);background:radial-gradient(ellipse,rgba(96,165,250,.24),transparent 65%);box-shadow:0 0 45px rgba(96,165,250,.75);animation:shield .7s ease forwards}
+@keyframes shield{0%{opacity:0;transform:scale(.55)}35%{opacity:1}100%{opacity:0;transform:scale(1.18)}}
+
+/* Pulsantiera delle azioni di combattimento */
+.spellbar{justify-content:center;margin-top:16px}.spellbtn{min-width:132px}
+/* Stato non utilizzato da CSS per abbassare opacità sulle magie al cooldown (messo qui come predisposizione) */
+.cooldown{opacity:.42;pointer-events:none;filter:grayscale(.3)}
+
+/* Console di sistema di testo con gli aggiornamenti di battaglia */
+.log{min-height:64px;margin-top:16px;padding:14px 16px;border-radius:18px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.12);color:#ead8af;text-align:center}
+.keys{margin-top:10px;text-align:center;color:#cdbb96;font-size:.9rem}
+
+/* Grafica della legenda dei comandi */
+.keymap{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px}
+.key{border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.25);border-radius:16px;padding:10px}
+.key strong{display:block;color:#ffe8a3;font-size:1.15rem}.key span{font-size:.82rem;color:#cdbb96}
+
+/* Modali generici usati da Vittoria e Tutorial di Piton che coprono l'intero schermo */
+.finish,.snapeIntro{position:fixed;inset:0;display:grid;place-items:center;background:radial-gradient(circle,rgba(255,215,111,.18),rgba(0,0,0,.88) 58%,rgba(0,0,0,.95));z-index:90;backdrop-filter:blur(6px)}
+.finish-card,.snape-card{width:min(900px,94vw);border-radius:34px;border:1px solid rgba(255,215,111,.36);background:linear-gradient(180deg,rgba(28,16,34,.96),rgba(5,3,8,.98));box-shadow:0 40px 120px rgba(0,0,0,.75);padding:30px;position:relative;overflow:hidden}
+
+/* Elemento rotante di sottofondo sul banner finale */
+.finish-card{text-align:center}
+.finish-card:before,.snape-card:before{content:"";position:absolute;inset:-60%;background:conic-gradient(transparent,rgba(255,215,111,.14),transparent,rgba(96,165,250,.11),transparent);animation:spin 9s linear infinite}
+.finish-card>* , .snape-card>*{position:relative}
+
+/* Layout del tutorial di Piton suddiviso in due colonne (Immagine / Dialogo) */
+.snape-layout{display:grid;grid-template-columns:260px 1fr;gap:24px;align-items:center}
+.snape-figure{height:390px;border-radius:28px;border:1px solid rgba(255,215,111,.28);background:radial-gradient(circle at 50% 25%,rgba(255,255,255,.08),transparent 28%),linear-gradient(180deg,#111,#020203);position:relative;overflow:hidden;box-shadow:0 28px 80px rgba(0,0,0,.55)}
+.snape-figure:before{content:"";position:absolute;left:50%;top:42px;transform:translateX(-50%);width:150px;height:210px;border-radius:50% 50% 42% 42%;background:linear-gradient(90deg,#020203,#17171d,#020203);box-shadow:0 18px 30px rgba(0,0,0,.5)}
+
+/* Ricostruzione vettoriale di Piton (Faccia / Veste / Bacchetta) usata se non si trova l'immagine reale */
+.snape-face{position:absolute;left:50%;top:76px;transform:translateX(-50%);width:94px;height:118px;border-radius:48%;background:linear-gradient(#ead0b7,#b99275);z-index:2}
+.snape-robe{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:220px;height:235px;border-radius:45% 45% 0 0;background:linear-gradient(90deg,#020203,#15151c,#020203)}
+.snape-wand{position:absolute;right:18px;top:210px;width:145px;height:7px;background:linear-gradient(90deg,#2b1406,#9a5a1f);border-radius:999px;transform:rotate(-25deg);box-shadow:0 0 20px rgba(255,215,111,.55)}
+.snape-wand:after{content:"";position:absolute;right:-10px;top:50%;width:18px;height:18px;border-radius:50%;background:#fff4b8;transform:translateY(-50%);box-shadow:0 0 30px #ffd76b,0 0 70px #60a5fa}
+
+/* Riquadro Dialoghi del gioco stile "pergamena chiara" */
+.dialogue{border-radius:26px;background:linear-gradient(180deg,rgba(255,231,176,.96),rgba(190,126,52,.94));color:#2b1406;padding:24px;box-shadow:inset 0 0 30px rgba(67,31,8,.22),0 20px 55px rgba(0,0,0,.35)}
+.dialogue h2{color:#2b1406;font-size:2rem}
+.dialogue p{color:#3a1906;font-size:1.12rem;font-weight:800;margin:12px 0}
+.tutorial-list{margin:14px 0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tutorial-list div{background:rgba(255,255,255,.22);border:1px solid rgba(43,20,6,.22);border-radius:14px;padding:9px;font-weight:900}
+
+/* Scintille animate generate casualmente dopo un impatto da JS */
+.sparkle{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px var(--gold);animation:rise 1.2s ease forwards;z-index:20}
+@keyframes rise{to{opacity:0;transform:translateY(-90px) scale(.2)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* MEDIA QUERIES per la reattività e adattamento a tablet/desktop piccoli */
+@media(max-width:900px){
+  .menu-grid,.snape-layout{grid-template-columns:1fr}
+  .hud{grid-template-columns:1fr}.centerHud{order:-1}
+  .arena{height:500px}
+  /* Rimpicciolisce visivamente la struttura CSS del mago */
+  .wizard{width:145px;height:230px}
+  .wizard.left{left:4%}.wizard.right{right:4%}
+  .head{left:43px;width:58px;height:70px}
+  .hair{left:32px;width:78px;height:88px}
+  .body{left:20px;top:82px;width:105px;height:138px}
+  .scarf{left:35px;top:88px;width:76px}
+  .arm{right:-17px;top:108px;width:88px}
+  .wand{right:-72px;top:109px;width:88px}
+  .legs{left:35px;width:30px;height:42px;box-shadow:42px 0 0 #050506}
+  .keymap{grid-template-columns:1fr 1fr}
+  .snape-figure{height:320px}
+}
+
+/* MEDIA QUERIES estreme per lo smartphone */
+@media(max-width:620px){
+  body{padding:14px}.screen{padding:14px}
+  .arena{height:430px}
+  .spellbtn{min-width:100%}.char{min-width:100%}
+  .tutorial-list{grid-template-columns:1fr}
+  .keymap{grid-template-columns:1fr}
+}
+
+/* === GESTIONE FOTO PERSONALIZZATE === */
+/* Styling dinamico per visualizzare immagini del volto sui maghi qualora ci siano (sovrascrive il CSS vector) */
+.head-img{
+  position:absolute;
+  left:50%;
+  top:20px;
+  transform:translateX(-50%);
+  width:92px;
+  height:110px;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:46% 46% 48% 48%;
+  z-index:12;
+  border:2px solid rgba(255,215,111,.45);
+  box-shadow:0 0 22px rgba(255,215,111,.25), inset 0 0 18px rgba(0,0,0,.35);
+  background:#111;
+}
+
+/* Se viene assegnata un'immagine, la figura base di sfondo scompare */
+.wizard.right .head-img{transform:translateX(-50%) scaleX(-1)}
+.head,.hair{display:none}
+
+/* Stile per l'eventuale foto di Piton */
+.snape-img{
+  position:absolute;
+  left:50%;
+  top:44px;
+  transform:translateX(-50%);
+  width:155px;
+  height:210px;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:26px;
+  z-index:4;
+  border:2px solid rgba(255,215,111,.35);
+  box-shadow:0 0 34px rgba(255,215,111,.18),0 24px 50px rgba(0,0,0,.55);
+}
+
+/* Se Piton usa la foto, togli il viso CSS */
+.snape-face{display:none}
+
+.photo-note{
+  margin-top:10px;
+  color:#ffe8a3;
+  font-size:.88rem;
+}
+
+/* FIX: la CPU è specchiata sul container, quindi ri-specchio il testo per non farlo mostrare al contrario */
+.wizard.right .faceTxt{
+  transform:translateX(-50%) scaleX(-1);
+}
+
+/* FIX: toglie l'elemento della bacchetta di default se stiamo visualizzando la foto di Piton */
+.snape-wand{
+  display:none!important;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform 9 ¾ - Recupero Parola d'Ordine</title>
+    <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("pf_theme") || "dark");</script>
+
+    <link rel="stylesheet" href="css/test.css?v=home-adventure-title-1">
+    <style>
+        .recovery-container {
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(10, 11, 28, 0.9);
+            border: 2px solid gold;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+        .recovery-container h2 { color: gold; font-family: 'Cinzel', serif; margin-bottom: 1rem; }
+        .recovery-container p { color: #ccc; font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .input-magico {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background: #180f2e;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            color: white;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .input-magico:focus { border-color: gold; outline: none; }
+    </style>
+    <link rel="stylesheet" href="css/harmony.css?v=6">
+    <link rel="stylesheet" href="css/responsive.css?v=home-adventure-title-1">
+</head>
+<body class="olivander-page">
+    <div class="magic-dust"></div>
+
+    <div class="recovery-container">
+        <h2>Recupero Password</h2>
+        <p>Inserisci nome da mago ed email associati al tuo account. Ti invieremo un gufo con le istruzioni.</p>
+        
+        <form id="recovery-form">
+            <input type="text" id="recovery-username" class="input-magico" placeholder="Il tuo nome da mago..." required autocomplete="username">
+            <input type="email" id="recovery-email" class="input-magico" placeholder="La tua email..." required>
+            <button type="submit" id="btn-invia" class="quiz-btn" style="width: 100%;">Invia Gufo di Recupero</button>
+        </form>
+
+        <div style="margin-top: 20px;">
+            <a href="index.html" style="color: gold; text-decoration: none; font-size: 0.8rem;">← Torna al Binario 9 ¾</a>
+        </div>
+        <p id="response-msg" style="margin-top: 15px; font-weight: bold;"></p>
+    </div>
+
+    <script>
+        document.getElementById('recovery-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('recovery-username').value.trim();
+            const email = document.getElementById('recovery-email').value.trim();
+            const btn = document.getElementById('btn-invia');
+            const msg = document.getElementById('response-msg');
+
+            btn.innerText = "Evocazione gufo...";
+            btn.disabled = true;
+
+            try {
+                const res = await fetch('php/forgot_password.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email })
+                });
+                const data = await res.json();
+                
+                msg.innerText = data.message;
+                msg.style.color = data.success ? "#4CAF50" : "#f44336";
+                
+                if(data.success) {
+                    document.getElementById('recovery-form').reset();
+                }
+            } catch (error) {
+                msg.innerText = "Errore nella spedizione del gufo.";
+                msg.style.color = "#f44336";
+            } finally {
+                btn.innerText = "Invia Gufo di Recupero";
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

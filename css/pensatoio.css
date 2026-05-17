@@ -1,0 +1,157 @@
+/* Sfondo scuro e nebbioso */
+.pensieve-page {
+    background: radial-gradient(circle at center, #111a22, #020508);
+    color: #e0f2fe;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: Georgia, serif;
+}
+
+.pensieve-container {
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pensieve-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.pensieve-header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    color: #b6e2ff;
+    text-shadow: 0 0 20px rgba(182, 226, 255, 0.5);
+    margin: 0;
+}
+
+/* --- LA BACINELLA --- */
+.basin-wrapper {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    padding: 15px;
+    background: radial-gradient(circle, #2a2d34, #0a0c10);
+    box-shadow: 
+        0 20px 50px rgba(0,0,0,0.8),
+        inset 0 0 30px rgba(0,0,0,0.9);
+}
+
+.basin {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle, #0e2a3a, #020b12);
+    box-shadow: inset 0 0 60px rgba(117, 203, 255, 0.4);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Effetto liquido turbinante */
+.water-surface {
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(from 0deg, rgba(162, 219, 255, 0.1), rgba(255, 255, 255, 0.05), rgba(162, 219, 255, 0.2), rgba(162, 219, 255, 0.1));
+    animation: swirl 20s linear infinite;
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
+@keyframes swirl {
+    100% { transform: rotate(360deg); }
+}
+
+/* --- I RICORDI FLUTTUANTI (Globi di luce) --- */
+.wisp {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 15px 5px rgba(182, 226, 255, 0.8);
+    cursor: pointer;
+    transition: transform 0.3s;
+    animation: float 8s ease-in-out infinite alternate;
+}
+
+.wisp:hover {
+    transform: scale(1.5);
+    box-shadow: 0 0 25px 8px #ffffff;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { transform: translate(30px, -40px) scale(1.2); opacity: 0.8; }
+}
+
+/* --- BOTTONI E MODALI --- */
+.magic-btn {
+    background: transparent;
+    border: 1px solid #b6e2ff;
+    color: #b6e2ff;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-family: 'Cinzel', serif;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 15px;
+}
+.magic-btn:hover {
+    background: rgba(182, 226, 255, 0.2);
+    box-shadow: 0 0 15px rgba(182, 226, 255, 0.5);
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.overlay.hidden { display: none; }
+
+.parchment-modal {
+    background: #f4e8c1;
+    color: #2c3e50;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    background-image: url('https://www.transparenttextures.com/patterns/old-paper.png'); /* Texture finta pergamena */
+}
+
+.parchment-modal input, .parchment-modal textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #888;
+    color: #2c3e50;
+    font-family: Georgia, serif;
+    margin-bottom: 15px;
+    padding: 10px 0;
+    outline: none;
+}
+.parchment-modal input::placeholder, .parchment-modal textarea::placeholder {
+    color: #888;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px; right: 15px;
+    background: none; border: none;
+    font-size: 1.5rem; color: #555;
+    cursor: pointer;
+}

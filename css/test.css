@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
+/* =========================================
+   BASE PAGE & NAVBAR (Atmosfera Mistica)
+========================================= */
+.olivander-page {
+  margin: 0;
+  font-family: Georgia, serif;
+  /* Gradiente radiale dal viola mistico al blu notte profondo */
+  background: radial-gradient(circle at top, #34205b, #151224);
+  color: #f3e3c2;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  /* Blu notte semitrasparente */
+  background: rgba(24, 20, 39, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  color: #ffd700; /* Oro vibrante */
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #e0d4ff; /* Lilla chiarissimo */
+  font-family: 'Cinzel', serif;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+/* =========================================
+   QUIZ CONTAINER
+========================================= */
+.quiz-container {
+  max-width: 800px;
+  margin: 2rem auto 2rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.quiz-section {
+  /* Box con gradiente tra il blu notte e il viola scuro */
+  background: linear-gradient(145deg, #2a2146, #17172c);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 18px;
+  padding: 3rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.46), 0 0 20px rgba(42, 17, 76, 0.5);
+  transition: opacity 0.5s ease;
+}
+
+.quiz-section h2 {
+  font-family: 'Cinzel', serif;
+  color: #ffd700;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.quiz-section p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  color: #e0d4ff;
+  margin-bottom: 2rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.active {
+  display: block;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   OPTIONS & BUTTONS
+========================================= */
+.options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.option-btn {
+  /* Sfondo leggermente violaceo */
+  background: rgba(60, 30, 100, 0.2);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  color: #f3e3c2;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-family: Georgia, serif;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.option-btn:hover {
+  background: rgba(255, 215, 0, 0.15);
+  transform: translateX(10px);
+  border-color: #ffd700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  color: #fff;
+}
+
+.quiz-btn {
+  /* Bottone dorato acceso */
+  background: linear-gradient(145deg, #ffd700, #b8860b);
+  color: #151224; /* Testo scuro per contrasto */
+  border: none;
+  padding: 1rem 2.5rem;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.quiz-btn:hover {
+  background: linear-gradient(145deg, #ffe033, #daa520);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+  transform: scale(1.05);
+}
+
+.progress {
+  margin-top: 2rem !important;
+  font-size: 0.9rem !important;
+  opacity: 0.6 !important;
+  font-style: italic;
+  color: #bfa1ff; /* Tocco di lilla */
+}
+
+/* =========================================
+   RESULT CARD
+========================================= */
+.result-card {
+  margin: 2rem auto;
+  max-width: 400px;
+  background: linear-gradient(145deg, #241b3d, #151224);
+  padding: 2.5rem;
+  border: 2px solid #ffd700;
+  border-radius: 18px;
+  box-shadow: 0 0 30px rgba(42, 17, 76, 0.8), inset 0 0 15px rgba(255, 215, 0, 0.1);
+}
+
+.result-card h3 {
+  font-family: 'Cinzel', serif;
+  color: #ffd700;
+  font-size: 1.8rem;
+  margin: 1rem 0;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.result-card p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  color: #e0d4ff;
+}
+
+.return-btn {
+  display: inline-block;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+/* =========================================
+   MAGIC DUST BACKGROUND
+========================================= */
+.magic-dust {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+.magic-dust::before, .magic-dust::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Polvere magica dorata che brilla sul fondo blu/viola */
+  background-image: radial-gradient(circle, rgba(255, 215, 0, 0.6) 1.5px, transparent 1.5px);
+  background-size: 100px 100px;
+  opacity: .15;
+  animation: dustMove 30s linear infinite;
+}
+.magic-dust::after {
+  animation-duration: 50s;
+  opacity: .08;
+  background-size: 150px 150px;
+}
+@keyframes dustMove {
+  from { transform: translateY(0); }
+  to { transform: translateY(-300px); }
+}
+
+/* Stile per la finestra di recupero password */
+.modal-hidden {
+    display: none !important;
+}
+
+#forgot-password-modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Sfondo scuro semitrasparente */
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#forgot-password-modal .modal-content {
+    background: #17172c;
+    border: 2px solid gold;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}

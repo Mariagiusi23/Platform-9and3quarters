@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
+/* =========================================
+   BASE PAGE & NAVBAR
+========================================= */
+.mystic-page {
+    margin: 0;
+    font-family: Georgia, serif;
+    background: radial-gradient(circle at top, #34205b, #151224);
+    color: #f3e3c2;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(24, 20, 39, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: #ffd700;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #e0d4ff;
+    font-family: 'Cinzel', serif;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+/* =========================================
+   AUTH CONTAINER & FORMS
+========================================= */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem 2rem 2rem 2rem;
+}
+
+.auth-card {
+    background: linear-gradient(145deg, #2a2146, #17172c);
+    border: 2px solid rgba(255, 215, 0, 0.4);
+    border-radius: 18px;
+    padding: 3rem;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.46), 0 0 20px rgba(139, 92, 246, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.5s ease;
+}
+
+.auth-form.hidden {
+    display: none !important;
+}
+
+.auth-form.active {
+    display: flex;
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    font-family: 'Cinzel', serif;
+    color: #ffd700;
+    font-size: 2.2rem;
+    margin: 0 0 0.5rem 0;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.subtitle {
+    text-align: center;
+    color: #e0d4ff;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-family: 'Cinzel', serif;
+    color: #e0d4ff;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    background: rgba(24, 20, 39, 0.52);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    color: #f3e3c2;
+    padding: 1rem;
+    border-radius: 8px;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.password-hint {
+    margin: 0.5rem 0 0;
+    color: #d8c6ff;
+    font-size: 0.82rem;
+    line-height: 1.35;
+}
+
+.magic-btn {
+    background: linear-gradient(145deg, #ffd700, #b8860b);
+    color: #151224;
+    border: none;
+    padding: 1rem;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 1rem;
+}
+
+.magic-btn:hover {
+    background: linear-gradient(145deg, #ffe033, #daa520);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.switch-text {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #bfa1ff;
+}
+
+.link-style {
+    color: #ffd700;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.link-style:hover {
+    color: #fff;
+}
+
+/* Polvere Magica Background */
+.magic-dust {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+.magic-dust::before, .magic-dust::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255, 215, 0, 0.6) 1.5px, transparent 1.5px);
+    background-size: 100px 100px;
+    opacity: .15;
+    animation: dustMove 30s linear infinite;
+}
+.magic-dust::after {
+    animation-duration: 50s;
+    opacity: .08;
+    background-size: 150px 150px;
+}
+@keyframes dustMove {
+    from { transform: translateY(0); }
+    to { transform: translateY(-300px); }
+}

@@ -1,0 +1,563 @@
+@import url("base.css?v=home-adventure-title-1");
+@import url("navbar.css?v=home-adventure-title-1");
+@import url("home.css");
+@import url("auth.css");
+@import url("gazzetta.css");
+@import url("pensatoio.css");
+@import url("olivander.css");
+@import url("effetti.css");
+@import url("responsive.css?v=home-adventure-title-1");
+@import url("guferia.css");
+
+/* =========================================
+   LA STRILLETTERA (OVERLAY E ANIMAZIONI)
+========================================= */
+
+.howler-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: sepia(0.8) hue-rotate(-30deg);
+}
+
+.howler-overlay.hidden {
+    display: none !important;
+}
+
+.howler-envelope {
+    background: #8b0000;
+    width: 300px;
+    height: 200px;
+    border: 3px solid #d4af37;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 0 30px #ff0000;
+    animation: rage-shake 0.1s infinite;
+    text-align: center;
+    padding: 20px;
+}
+
+.howler-seal {
+    background: #d4af37;
+    color: #8b0000;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.click-to-open {
+    font-size: 0.9rem;
+    margin-top: 15px;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+#howler-ashes {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(90vw, 620px);
+    transform: translate(-50%, -50%);
+    color: #ffaa00;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 0 10px red;
+}
+
+@keyframes rage-shake {
+    0% { transform: translate(2px, 1px) rotate(0deg) scale(1); }
+    10% { transform: translate(-1px, -2px) rotate(-2deg) scale(1.05); }
+    20% { transform: translate(-3px, 0px) rotate(2deg) scale(1.05); }
+    30% { transform: translate(0px, 2px) rotate(0deg) scale(1); }
+    40% { transform: translate(1px, -1px) rotate(2deg) scale(1.05); }
+    50% { transform: translate(-1px, 2px) rotate(-2deg) scale(1.05); }
+    60% { transform: translate(-3px, 1px) rotate(0deg) scale(1); }
+    70% { transform: translate(2px, 1px) rotate(-2deg) scale(1.05); }
+    80% { transform: translate(-1px, -1px) rotate(2deg) scale(1.05); }
+    90% { transform: translate(2px, 2px) rotate(0deg) scale(1); }
+    100% { transform: translate(1px, -2px) rotate(-2deg) scale(1.05); }
+}
+
+.profile-btn {
+    color: gold;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* =====================================================
+   CINEMATIC WAND UNLOCK — LOGIN EFFECT
+===================================================== */
+
+.wand-cinematic-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 48%, rgba(255, 214, 107, 0.22), transparent 18%),
+        radial-gradient(circle at 50% 55%, rgba(124, 58, 237, 0.26), transparent 32%),
+        radial-gradient(circle at center, rgba(3, 1, 8, 0.78), rgba(0, 0, 0, 0.96) 72%);
+    backdrop-filter: blur(10px);
+    animation: cinematicOverlayIn 0.35s ease both;
+}
+
+.wand-cinematic-overlay > * {
+    position: absolute;
+}
+
+.wand-cinematic-overlay::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    width: 90vmax;
+    height: 90vmax;
+    border-radius: 50%;
+    background:
+        conic-gradient(
+            from 0deg,
+            transparent,
+            rgba(255, 215, 111, 0.16),
+            transparent,
+            rgba(140, 92, 255, 0.2),
+            transparent,
+            rgba(255, 255, 255, 0.12),
+            transparent
+        );
+    animation: cinematicSpin 3.6s linear infinite;
+    filter: blur(1px);
+    opacity: 0.85;
+}
+
+.wand-cinematic-overlay::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, .16) 0 1px, transparent 2px),
+        radial-gradient(circle at 80% 20%, rgba(255, 215, 111, .2) 0 1px, transparent 2px),
+        radial-gradient(circle at 70% 75%, rgba(196, 181, 253, .18) 0 1px, transparent 2px),
+        radial-gradient(circle at 35% 80%, rgba(255, 255, 255, .14) 0 1px, transparent 2px);
+    background-size: 180px 180px;
+    opacity: 0.8;
+    animation: cinematicStars 2.6s ease-in-out infinite alternate;
+}
+
+.wand-portal {
+    position: absolute;
+    z-index: 2;
+    width: min(440px, 72vw);
+    height: min(440px, 72vw);
+    border-radius: 50%;
+    background:
+        radial-gradient(circle, rgba(255, 255, 255, .82) 0 4%, rgba(255, 215, 111, .5) 8%, rgba(124, 58, 237, .25) 28%, transparent 64%);
+    box-shadow:
+        0 0 45px rgba(255, 215, 111, .55),
+        0 0 100px rgba(124, 58, 237, .45),
+        inset 0 0 80px rgba(255, 255, 255, .25);
+    animation: portalPulse 2.4s ease-in-out both;
+}
+
+.wand-ring {
+    position: absolute;
+    z-index: 3;
+    width: min(360px, 62vw);
+    height: min(360px, 62vw);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 215, 111, .6);
+    box-shadow:
+        0 0 22px rgba(255, 215, 111, .65),
+        inset 0 0 22px rgba(255, 215, 111, .35);
+    animation: ringExpand 2.5s ease both;
+}
+
+.wand-ring::before,
+.wand-ring::after {
+    content: "";
+    position: absolute;
+    inset: 22px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255, 255, 255, .42);
+    animation: cinematicSpin 6s linear infinite reverse;
+}
+
+.wand-ring::after {
+    inset: 52px;
+    border-color: rgba(196, 181, 253, .42);
+    animation-direction: normal;
+}
+
+.wand-runes {
+    position: absolute;
+    z-index: 4;
+    width: min(470px, 78vw);
+    height: min(470px, 78vw);
+    display: grid;
+    place-items: start center;
+    color: rgba(255, 232, 166, .78);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(18px, 3vw, 32px);
+    letter-spacing: 14px;
+    text-shadow: 0 0 18px rgba(255, 215, 111, .7);
+    animation: runeSpin 5.5s linear infinite;
+}
+
+.cinematic-wand {
+    position: absolute;
+    z-index: 7;
+    width: min(330px, 70vw);
+    height: 12px;
+    border-radius: 999px;
+    background:
+        linear-gradient(90deg, #2b1206 0%, #6b3512 34%, #c0843b 72%, #f8e0a4 100%);
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, .6),
+        0 0 18px rgba(255, 215, 111, .35);
+    transform-origin: 92% 50%;
+    animation: wandSweep 2.15s cubic-bezier(.16, .84, .22, 1) both;
+}
+
+.cinematic-wand::before {
+    content: "";
+    position: absolute;
+    left: -18px;
+    top: 50%;
+    width: 56px;
+    height: 22px;
+    transform: translateY(-50%);
+    border-radius: 999px;
+    background: linear-gradient(90deg, #160704, #5b2b10, #d59b4e);
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, .14);
+}
+
+.cinematic-wand-tip {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    width: 22px;
+    height: 22px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: #fff8c7;
+    box-shadow:
+        0 0 18px #fff,
+        0 0 42px #ffd76f,
+        0 0 80px #8b5cf6;
+    animation: wandTipGlow .7s ease-in-out infinite alternate;
+}
+
+.spell-line {
+    position: absolute;
+    z-index: 6;
+    width: min(520px, 82vw);
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, #fff8c7, #ffd76f, #8b5cf6, transparent);
+    box-shadow:
+        0 0 18px rgba(255, 215, 111, .9),
+        0 0 44px rgba(139, 92, 246, .6);
+    transform: rotate(-18deg) scaleX(0);
+    animation: spellSlash 1.55s .45s cubic-bezier(.2, .9, .2, 1) both;
+}
+
+.wand-cinematic-title {
+    position: absolute;
+    z-index: 20;
+    top: calc(50% + 115px);
+    left: 50%;
+    width: min(92vw, 900px);
+    color: #ffd76f;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.1rem, 6vw, 5rem);
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
+    text-shadow:
+        0 0 18px rgba(255, 215, 111, .7),
+        0 0 42px rgba(139, 92, 246, .4),
+        0 7px 20px rgba(0, 0, 0, .75);
+    animation: titleReveal 1.45s .85s ease both;
+}
+
+.wand-cinematic-subtitle {
+    position: absolute;
+    z-index: 21;
+    top: calc(50% + 195px);
+    left: 50%;
+    width: min(92vw, 700px);
+    color: rgba(255, 244, 216, .96);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+    font-style: italic;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
+    text-shadow:
+        0 0 14px rgba(255, 255, 255, .75),
+        0 0 32px rgba(255, 215, 111, .5),
+        0 0 52px rgba(139, 92, 246, .4);
+    animation: subtitleReveal 1.2s 1.15s ease both;
+}
+
+.cinematic-particle {
+    position: absolute;
+    z-index: 8;
+    left: 50%;
+    top: 50%;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background: #ffd76f;
+    box-shadow:
+        0 0 12px #ffd76f,
+        0 0 26px rgba(139, 92, 246, .7);
+    animation: particleBurst 1.7s var(--delay) ease-out both;
+}
+
+.cinematic-star {
+    position: absolute;
+    z-index: 9;
+    color: rgba(255, 236, 184, .9);
+    font-size: 18px;
+    text-shadow: 0 0 16px rgba(255, 215, 111, .8);
+    animation: starFloat 1.9s ease-in-out infinite alternate;
+}
+
+.wand-cinematic-overlay.closing {
+    animation: cinematicClose .55s ease forwards;
+}
+
+/* =========================================
+   KEYFRAMES CINEMATIC LOGIN
+========================================= */
+
+@keyframes cinematicOverlayIn {
+    from {
+        opacity: 0;
+        filter: blur(12px);
+    }
+
+    to {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes cinematicClose {
+    to {
+        opacity: 0;
+        transform: scale(1.05);
+        filter: blur(18px);
+    }
+}
+
+@keyframes cinematicSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes cinematicStars {
+    to {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes portalPulse {
+    0% {
+        opacity: 0;
+        transform: scale(.38);
+        filter: blur(14px);
+    }
+
+    45% {
+        opacity: 1;
+        transform: scale(1.08);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: .88;
+        transform: scale(.96);
+    }
+}
+
+@keyframes ringExpand {
+    0% {
+        opacity: 0;
+        transform: scale(.2) rotate(0deg);
+    }
+
+    55% {
+        opacity: 1;
+        transform: scale(1.08) rotate(130deg);
+    }
+
+    100% {
+        opacity: .85;
+        transform: scale(1) rotate(210deg);
+    }
+}
+
+@keyframes runeSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes wandSweep {
+    0% {
+        opacity: 0;
+        transform: translate(-48vw, 22vh) rotate(-38deg) scale(.72);
+    }
+
+    18% {
+        opacity: 1;
+    }
+
+    48% {
+        transform: translate(-4vw, -2vh) rotate(-18deg) scale(1.05);
+    }
+
+    78% {
+        transform: translate(12vw, 1vh) rotate(-10deg) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(44vw, -20vh) rotate(18deg) scale(.9);
+    }
+}
+
+@keyframes wandTipGlow {
+    to {
+        transform: translateY(-50%) scale(1.25);
+        box-shadow:
+            0 0 24px #fff,
+            0 0 58px #ffd76f,
+            0 0 110px #8b5cf6;
+    }
+}
+
+@keyframes spellSlash {
+    0% {
+        opacity: 0;
+        transform: rotate(-18deg) scaleX(0);
+    }
+
+    35% {
+        opacity: 1;
+        transform: rotate(-18deg) scaleX(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: rotate(-18deg) scaleX(1.2);
+    }
+}
+
+@keyframes titleReveal {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 26px) scale(.92);
+        filter: blur(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes subtitleReveal {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 14px);
+        filter: blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+        filter: blur(0);
+    }
+}
+
+@keyframes particleBurst {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.2);
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate(calc(-50% + var(--x)), calc(-50% + var(--y)))
+            scale(.15);
+    }
+}
+
+@keyframes starFloat {
+    from {
+        opacity: .35;
+        transform: translateY(0) scale(.85) rotate(0deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-16px) scale(1.25) rotate(18deg);
+    }
+}
+
+/* =========================================
+   RESPONSIVE CINEMATIC LOGIN
+========================================= */
+
+@media (max-width: 700px) {
+    .wand-cinematic-title {
+        top: calc(50% + 95px);
+        font-size: 1.85rem;
+        white-space: normal;
+        line-height: 1.05;
+    }
+
+    .wand-cinematic-subtitle {
+        top: calc(50% + 155px);
+        font-size: .95rem;
+        letter-spacing: .16em;
+        white-space: normal;
+    }
+
+    .cinematic-wand {
+        width: 260px;
+    }
+}

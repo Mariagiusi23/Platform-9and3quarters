@@ -1,0 +1,44 @@
+home.css
+header {
+  /* preserve previous spacing but adapt to dynamic navbar height */
+  padding-top: calc(var(--navbar-height) + 46px); /* 110px original -> 46px extra */
+}
+
+.hero {
+  width: min(1100px, 94%);
+  margin: 40px auto 80px;
+  padding: 2.4rem;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 7vw, 5.4rem);
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+
+.hero p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  margin-bottom: 1.5rem;
+}
+
+.top-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* TITOLI SEZIONI */
+.section-title,
+.titolo-giornale {
+  text-align: center;
+  color: var(--gold);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  margin-bottom: 1rem;
+}

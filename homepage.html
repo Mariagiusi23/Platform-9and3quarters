@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform 9 ¾ | Home</title>
+    <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("pf_theme") || "dark");</script>
+
+    <link rel="stylesheet" href="css/style.css?v=home-adventure-title-1">
+    <link rel="stylesheet" href="css/homepage.css?v=home-adventure-title-1">
+    <link rel="stylesheet" href="css/harmony.css?v=6">
+    <link rel="stylesheet" href="css/responsive.css?v=home-adventure-title-1">
+</head>
+<body class="home-page">
+    <nav class="navbar">
+  <div class="nav-container">
+    <a href="homepage.html" class="logo"><span class="navbar-logo-mark" role="button" aria-label="Mostra logo ingrandito" tabindex="0"><img src="logo.jpg" alt="" loading="eager"></span>Platform 9 ¾</a>
+
+    <ul class="nav-links">
+      <li><a href="homepage.html" data-i18n="nav_home">Home</a></li>
+      <li><a href="gazzetta.html" data-i18n="nav_gazzetta">Gazzetta</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Test ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="smistamento.html">Smistamento</a></li>
+          <li><a href="test.html">Bacchetta</a></li>
+        </ul>
+      </li>
+      <li><a href="pensatoio.html" data-i18n="nav_pensatoio">Pensatoio</a></li>
+      <li><a href="olivander.html" data-i18n="nav_olivander">Olivander</a></li>
+      <li><a href="guferia.html" data-i18n="nav_guferia">Guferia</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Minigiochi ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="index_legilimanzia.html">Legilimanzia</a></li>
+          <li><a href="index_pozioni.html">Pozioni</a></li>
+          <li><a href="index_club_duellanti.html">Club Duellanti</a></li>
+          <li><a href="index_quidditch.html">Quidditch</a></li>
+        </ul>
+      </li>
+      <li><a href="index_archivio.html" data-i18n="nav_archivio">Archivio</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <div class="settings-wrapper">
+        <button class="settings-btn" type="button" aria-label="Impostazioni" title="Impostazioni" aria-expanded="false">⚙️</button>
+      </div>
+      <a href="posta.html" class="nav-icon-btn nav-mail-btn" data-i18n-title="nav_posta" aria-label="Posta" title="Posta">✉️</a>
+      <a href="profilo.html" class="profile-btn" aria-label="Profilo" title="Profilo">
+        <span id="nav-username">🧙‍♂️</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+    <header class="hero-section">
+        <video class="hero-video-bg" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+            <source src="./intro.mp4" type="video/mp4">
+        </video>
+        <div class="hero-video-shade"></div>
+
+        <div class="hero-content">
+            <p class="eyebrow">Benvenuto su</p>
+            <h1>Platform 9 ¾</h1>
+            <p>Attraversa il binario e scegli dove iniziare: test, Gazzetta, mappa 3D, Pensatoio, Guferia e minigiochi.</p>
+            <div class="hero-buttons">
+                <a href="smistamento.html" class="btn-magic">Entra nel mondo magico <span>✦</span></a>
+                <a href="gazzetta.html" class="btn-outline">Leggi la Gazzetta <span>▣</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="portal-shell">
+        <section class="adventure-section" aria-labelledby="adventure-title">
+            <div class="section-title">
+                <span></span>
+                <h2 id="adventure-title">Scegli la tua avventura</h2>
+                <span></span>
+            </div>
+
+            <div class="adventure-grid">
+                <a class="adventure-card" href="smistamento.html">
+                    <img src="images/Casa_comune_grifondoro.webp" alt="">
+                    <div>
+                        <h3>Test della Casa</h3>
+                        <p>Rispondi alle domande del Cappello Parlante e salva il risultato</p>
+                    </div>
+                    <b>›</b>
+                </a>
+
+                <a class="adventure-card" href="gazzetta.html">
+                    <img src="images/Sala_Grande.webp" alt="">
+                    <div>
+                        <h3>La Gazzetta</h3>
+                        <p>Leggi la pagina giornale del mondo magico</p>
+                    </div>
+                    <b>›</b>
+                </a>
+
+                <a class="adventure-card" href="index_hogwarts_3d.html">
+                    <img src="images/Mappa-del-Malandrino.webp" alt="">
+                    <div>
+                        <h3>Mappa di Hogwarts</h3>
+                        <p>Entra nella mappa 3D di Hogwarts</p>
+                    </div>
+                    <b>›</b>
+                </a>
+
+                <a class="adventure-card" href="guferia.html">
+                    <img src="images/diagon_alley.jpg" alt="">
+                    <div>
+                        <h3>La Guferia</h3>
+                        <p>Scrivi e invia Strillettere agli utenti registrati</p>
+                    </div>
+                    <b>›</b>
+                </a>
+            </div>
+        </section>
+
+        <section class="dashboard-grid" aria-label="Panoramica">
+            <article class="portal-panel news-panel">
+                <div class="panel-heading">
+                    <h2>Sezioni principali</h2>
+                </div>
+                <a class="news-item" href="olivander.html">
+                    <img src="images/Bacchetta_di_Sambuco_main.webp" alt="">
+                    <span>
+                        <strong>Olivander</strong>
+                        <small>La bottega delle bacchette è una sezione dedicata alla scelta e all'acquisto.</small>
+                    </span>
+                    <em>Apri</em>
+                </a>
+                <a class="news-item" href="pensatoio.html">
+                    <img src="images/pensieve.jpg" alt="">
+                    <span>
+                        <strong>Pensatoio</strong>
+                        <small>La pagina raccoglie e gestisce i ricordi salvati dagli utenti.</small>
+                    </span>
+                    <em>Apri</em>
+                </a>
+                <a class="news-item" href="index_archivio.html">
+                    <img src="images/Sala_Grande.webp" alt="">
+                    <span>
+                        <strong>Archivio</strong>
+                        <small>Una raccolta navigabile di contenuti e personaggi presenti nel sito.</small>
+                    </span>
+                    <em>Apri</em>
+                </a>
+            </article>
+
+            <article class="portal-panel games-panel" id="minigiochi-home">
+                <div class="panel-heading">
+                    <h2>Minigiochi in evidenza</h2>
+                    <a href="#minigiochi-home">4 giochi</a>
+                </div>
+                <div class="game-grid">
+                    <a class="game-card" href="index_legilimanzia.html">
+                        <img src="images/expelli_armus.png" alt="">
+                        <strong>Legilimanzia</strong>
+                        <span>Gioca ora</span>
+                    </a>
+                    <a class="game-card" href="index_quidditch.html">
+                        <img src="images/boccino-d-oro-harry-potter-1pz.jpg.webp" alt="">
+                        <strong>Quidditch</strong>
+                        <span>Gioca ora</span>
+                    </a>
+                    <a class="game-card" href="index_club_duellanti.html">
+                        <img src="images/avada_kedavra.png.webp" alt="">
+                        <strong>Club Duellanti</strong>
+                        <span>Gioca ora</span>
+                    </a>
+                    <a class="game-card" href="index_pozioni.html">
+                        <img src="images/potion.gif" alt="">
+                        <strong>Pozioni</strong>
+                        <span>Gioca ora</span>
+                    </a>
+                </div>
+            </article>
+
+            <aside class="portal-panel house-panel">
+                <div class="panel-heading centered">
+                    <h2>Il tuo profilo</h2>
+                </div>
+                <img class="house-crest" id="home-house-crest" src="logo.jpg" alt="">
+                <h3 id="home-house-name">Casata non scelta</h3>
+                <p id="home-house-info">Completa il Test della Casa per registrare la tua casata.</p>
+                <div class="vault-mini-grid">
+                    <div>
+                        <span>Caveau</span>
+                        <strong id="home-vault-number">...</strong>
+                    </div>
+                    <div>
+                        <span>Galeoni</span>
+                        <strong><span id="home-vault-balance">0</span> G</strong>
+                    </div>
+                </div>
+                <a href="profilo.html" class="house-link">Apri profilo <span>›</span></a>
+            </aside>
+        </section>
+
+        <section class="portal-stats" aria-label="Statistiche">
+            <div>
+                <strong>4</strong>
+                <span>Minigiochi collegati dalla home</span>
+            </div>
+            <div>
+                <strong>2</strong>
+                <span>Test disponibili: Smistamento e Bacchetta</span>
+            </div>
+            <blockquote>
+                Vinci nei minigiochi per aggiungere galeoni al tuo caveau.
+                <cite>Gringott</cite>
+            </blockquote>
+            <div>
+                <strong>1</strong>
+                <span>Mappa 3D di Hogwarts collegata</span>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Platform 9 ¾ - Magia e Codice</p>
+    </footer>
+
+    <div id="howler-modal" class="howler-overlay hidden">
+        <div id="howler-envelope" class="howler-envelope">
+            <div class="howler-seal">M</div>
+            <p>Aperta da <span id="howler-sender"></span>...</p>
+            <p class="click-to-open">Clicca per aprirla prima che esploda!</p>
+        </div>
+        <div id="howler-ashes" class="hidden">La lettera si è incenerita...</div>
+    </div>
+    <script src="script.js?v=home-adventure-title-1"></script>
+    <script src="jss/homepage.js?v=accents-1"></script>
+</body>
+</html>

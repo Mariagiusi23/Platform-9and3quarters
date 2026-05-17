@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Platform 9¾ - Laboratorio di Pozioni</title>
+    <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("pf_theme") || "dark");</script>
+
+<link rel="stylesheet" href="css/style.css?v=home-adventure-title-1">
+<link rel="stylesheet" href="css/style_pozioni.css" />
+
+<script src="jss/guardia.js?v=i18n-1"></script>
+    <link rel="stylesheet" href="css/harmony.css?v=6">
+    <link rel="stylesheet" href="css/responsive.css?v=home-adventure-title-1">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="homepage.html" class="logo"><span class="navbar-logo-mark" role="button" aria-label="Mostra logo ingrandito" tabindex="0"><img src="logo.jpg" alt="" loading="eager"></span>Platform 9 ¾</a>
+
+    <ul class="nav-links">
+      <li><a href="homepage.html" data-i18n="nav_home">Home</a></li>
+      <li><a href="gazzetta.html" data-i18n="nav_gazzetta">Gazzetta</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Test ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="smistamento.html">Smistamento</a></li>
+          <li><a href="test.html">Bacchetta</a></li>
+        </ul>
+      </li>
+      <li><a href="pensatoio.html" data-i18n="nav_pensatoio">Pensatoio</a></li>
+      <li><a href="olivander.html" data-i18n="nav_olivander">Olivander</a></li>
+      <li><a href="guferia.html" data-i18n="nav_guferia">Guferia</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Minigiochi ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="index_legilimanzia.html">Legilimanzia</a></li>
+          <li><a href="index_pozioni.html">Pozioni</a></li>
+          <li><a href="index_club_duellanti.html">Club Duellanti</a></li>
+          <li><a href="index_quidditch.html">Quidditch</a></li>
+        </ul>
+      </li>
+      <li><a href="index_archivio.html" data-i18n="nav_archivio">Archivio</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <div class="settings-wrapper">
+        <button class="settings-btn" type="button" aria-label="Impostazioni" title="Impostazioni" aria-expanded="false">⚙️</button>
+      </div>
+      <a href="posta.html" class="nav-icon-btn nav-mail-btn" data-i18n-title="nav_posta" aria-label="Posta" title="Posta">✉️</a>
+      <a href="profilo.html" class="profile-btn" aria-label="Profilo" title="Profilo">
+        <span id="nav-username">🧙‍♂️</span>
+      </a>
+    </div>
+  </div>
+</nav>
+<div class="page">
+  <header class="hero">
+    <span class="badge">Aula di Pozioni</span>
+    <h1>Il Calderone Incantato</h1>
+    <p>Scegli una pozione dalla pergamena, memorizza la ricetta e inserisci gli ingredienti nell’ordine corretto. Se sarai abbastanza preciso, il professor Piton completerà l’incantesimo.</p>
+  </header>
+
+  <section id="selectionScreen" class="screen">
+    <div class="section-title">
+      <div>
+        <h2>Scegli la tua pozione</h2>
+        <p>Ogni pergamena contiene descrizione, ricetta e livello di difficoltà.</p>
+      </div>
+      <span class="step-pill">Step 1 / 2</span>
+    </div>
+    <div id="potionsGrid" class="potions-grid"></div>
+  </section>
+
+  <section id="labScreen" class="screen hidden">
+    <div class="lab-title">
+      <div>
+        <h2 id="currentTitle">Pozione</h2>
+        <p id="currentDesc">Descrizione</p>
+      </div>
+      <span class="step-pill" id="progressPill">Ingrediente 1</span>
+    </div>
+    <div class="recipe-strip" id="recipeStrip"></div>
+    
+    <div class="lab">
+      <div class="panel workspace">
+        <div class="shelf">
+          <span class="bottle b1"></span>
+          <span class="bottle b2"></span>
+          <span class="bottle b3"></span>
+          <span class="bottle b4"></span>
+          <span class="bottle b5"></span>
+        </div>
+        
+        <div class="cauldron-zone">
+          <div class="steam s1"></div>
+          <div class="steam s2"></div>
+          <div class="steam s3"></div>
+          <div class="steam s4"></div>
+          
+          <div class="fire"></div>
+          
+          <div class="cauldron">
+            <div id="liquid" class="liquid"></div>
+            <span class="handle left"></span>
+            <span class="handle right"></span>
+            <span class="feet f1"></span>
+            <span class="feet f2"></span>
+            <span class="bubble bb1"></span>
+            <span class="bubble bb2"></span>
+            <span class="bubble bb3"></span>
+          </div>
+        </div>
+      </div>
+      
+      <aside class="panel">
+        <h3>Ingredienti disponibili</h3>
+        <p>Clicca gli ingredienti nel giusto ordine. Una vera pozione non perdona distrazioni.</p>
+        <div id="ingredientsList" class="ingredients" style="margin-top:14px"></div>
+        
+        <div id="log" class="log">Seleziona il primo ingrediente della ricetta.</div>
+        
+        <div class="controls">
+          <button onclick="restartPotion()">Riprova pozione</button>
+          <button class="soft" onclick="backToSelection()">Cambia pergamena</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+</div>
+
+<div id="pitonOverlay" class="piton-overlay hidden">
+  <div class="piton-scene">
+    <div class="stars-final"></div>
+    
+    <div class="piton-photo-wrap">
+      <div class="piton-aura"></div>
+      <picture>
+        <!-- Usa piton.jpg se presente nella cartella del progetto -->
+        <source srcset="images/piton.jpg" type="image/jpeg">
+        <!-- Se il jpg manca o non si carica, onerror sostituisce con il fallback SVG -->
+        <img class="piton-photo" src="images/piton.jpg" alt="Foto Professor Piton" onerror="this.onerror=null;this.src='images/piton.svg'" />
+      </picture>
+    </div>
+    
+    <div class="speech">
+      <h2>Professor Piton</h2>
+      <p id="pitonPhrase"></p>
+      <button onclick="closePiton()" style="margin-top:14px">Torna all'Aula</button>
+    </div>
+  </div>
+</div>
+    <div id="howler-modal" class="howler-overlay hidden">
+        <div id="howler-envelope" class="howler-envelope">
+            <div class="howler-seal">M</div>
+            <p>Aperta da <span id="howler-sender"></span>...</p>
+            <p class="click-to-open">Clicca per aprirla prima che esploda!</p>
+        </div>
+        <div id="howler-ashes" class="hidden">🔥 La lettera si è incenerita... 🔥</div>
+    </div>
+<script src="script.js?v=home-adventure-title-1"></script>
+<script src="jss/script_pozioni.js"></script>
+</body>
+</html>

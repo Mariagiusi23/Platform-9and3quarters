@@ -1,0 +1,596 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+  background: rgba(8, 6, 18, 0.7);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Smooth hide/show for reveal-on-demand behavior on non-home pages */
+.navbar {
+  transition: none;
+  will-change: auto;
+}
+
+/* When hidden we move the navbar up and disable pointer events so page underneath is usable */
+.navbar.hidden {
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Default CSS variable for navbar height.
+   This ensures the page content is pushed below the fixed navbar.
+   The value is updated dynamically by JS so it adapts on wrap/resize. */
+:root {
+  --navbar-height: 78px;
+}
+
+/* Add top padding equal to navbar height so fixed navbar doesn't overlap content. */
+body {
+  padding-top: var(--navbar-height);
+  transition: none;
+}
+
+.navbar.scrolled {
+  background: rgba(8, 6, 18, 0.7);
+  box-shadow: none;
+}
+
+.nav-container {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin-right: auto; /* Spinge via tutto ciò che sta alla sua destra */
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  position: relative;
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: 0.3s;
+  padding: 4px 0;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: var(--gold);
+  transition: 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--gold);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Spazio tra i due tasti */
+    margin-left: auto; /* Spinge tutto a destra se sei in un contenitore flex */
+}
+.nav-actions a {
+  padding: 0.55rem 1rem;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  position: relative;
+  z-index: 1;
+}
+
+.navbar-logo-mark {
+  position: relative;
+  display: inline-flex;
+  width: 60px;
+  height: 60px;
+  flex: 0 0 52px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 !important;
+  border: 1px solid rgba(216, 170, 85, 0.55);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(244, 216, 143, 0.18), transparent 52%),
+    rgba(18, 12, 24, 0.86);
+  box-shadow:
+    0 0 0 2px rgba(92, 32, 55, 0.45),
+    0 0 18px rgba(216, 170, 85, 0.18);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.navbar-logo-mark img {
+  width: 112%;
+  height: 112%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.86) sepia(0.16) hue-rotate(348deg) brightness(0.96) contrast(1.08);
+}
+
+.navbar-logo-mark:hover {
+  transform: scale(1.04);
+  border-color: rgba(244, 216, 143, 0.82);
+  box-shadow:
+    0 0 0 2px rgba(92, 32, 55, 0.58),
+    0 0 24px rgba(216, 170, 85, 0.28);
+}
+
+.logo-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000000;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  background: rgba(5, 3, 10, 0.86);
+  backdrop-filter: blur(10px);
+}
+
+.logo-lightbox img {
+  width: min(720px, 88vw);
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 18px;
+  border: 1px solid rgba(244, 216, 143, 0.52);
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.62), 0 0 34px rgba(216, 170, 85, 0.22);
+}
+
+.logo-lightbox-close {
+  position: fixed;
+  top: 22px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(244, 216, 143, 0.42);
+  border-radius: 50%;
+  color: #f4d88f;
+  background: rgba(18, 12, 24, 0.86);
+  display: inline-grid;
+  place-items: center;
+  font-size: 30px;
+  line-height: 1;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+}
+
+/* Settings panel styling appended to navbar.css for better visibility */
+.settings-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  min-width: 260px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  z-index: 1100;
+}
+
+.settings-panel label { display:block; font-size:0.9rem; margin-bottom:6px; color:var(--muted); }
+.settings-panel select, .settings-panel input[type="text"] { width:100%; padding:6px 8px; border-radius:6px; border:1px solid var(--border); background:var(--bg); color:var(--text); }
+.settings-panel button#translate-now { padding:6px 10px; border-radius:6px; border:1px solid var(--border); background:var(--gold); color:#111; cursor:pointer; }
+.settings-wrapper { display:inline-block; }
+
+/* Force settings button always visible (override responsive rules) */
+.settings-wrapper, .settings-btn {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.settings-btn {
+  font-size: 1rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+}
+
+/* On very small screens make sure it doesn't overlap content */
+@media (max-width: 480px) {
+  .nav-actions { gap: 8px; }
+  .navbar-logo-mark {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
+  .settings-btn { padding: 0.35rem 0.45rem; }
+}
+
+/* Floating settings (used when there is no navbar or on pages where nav is hidden) */
+.settings-floating {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 2002;
+  background: rgba(8,6,18,0.7);
+  padding: 6px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+.settings-floating .settings-panel {
+  right: 0;
+  top: calc(100% + 8px);
+}
+
+/* Stile base per il Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Nasconde il contenuto del menu inizialmente */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #2a2a2a; /* Colore scuro stile magico */
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.5);
+    z-index: 1000;
+    border-radius: 8px;
+    padding: 10px 0;
+    list-style: none;
+}
+
+/* Stile dei link dentro il dropdown */
+.dropdown-content li a {
+    color: gold !important;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+}
+
+/* Effetto hover sui link del sottomenu */
+.dropdown-content li a:hover {
+    background-color: #3d3d3d;
+    color: white !important;
+}
+
+/* Mostra il menu quando passi il mouse sopra la voce principale */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Piccola freccia opzionale */
+.dropbtn {
+    cursor: pointer;
+}
+
+.profile-btn {
+  position: relative;
+  background: #3a2416;
+  color: #f3e3c2;
+  padding: .6rem 1rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: .3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-btn:hover {
+    background: #f3e3c2;
+    color: #2c1608; /* Cambia colore testo al passaggio */
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 15px rgba(243, 227, 194, 0.5);
+}
+
+/* Settings (theme / language) icon in navbar */
+.settings-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text);
+  padding: 0.45rem 0.7rem;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.settings-btn:focus,
+.settings-btn:hover {
+  border-color: var(--border);
+  background: var(--panel);
+}
+
+.settings-wrapper { position: relative; }
+
+/* Small invisible/visible handle at the very top that reveals the navbar when hovered or focused.
+   It's injected and used on non-home pages. Keeping it subtle but keyboard accessible. */
+#nav-handle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  z-index: 2001; /* above navbar to receive pointer when navbar hidden */
+  background: linear-gradient(90deg, rgba(255,215,0,0.06), rgba(0,0,0,0));
+  cursor: pointer;
+}
+
+#nav-handle:focus {
+  outline: 2px solid rgba(255,215,0,0.25);
+}
+
+/* =====================================================
+   FIX: navbar sempre visibile, anche con Google Translate
+===================================================== */
+
+.navbar,
+.navbar.hidden,
+html.translated-ltr .navbar,
+html.translated-rtl .navbar,
+body.translated-ltr .navbar,
+body.translated-rtl .navbar {
+  transform: none !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  display: block !important;
+  visibility: visible !important;
+}
+
+#nav-handle {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+/* Nasconde la barra superiore automatica di Google Translate */
+.goog-te-banner-frame,
+.skiptranslate iframe {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  font-size: 0 !important;
+}
+
+.goog-logo-link {
+  display: none !important;
+}
+
+/* =====================================================
+   NAVBAR UNIFICATA FINALE
+   Tiene la stessa barra su tutte le pagine, Gazzetta inclusa.
+===================================================== */
+.navbar {
+  min-height: var(--navbar-height) !important;
+  background: rgba(9, 8, 20, 0.9) !important;
+  border-bottom: 1px solid rgba(205, 164, 88, 0.34) !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+.nav-container {
+  min-height: var(--navbar-height) !important;
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0.9rem 1.25rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+}
+
+.logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.65rem !important;
+  margin-right: auto !important;
+  color: var(--gold, #d8aa55) !important;
+  text-decoration: none !important;
+  transform: none !important;
+}
+
+.navbar-logo-mark {
+  width: 52px !important;
+  height: 52px !important;
+  flex: 0 0 52px !important;
+}
+
+.nav-links {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.nav-links a,
+.dropbtn {
+  color: var(--text, #f2e7d0) !important;
+  text-decoration: none !important;
+}
+
+.nav-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.cart-btn,
+.settings-btn,
+.nav-icon-btn {
+  width: 52px !important;
+  height: 52px !important;
+  min-width: 52px !important;
+  min-height: 52px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  color: var(--text, #f2e7d0) !important;
+  font-size: 1.18rem !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  background: rgba(24, 20, 35, 0.58) !important;
+  border: 1px solid rgba(205, 164, 88, 0.34) !important;
+  border-radius: 50% !important;
+  transform: none !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22) !important;
+}
+
+.profile-btn {
+  width: auto !important;
+  height: 52px !important;
+  min-width: 52px !important;
+  max-width: min(220px, 32vw) !important;
+  min-height: 52px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+  padding: 0 1rem !important;
+  color: var(--text, #f2e7d0) !important;
+  font-size: 0.95rem !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  background: rgba(24, 20, 35, 0.58) !important;
+  border: 1px solid rgba(205, 164, 88, 0.34) !important;
+  border-radius: 999px !important;
+  transform: none !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22) !important;
+}
+
+.profile-btn span {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.profile-btn:hover,
+.cart-btn:hover,
+.settings-btn:hover,
+.settings-btn:focus,
+.nav-icon-btn:hover,
+.nav-icon-btn:focus {
+  color: #17100b !important;
+  background: linear-gradient(145deg, #f4d88f, #d8aa55) !important;
+  border-color: rgba(244, 216, 143, 0.82) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 0 18px rgba(216, 170, 85, 0.24) !important;
+}
+
+.floating-map-btn {
+  position: fixed;
+  right: 24px;
+  top: auto;
+  bottom: 22px;
+  z-index: 2200;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  color: #f7df9a;
+  font-size: 1.62rem;
+  text-decoration: none;
+  border: 1px solid rgba(244, 216, 143, 0.72);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 25%, rgba(255, 235, 166, 0.34), transparent 28%),
+    linear-gradient(145deg, rgba(48, 30, 20, 0.96), rgba(15, 12, 26, 0.98));
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(92, 32, 55, 0.42),
+    0 0 24px rgba(216, 170, 85, 0.22);
+  transform: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.floating-map-btn::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(244, 216, 143, 0.28);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.floating-map-icon {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 0 8px rgba(244, 216, 143, 0.38));
+}
+
+.floating-map-btn:hover,
+.floating-map-btn:focus {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow:
+    0 20px 42px rgba(0, 0, 0, 0.46),
+    0 0 0 1px rgba(244, 216, 143, 0.56),
+    0 0 32px rgba(244, 216, 143, 0.34);
+}
+
+@media (max-width: 760px) {
+  .floating-map-btn {
+    right: 14px;
+    top: auto;
+    bottom: 86px;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    font-size: 1.48rem;
+  }
+
+  .settings-btn,
+  .cart-btn,
+  .nav-icon-btn {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  .profile-btn {
+    width: auto !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    max-width: min(180px, 42vw) !important;
+    min-height: 44px !important;
+    padding: 0 0.8rem !important;
+    border-radius: 999px !important;
+    font-size: 0.86rem !important;
+  }
+}

@@ -1,0 +1,584 @@
+/* Reset di base: assicura che padding e bordi non aumentino le dimensioni degli elementi */
+* { box-sizing: border-box; }
+
+/* VARIABILI GLOBALI */
+/* Definiscono la palette colori (tema Hogwarts/magico) per poterli riutilizzare facilmente */
+:root {
+  --gold: #f1c76a;
+  --gold-soft: rgba(241, 199, 106, .38);
+  --glass: rgba(8, 9, 13, .52);
+  --glass-border: rgba(241, 199, 106, .24);
+  --text: #f8ecd1;
+}
+
+/* Lumos overrides for Hogwarts 3D page */
+html[data-theme="light"] {
+  --gold: #9a6514;
+  --gold-soft: rgba(154,101,20,0.28);
+  --glass: rgba(255,255,255,0.62);
+  --glass-border: rgba(112,78,24,0.24);
+  --text: #241706;
+}
+
+html[data-theme="light"] body {
+  color: #241706;
+  background:
+    radial-gradient(circle at 50% 49%, rgba(255, 225, 165, .48), rgba(106, 83, 121, .18) 22%, rgba(33, 42, 66, .12) 47%, #f7f2df 82%),
+    linear-gradient(135deg, #fff8df 0%, #ead39b 45%, #f7f2df 100%) !important;
+}
+
+/* STILE GENERALE DELLA PAGINA */
+body {
+  margin: 0;
+  overflow: hidden; /* Fondamentale: impedisce la comparsa delle barre di scorrimento sul canvas 3D */
+  color: var(--text);
+  font-family: Georgia, 'Times New Roman', serif; /* Font dal sapore antico/magico */
+  /* Sfondo di base: un cielo notturno o un'atmosfera nebbiosa */
+  background:
+    radial-gradient(circle at 50% 49%, rgba(216, 158, 124, .58) 0%, rgba(106, 83, 121, .45) 22%, rgba(33, 42, 66, .55) 47%, rgba(6, 8, 13, .98) 82%),
+    linear-gradient(135deg, #06080d 0%, #111827 45%, #2b1b1e 100%);
+}
+
+/* STRATI DI SFONDO (Pseudo-elementi) */
+/* Questo crea delle "macchie" di luce soffusa sullo sfondo per dare profondità */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none; /* Lascia passare i click verso il canvas sottostante */
+  background:
+    radial-gradient(circle at 50% 58%, rgba(255, 225, 165, .17), transparent 23%),
+    radial-gradient(circle at 18% 22%, rgba(87, 114, 175, .20), transparent 30%),
+    radial-gradient(circle at 88% 64%, rgba(172, 87, 70, .16), transparent 30%);
+  filter: blur(6px); /* Sfoca le macchie di luce */
+}
+
+/* Vignettatura scura ai bordi dello schermo per concentrare l'attenzione al centro */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at center, transparent 38%, rgba(0,0,0,.62) 100%);
+}
+
+/* Un bagliore dorato specifico posizionato dietro al modello del castello */
+.background-glow {
+  position: fixed;
+  left: 50%;
+  top: 58%;
+  width: 48vw;
+  height: 16vh;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse, rgba(255, 222, 170, .35), transparent 65%);
+  filter: blur(28px);
+}
+
+/* IL CANAVACCHIO 3D */
+/* Occupa tutto lo schermo ed è posizionato sopra gli sfondi (z-index: 1) */
+canvas {
+  /* Make the 3D canvas sit below the navbar and fill the remaining viewport. */
+  position: fixed;
+  top: var(--navbar-height);
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: calc(100vh - var(--navbar-height));
+  display: block;
+}
+
+/* INTESTAZIONE (Titolo in alto a sinistra) */
+.map-header {
+  position: fixed;
+  /* Place the header below the navbar dynamically */
+  top: calc(var(--navbar-height) + 32px);
+  left: 34px;
+  z-index: 3;
+  pointer-events: none; /* Il testo non blocca il mouse */
+}
+
+/* clamp() rende il testo responsivo: minimo 30px, ideale 3vw, massimo 48px */
+.map-header h1 {
+  margin: 0;
+  font-size: clamp(30px, 3vw, 48px);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-shadow: 0 0 24px rgba(241,199,106,.18); /* Bagliore del testo */
+}
+
+.map-header p {
+  margin: 14px 0 0;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: rgba(255,255,255,.86);
+}
+
+/* La linea decorativa dorata sotto il titolo principale */
+.ornament {
+  width: 290px;
+  height: 12px;
+  margin-top: 4px;
+  position: relative;
+  border-top: 2px solid var(--gold);
+}
+
+/* Le due stelline (✦) posizionate sulla linea decorativa */
+.ornament::before,
+.ornament::after {
+  content: "✦";
+  position: absolute;
+  top: -10px;
+  color: var(--gold);
+  font-size: 16px;
+}
+.ornament::before { left: 132px; }
+.ornament::after { right: 0; }
+
+/* STILE COMUNE PER PANNELLI "EFFETTO VETRO" (Glassmorphism) */
+/* Raggruppa tutte le classi che condividono questo look semi-trasparente e sfocato */
+.info-panel,
+.visit-panel,
+.control-pill,
+.control-box,
+.modal-card,
+.visit-menu,
+.zone-tooltip {
+  border: 1px solid var(--glass-border);
+  background: linear-gradient(145deg, rgba(14, 17, 22, .75), rgba(10, 10, 10, .46));
+  backdrop-filter: blur(14px); /* L'effetto vetro che sfoca ciò che sta dietro */
+  box-shadow: 0 22px 70px rgba(0,0,0,.32);
+}
+
+/* Pannello informativo in alto a destra */
+.info-panel {
+  position: fixed;
+  /* Keep the info panel below the navbar */
+  top: calc(var(--navbar-height) + 32px);
+  right: 34px;
+  z-index: 3;
+  width: min(290px, calc(100vw - 68px)); /* Evita che esca dallo schermo sui cellulari */
+  padding: 20px 22px;
+  border-radius: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.info-panel h2 {
+  margin: 0 0 14px;
+  color: var(--gold);
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+}
+.info-panel p { margin: 0; line-height: 1.55; color: rgba(255,255,255,.88); }
+
+/* Pannello del menu delle aree visitabili */
+.visit-panel {
+  position: fixed;
+  right: 34px;
+  /* Place lower panels relative to the navbar */
+  top: calc(var(--navbar-height) + 176px);
+  z-index: 10;
+  width: min(310px, calc(100vw - 68px));
+  border-radius: 16px;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+}
+
+/* Il bottone principale che apre il menu a tendina */
+.visit-toggle {
+  width: 100%;
+  padding: 14px 15px;
+  border: 0;
+  border-radius: 12px;
+  color: #1d1204;
+  background: linear-gradient(90deg, #af7627, #f1c76a, #8f5d1f);
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: .3px;
+}
+
+/* Contenitore scorrevole (scroll) della lista delle stanze */
+.visit-menu {
+  display: none; /* Nascosto di default */
+  margin-top: 10px;
+  max-height: 48vh;
+  overflow: auto;
+  border-radius: 12px;
+  padding: 8px;
+}
+.visit-menu.open { display: block; } /* Classe aggiunta dal JS per mostrarlo */
+
+/* I singoli bottoni delle stanze dentro il menu */
+.visit-item {
+  width: 100%;
+  text-align: left;
+  margin: 4px 0;
+  padding: 12px 12px;
+  border: 1px solid rgba(241,199,106,.14);
+  border-radius: 10px;
+  color: rgba(255,255,255,.92);
+  background: rgba(255,255,255,.045);
+  cursor: pointer;
+}
+.visit-item:hover {
+  color: var(--gold);
+  background: rgba(241,199,106,.10);
+}
+
+/* L'etichetta col nome che appare passando il mouse sui marker luminosi */
+.zone-tooltip {
+  position: fixed;
+  z-index: 8;
+  display: none;
+  padding: 9px 12px;
+  border-radius: 999px; /* Bordo completamente arrotondato (a pillola) */
+  color: var(--gold);
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  pointer-events: none; /* Impedisce che il tooltip interferisca col click sul marker */
+}
+.zone-tooltip.visible { display: block; }
+
+/* MODAL (Il popup centrale di conferma ingresso) */
+/* Copre l'intero schermo oscurandolo */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.52);
+  backdrop-filter: blur(8px);
+}
+.modal.hidden { display: none; }
+
+/* Il box fisico della finestra modale */
+.modal-card {
+  width: min(520px, calc(100vw - 34px));
+  border-radius: 22px;
+  padding: 30px;
+  text-align: center;
+  animation: modalIn .35s ease both; /* Animazione di entrata morbida */
+}
+
+/* Definizione dell'animazione: compare e sale leggermente verso l'alto */
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(18px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Testo piccolo in alto ("Passaggio segreto trovato") */
+.modal-kicker {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: var(--gold);
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.modal-card h2 { margin: 0 0 12px; color: var(--gold); }
+.modal-card p { margin: 0 0 24px; font-family: Arial, sans-serif; color: rgba(255,255,255,.86); }
+.modal-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* Stile base dei bottoni dentro la modale */
+.modal-btn {
+  min-width: 135px;
+  padding: 13px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 800;
+}
+/* Bottone dorato "Entra" */
+.modal-btn.primary {
+  border: 0;
+  color: #1d1204;
+  background: linear-gradient(90deg, #b77b2a, #f1c76a);
+}
+/* Bottone trasparente "No, resta qui" */
+.modal-btn.secondary {
+  border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.9);
+  background: rgba(255,255,255,.06);
+}
+
+/* CONTROLLI TOUCH: FRECCE DIREZIONALI (D-PAD) */
+/* Strutturato come una griglia 3x3 per posizionare le frecce a croce */
+.d-pad {
+  position: fixed;
+  left: 34px;
+  top: 50%;
+  transform: translateY(-50%); /* Lo centra perfettamente in verticale */
+  z-index: 4;
+  display: grid;
+  grid-template-columns: repeat(3, 48px);
+  grid-template-rows: repeat(3, 48px);
+  gap: 6px;
+}
+
+/* CONTROLLI TOUCH: ZOOM */
+.zoom-pad {
+  position: fixed;
+  left: 34px;
+  right: auto;
+  top: auto;
+  bottom: 150px;
+  transform: none;
+  z-index: 6;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.zoom-pad .pad-btn {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+/* Stile condiviso tra i tasti del d-pad e dello zoom (bottoni rotondi) */
+.pad-btn {
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(14, 13, 12, .58);
+  color: var(--gold);
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,.45), inset 0 0 0 4px rgba(255,255,255,.04);
+  backdrop-filter: blur(10px);
+  transition: transform .22s ease, background .22s ease, box-shadow .22s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+/* Effetto pressione: il bottone si allarga leggermente e brilla */
+.pad-btn:hover {
+  background: rgba(35, 27, 18, .75);
+  transform: scale(1.1);
+  box-shadow: 0 12px 30px rgba(0,0,0,.55), 0 0 20px rgba(241,199,106,.18), inset 0 0 0 4px rgba(255,255,255,.06);
+}
+/* Assegnazione dei tasti alle celle della griglia 3x3 */
+.pad-btn.up { grid-column: 2; grid-row: 1; }
+.pad-btn.left { grid-column: 1; grid-row: 2; }
+.pad-btn.right { grid-column: 3; grid-row: 2; }
+.pad-btn.down { grid-column: 2; grid-row: 3; }
+
+/* BARRA INFERIORE (Contiene suggerimenti e i bottoni Indietro/Fullscreen) */
+.bottom-controls {
+  position: fixed;
+  left: 34px;
+  right: 18px;
+  bottom: 28px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  font-family: Arial, sans-serif;
+}
+
+#fullscreenBtn {
+  margin-right: 64px;
+}
+
+.control-pill,
+.control-box {
+  border-radius: 14px;
+  color: rgba(255,255,255,.90);
+}
+/* Bottoni laterali in basso */
+.control-pill {
+  min-width: 170px;
+  padding: 16px 20px;
+  text-align: center;
+}
+button.control-pill {
+  cursor: pointer;
+  font: inherit;
+}
+/* Box centrale con le icone/testo descrittivo "🖱️ Ruota, ⌕ Zoom..." */
+.control-box {
+  padding: 16px 30px;
+  display: flex;
+  gap: 46px;
+}
+.control-box span { color: rgba(255,255,255,.9); }
+/* Classe di utilità per nascondere forzatamente gli elementi via JS */
+.hidden { display: none !important; }
+
+/* SCHERMATA DI CARICAMENTO INIZIALE ("Platform 9¾") */
+#loading {
+  position: fixed;
+  inset: 0; /* Si espande su tutto lo schermo */
+  z-index: 30; /* Deve stare sopra a tutto il resto */
+  background:
+    radial-gradient(circle at center, rgba(72, 47, 24, .96), rgba(5, 5, 8, .98)),
+    linear-gradient(135deg, #0b101b, #251611);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+#loading h1 { font-size: 52px; margin: 0; color: var(--gold); }
+/* Lo sfondo della barra di progresso */
+.bar {
+  width: min(520px, 80vw);
+  height: 12px;
+  border-radius: 99px;
+  overflow: hidden;
+  background: rgba(255,255,255,.18);
+}
+/* La parte colorata che avanza da sinistra verso destra in base alla percentuale % */
+#barFill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #8f5d1f, #f6d27a);
+  transition: .25s; /* Movimento fluido della barra */
+}
+
+/* MEDIA QUERY: RESPONSIVE DESIGN (Adatta l'UI a tablet e smartphone) */
+@media (max-width: 850px) {
+  .info-panel { display: none; } /* Nasconde le info testuali per risparmiare spazio */
+  .visit-panel { right: 16px; top: 105px; width: min(300px, calc(100vw - 32px)); }
+  /* Rimpicciolisce i bottoni direzionali e dello zoom e li avvicina ai bordi */
+  .d-pad { left: 16px; transform: translateY(-30%); grid-template-columns: repeat(3, 40px); grid-template-rows: repeat(3, 40px); }
+  .zoom-pad { left: 16px; bottom: 96px; transform: none; }
+  .zoom-pad .pad-btn { width: 46px; height: 46px; flex-basis: 46px; }
+  .bottom-controls { left: 16px; right: 16px; bottom: 16px; }
+  .control-box { display: none; } /* Nasconde le istruzioni mouse su mobile */
+  .control-pill { min-width: auto; padding: 13px 15px; }
+  /* Ristringe il logo e il titolo */
+  .map-header { left: 18px; top: 20px; }
+  .map-header h1 { font-size: 30px; }
+  .ornament { width: 220px; }
+}
+
+/* PANNELLO HOGSMEADE (In basso a destra) */
+.hogsmeade-card {
+  position: fixed;
+  right: 34px;
+  bottom: 105px;
+  z-index: 4;
+  width: 285px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(241,199,106,.28);
+  background: linear-gradient(145deg, rgba(16,18,26,.82), rgba(55,30,18,.62));
+  backdrop-filter: blur(14px);
+  box-shadow: 0 22px 70px rgba(0,0,0,.38), 0 0 26px rgba(241,199,106,.10);
+  font-family: Arial, sans-serif;
+}
+
+/* Etichetta di stato (es: "Coming Soon") */
+.hogsmeade-alert {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(241,199,106,.14);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* ANIMAZIONE DELLO SPINNER (Rotellina di caricamento nel pannello Hogsmeade) */
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(241,199,106,0.3); /* Cerchio semi-trasparente */
+  border-top: 2px solid #f1c76a; /* Spicchio opaco che evidenzia la rotazione */
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite; /* Animazione che si ripete all'infinito */
+  box-shadow: 0 0 8px rgba(241,199,106,0.6);
+  flex-shrink: 0;
+}
+
+/* Definizione dei fotogrammi della rotazione (da 0 a 360 gradi) */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hogsmeade-card h2 {
+  margin: 0 0 8px;
+  color: var(--gold);
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.hogsmeade-card p {
+  margin: 0 0 14px;
+  color: rgba(255,255,255,.84);
+  line-height: 1.45;
+}
+
+/* Bottone di apertura della finestra modale di Hogsmeade */
+.hogsmeade-card button {
+  width: 100%;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 999px;
+  color: #1d1204;
+  background: linear-gradient(90deg, #af7627, #f1c76a, #8f5d1f);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+/* Contenitore per i bottoni delle anteprime delle stanze di Hogsmeade iniettate via JS */
+.hogsmeade-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+/* Stile speciale per le card che fanno caricare le anteprime (es. Olivander, Mielandia) */
+.preview-card {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(241,199,106,.28);
+  background: linear-gradient(145deg, rgba(241,199,106,.13), rgba(255,255,255,.05));
+  color: var(--gold);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* Sottotitolo descrittivo dentro i bottoni preview (es. "Il negozio delle bacchette") */
+.preview-card span {
+  display: block;
+  margin-top: 6px;
+  color: rgba(255,255,255,.78);
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+/* Effetto di sollevamento al passaggio del mouse sulle card preview */
+.preview-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 28px rgba(241,199,106,.16);
+}
+
+/* REGOLE MOBILE PER LA CARD DI HOGSMEADE */
+@media (max-width: 850px) {
+  .hogsmeade-card {
+    right: 16px;
+    bottom: 82px; /* Spostata per non sovrapporsi ai controlli touch */
+    width: min(270px, calc(100vw - 32px));
+  }
+}

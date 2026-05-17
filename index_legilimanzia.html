@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legilimanzia</title>
+    <script>document.documentElement.setAttribute("data-theme", localStorage.getItem("pf_theme") || "dark");</script>
+
+  <link rel="stylesheet" href="css/style.css?v=home-adventure-title-1">
+  <link rel="stylesheet" href="css/style_legilimanzia.css">
+
+  <script src="jss/guardia.js?v=i18n-1"></script>
+    <link rel="stylesheet" href="css/harmony.css?v=6">
+    <link rel="stylesheet" href="css/responsive.css?v=home-adventure-title-1">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="homepage.html" class="logo"><span class="navbar-logo-mark" role="button" aria-label="Mostra logo ingrandito" tabindex="0"><img src="logo.jpg" alt="" loading="eager"></span>Platform 9 ¾</a>
+
+    <ul class="nav-links">
+      <li><a href="homepage.html" data-i18n="nav_home">Home</a></li>
+      <li><a href="gazzetta.html" data-i18n="nav_gazzetta">Gazzetta</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Test ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="smistamento.html">Smistamento</a></li>
+          <li><a href="test.html">Bacchetta</a></li>
+        </ul>
+      </li>
+      <li><a href="pensatoio.html" data-i18n="nav_pensatoio">Pensatoio</a></li>
+      <li><a href="olivander.html" data-i18n="nav_olivander">Olivander</a></li>
+      <li><a href="guferia.html" data-i18n="nav_guferia">Guferia</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Minigiochi ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="index_legilimanzia.html">Legilimanzia</a></li>
+          <li><a href="index_pozioni.html">Pozioni</a></li>
+          <li><a href="index_club_duellanti.html">Club Duellanti</a></li>
+          <li><a href="index_quidditch.html">Quidditch</a></li>
+        </ul>
+      </li>
+      <li><a href="index_archivio.html" data-i18n="nav_archivio">Archivio</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <div class="settings-wrapper">
+        <button class="settings-btn" type="button" aria-label="Impostazioni" title="Impostazioni" aria-expanded="false">⚙️</button>
+      </div>
+      <a href="posta.html" class="nav-icon-btn nav-mail-btn" data-i18n-title="nav_posta" aria-label="Posta" title="Posta">✉️</a>
+      <a href="profilo.html" class="profile-btn" aria-label="Profilo" title="Profilo">
+        <span id="nav-username">🧙‍♂️</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <main class="app-shell">
+    <header class="hero">
+      <div class="orb" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <h1>Legilimanzia 🧙🏼</h1>
+        <p class="subtitle">Pensa a un personaggio, una creatura, un oggetto, un luogo, un incantesimo o una pozione.</p>
+      </div>
+    </header>
+
+    <section id="start" class="panel start-panel">
+      <div class="panel-head">
+        <div>
+          <h2>Giochiamo!</h2>
+        </div>
+        <span class="pill">AI</span>
+      </div>
+      <div class="disclaimer" role="note">
+        <strong>⚠️ Disclaimer</strong>
+        <span>Questo gioco è a scopo di divertimento e intrattenimento. Le risposte dell’AI sono stime ludiche, non valutazioni reali o ufficiali.</span>
+      </div>
+      <div class="start-actions">
+        <button id="loadAI" class="primary-action">Carica AI e gioca</button>
+      </div>
+      <div id="loadPanel" class="load-panel hidden" aria-live="polite">
+        <div class="load-top">
+          <span id="loadText">Preparazione</span>
+          <strong id="loadPercent">0%</strong>
+        </div>
+        <div class="progress-bar loading"><div id="loadProgress" class="progress"></div></div>
+      </div>
+      <p class="hint status-line" id="aiStatus">Pronto: carica l’AI locale per iniziare.</p>
+    </section>
+
+    <section id="quiz" class="game-grid hidden">
+      <aside class="side-card">
+        <div class="side-top">
+          <span class="pill" id="modePill">AI locale centrale</span>
+          <span class="pill muted" id="dbStats">Database</span>
+        </div>
+        <h2>Pannello di controllo</h2>
+        <div class="metric-grid">
+          <div class="metric"><strong id="askedCount">0</strong><span>risposte</span></div>
+          <div class="metric"><strong id="confidenceMini">—</strong><span>fiducia</span></div>
+        </div>
+        <div class="progress-bar"><div id="progress" class="progress"></div></div>
+        <div class="nav-actions">
+          <button id="backBtn" class="secondary-action" disabled>← Torna indietro</button>
+          <button id="restartBtn" class="ghost-action">Ricomincia</button>
+        </div>
+        <div class="history-box">
+          <div class="section-label">Cronologia</div>
+          <ol id="historyList"></ol>
+        </div>
+      </aside>
+
+      <section class="panel question-card">
+        <p id="status" class="status"></p>
+        <div class="ai-strip">
+          
+          <p id="aiHint">L’AI sta selezionando la domanda più informativa.</p>
+        </div>
+        <h2 id="question"></h2>
+        <div class="buttons answer-grid">
+          <button data-answer="yes">Sì</button>
+          <button data-answer="no">No</button>
+          <button class="secondary" data-answer="maybe">Forse</button>
+          <button class="secondary" data-answer="unknown">Non lo so</button>
+        </div>
+      </section>
+
+      <aside class="side-card candidates-card">
+        <div class="section-label">Candidati più probabili</div>
+        <div id="candidateList" class="candidate-list"></div>
+      </aside>
+    </section>
+
+    <section id="thinking" class="panel thinking-panel hidden">
+      <div class="orb small" aria-hidden="true"></div>
+      <p class="eyebrow">Lettura finale</p>
+      <h2>La mente artificiale sta ragionando...</h2>
+      <div class="progress-bar loading thinking-load"><div class="progress indeterminate"></div></div>
+      <p class="hint">Gioco a scopo di divertimento.</p>
+    </section>
+
+    <section id="result" class="panel result-card hidden">
+      <p class="small-title">La tua mente mi mostra...</p>
+      <h2 id="resultName"></h2>
+      <div class="result-layout">
+        <img id="resultImage" alt="" loading="lazy">
+        <div class="result-copy">
+          <p id="resultReason"></p>
+          <div id="resultBadges" class="badge-row"></div>
+        </div>
+      </div>
+      <div id="alternativeAnswers" class="alternative-answers" aria-label="Altre possibili risposte"></div>
+      <div id="finalImages" class="final-images" aria-label="Altre immagini possibili"></div>
+      <div id="giveUpForm" class="give-up-form hidden">
+        <input type="text" id="userAnswer" placeholder="Scrivi il nome di ciò che stavi pensando..." autocomplete="off">
+        <button id="submitAnswerBtn" class="primary-action">Invia risposta</button>
+      </div>
+      <div class="buttons result-actions">
+        <button id="okBtn">Sì, hai indovinato 🎯</button>
+        <button id="retryBtn" class="secondary">No, continua ❌</button>
+        <button id="reviewBtn" class="ghost-action">Modifica risposte</button>
+        <button id="newGameBtn" class="ghost-action">Nuova partita</button>
+      </div>
+      <p id="feedback"></p>
+    </section>
+  </main>
+    <div id="howler-modal" class="howler-overlay hidden">
+        <div id="howler-envelope" class="howler-envelope">
+            <div class="howler-seal">M</div>
+            <p>Aperta da <span id="howler-sender"></span>...</p>
+            <p class="click-to-open">Clicca per aprirla prima che esploda!</p>
+        </div>
+        <div id="howler-ashes" class="hidden">🔥 La lettera si è incenerita... 🔥</div>
+    </div>
+  <script src="script.js?v=home-adventure-title-1"></script>
+  <script src="jss/database.js"></script>
+  <script src="jss/database_extra.js"></script>
+  <script type="module" src="jss/script_legilimanzia.js"></script>
+</body>
+</html>
