@@ -1,20 +1,18 @@
 <?php
-// php/forgot_password.php
 header('Content-Type: application/json');
 
-// 1. Evocazione di PHPMailer
+//PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Colleghiamo i file della libreria (assicurati che la cartella 'src' sia dentro la cartella 'php')
+// Colleghiamo i file della libreria
 require 'src/Exception.php';
 require 'src/PHPMailer.php';
 require 'src/SMTP.php';
 
-// 2. Connessione al database
 require 'db.php';
 
-// 3. Lettura di nome da mago ed email inseriti nella pagina recupero.html
+// Lettura di nome da mago ed email inseriti nella pagina recupero.html
 $data = json_decode(file_get_contents("php://input"));
 $username = trim($data->username ?? '');
 $email = trim($data->email ?? '');
@@ -24,28 +22,27 @@ if ($username === '' || $email === '' || !filter_var($email, FILTER_VALIDATE_EMA
     exit;
 }
 
-// 4. Cerchiamo il profilo esatto: la stessa email puo' appartenere a piu' maghi.
+//  Cerchiamo il profilo esatto: la stessa email puo' appartenere a piu' maghi
 $stmt = $pdo->prepare("SELECT id, username, email FROM users WHERE username = ? AND LOWER(TRIM(email)) = LOWER(?) LIMIT 1");
 $stmt->execute([$username, $email]);
 $user = $stmt->fetch();
 
 if ($user) {
-    // Generiamo il token magico di recupero
+    // Generiamo il token di recupero
     $token = bin2hex(random_bytes(32)); 
     $expires = date("Y-m-d H:i:s", strtotime('+1 hour'));
 
-    // Salviamo il token solo sul profilo selezionato, non su tutti quelli con la stessa email.
+    // Salviamo il token solo sul profilo selezionato, non su tutti quelli con la stessa email
     $updateStmt = $pdo->prepare("UPDATE users SET reset_token = ?, reset_expires = ? WHERE id = ?");
     $updateStmt->execute([$token, $expires, $user['id']]);
 
-    // Il link magico punta alla cartella reale in cui si trova il progetto.
     $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
     $hostName = $_SERVER['HTTP_HOST'] ?? 'localhost';
     $basePath = rtrim(dirname(dirname($_SERVER['SCRIPT_NAME'] ?? '/Platform934/php/forgot_password.php')), '/\\');
     $resetLink = $scheme . '://' . $hostName . $basePath . '/reset.html?token=' . urlencode($token);
     $safeUsername = htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8');
 
-    // 5. PREPARAZIONE DEL GUFO CON PHPMAILER
+    // PRreparazione invio email
     $mail = new PHPMailer(true);
 
     try {
@@ -54,28 +51,24 @@ if ($user) {
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
         
-        // =========================================================================
-        // ⚠️ MODIFICA QUESTE 3 RIGHE CON I TUOI DATI GMAIL PERSONALI
-        // =========================================================================
-        
-        // 1. INSERISCI LA TUA VERA EMAIL GMAIL DENTRO GLI APICI
+
+        // Mail che manda le mail
         $mail->Username   = 'aurorawattpad1981@gmail.com'; 
         
-        // 2. INSERISCI LA PASSWORD PER LE APP DI 16 CARATTERI (SENZA SPAZI) DENTRO GLI APICI
+        //  LA PASSWORD PER LE APP DI GOOGLE DI 16 CARATTERI 
         $mail->Password   = 'ezbzlbmpdlmkmyks'; 
         
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
 
-        // 3. INSERISCI DI NUOVO LA TUA VERA EMAIL GMAIL DENTRO IL PRIMO APICE
         $mail->setFrom('aurorawattpad1981@gmail.com', 'Platform 9 3/4');
         
         // =========================================================================
 
-        // Destinatario: l'email verificata sul profilo trovato.
+        // Destinatario: l'email verificata sul profilo trovato
         $mail->addAddress($user['email'], $user['username']);
 
-        // Contenuto della pergamena (Email HTML)
+        // Contenuto della mail
         $mail->isHTML(true);
         $mail->Subject = "Il tuo Gufo di Recupero - Platform 9 3/4";
         $mail->Body    = "
@@ -91,7 +84,7 @@ if ($user) {
             </div>
         ";
 
-        // Spedisci l'email!
+        // Spedisci l'email
         $mail->send();
         
         // Messaggio di successo che appare sulla pagina recupero.html
@@ -101,7 +94,7 @@ if ($user) {
         ]);
 
     } catch (Exception $e) {
-        // Se c'è un errore nella spedizione (es. password Gmail errata)
+        // Se c'è un errore nella spedizione
         echo json_encode([
             "success" => false, 
             "message" => "Il gufo si è perso a causa di un'interferenza babbana."
