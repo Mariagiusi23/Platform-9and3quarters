@@ -46,11 +46,62 @@ In alternativa si puo' aprire direttamente una pagina specifica, ad esempio:
 http://localhost/Platform934/homepage.html
 ```
 
+## Configurazione del database
+
+Per usare registrazione, login, profilo, posta, guferia, pensatoio, salvataggio della casata e salvataggio della bacchetta serve il database MySQL del progetto.
+
+Il file del database si trova nella cartella principale del progetto:
+
+```text
+Platform934/platform934.sql
+```
+
+Il database deve chiamarsi esattamente:
+
+```text
+platform934
+```
+
+Il codice PHP e' gia' configurato per usare questo nome nel file:
+
+```text
+Platform934/php/db.php
+```
+
+### Come importare il database con phpMyAdmin
+
+1. Aprire XAMPP.
+2. Avviare **Apache** e **MySQL**.
+3. Aprire il browser e andare su:
+
+```text
+http://localhost/phpmyadmin
+```
+
+4. Creare un nuovo database chiamato `platform934`.
+5. Cliccare sul database `platform934`.
+6. Aprire la scheda **Importa**.
+7. Selezionare il file:
+
+```text
+Platform934/platform934.sql
+```
+
+8. Premere **Esegui**.
+
+Dopo l'importazione, nel database `platform934` devono comparire le tabelle principali:
+
+```text
+users
+strillettere
+ricordi
+```
+
 ## Note importanti
 
 - Il sito deve essere aperto tramite `localhost`, non facendo doppio click sui file HTML.
 - Apache serve per far funzionare correttamente i file del progetto.
-- MySQL serve per le parti con login, registrazione, profilo, posta, pensatoio e database.
+- MySQL e il database `platform934` servono per login, registrazione, profilo, posta, guferia, pensatoio e salvataggi dell'utente.
 - Se il browser mostra errore 404, controllare che il nome della cartella sia esattamente `Platform934` e che si trovi dentro `htdocs`.
 
 ## Pagina principale consigliata
@@ -60,4 +111,3 @@ Per presentare il progetto si consiglia di partire da:
 ```text
 http://localhost/Platform934/homepage.html
 ```
-
