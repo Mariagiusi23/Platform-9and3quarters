@@ -188,6 +188,20 @@ Il progetto combina sviluppo web, creatività, storytelling e contenuti 3D in un
 
 ---
 
+## ©️ Copyright e note sui contenuti
+
+Questo progetto è stato realizzato esclusivamente a **scopo universitario, didattico e non commerciale**.
+
+**Platform 9¾** è un progetto ispirato al mondo di Harry Potter, ma non è affiliato, associato, autorizzato, approvato o sponsorizzato da J.K. Rowling, Warner Bros., Wizarding World o da altri titolari ufficiali dei relativi diritti.
+
+Tutti i marchi, nomi, personaggi, ambientazioni, riferimenti narrativi e contenuti riconducibili all’universo di Harry Potter appartengono ai rispettivi proprietari.
+
+Gli asset, i modelli 3D, le immagini, i file audio, i video, le texture, i font e qualsiasi altro contenuto di terze parti eventualmente utilizzato all’interno del progetto appartengono ai rispettivi autori e proprietari.
+
+Il progetto non ha finalità commerciali e viene presentato unicamente come elaborato creativo e accademico.
+
+---
+
 ## 👩‍💻 Autrici
 
 Progetto realizzato da **Aurora Di Giovanna** e **Mariagiusi Nicodemo**.
