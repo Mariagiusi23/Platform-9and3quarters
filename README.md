@@ -1,4 +1,14 @@
 # 🚂 Platform 9¾
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=three.js&logoColor=white)
+![XAMPP](https://img.shields.io/badge/XAMPP-FB7A24?style=for-the-badge&logo=xampp&logoColor=white)
+![Git LFS](https://img.shields.io/badge/Git%20LFS-F05032?style=for-the-badge&logo=git&logoColor=white)
+![University Project](https://img.shields.io/badge/University%20Project-Yes-8A2BE2?style=for-the-badge)
+![Non Commercial](https://img.shields.io/badge/Use-Non--Commercial-red?style=for-the-badge)
 
 **Platform 9¾** è una piattaforma web interattiva ispirata al mondo magico di Harry Potter, progettata per offrire un’esperienza digitale immersiva, narrativa e ricca di contenuti esplorabili.
 
