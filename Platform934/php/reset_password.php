@@ -1,5 +1,4 @@
 <?php
-// php/reset_password.php
 header('Content-Type: application/json');
 
 // Connessione al database protetta da try/catch per gestire errori di connessione
