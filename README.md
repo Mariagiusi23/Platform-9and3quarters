@@ -317,7 +317,7 @@ Scaricare la repository come file ZIP da GitHub non è il metodo consigliato, pe
 In alternativa, i file grandi possono essere scaricati anche dalla cartella Google Drive del progetto:
 
 ```text
-[https://drive.google.com/drive/folders/1DQBzInUF_MqJJ4IxN21uCSkhfYI1B2vL?usp=share_link](https://drive.google.com/drive/folders/1NsjxMcYk4CIZZq9gNgVBX-JXpcZJq79G?usp=share_link)
+https://drive.google.com/drive/folders/1DQBzInUF_MqJJ4IxN21uCSkhfYI1B2vL
 ```
 
 Dopo averli scaricati, bisogna copiarli nelle rispettive cartelle del progetto mantenendo gli stessi nomi e percorsi.
