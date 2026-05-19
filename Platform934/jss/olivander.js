@@ -37,7 +37,7 @@ function renderProducts() {
             <h3>${wand.name}</h3>
             <p>${wand.wood} - ${wand.core}</p>
             <p>${wand.length}</p>
-            <div class="price">${wand.price} Galleoni</div>
+            <div class="price">${wand.price} Galeoni</div>
             <button class="add-btn" type="button" data-add-to-cart="${wand.id}">Aggiungi al Baule</button>
         `;
         productGrid.appendChild(card);
