@@ -44,7 +44,7 @@ L'obiettivo è ricreare una piccola esperienza digitale magica, in cui ogni pagi
 - Quidditch
 - Personaggi e oggetti 3D
 - Ambientazioni ispirate a Hogwarts
-- Asset multimediali: immagini, audio, video e modelli `.glb`
+- Asset multimediali: immagini, video e modelli `.glb`
 
 ---
 
@@ -52,7 +52,6 @@ L'obiettivo è ricreare una piccola esperienza digitale magica, in cui ogni pagi
 
 ```text
 Platform934/
-  audio/             File audio
   css/               Fogli di stile
   images/            Immagini e asset grafici
   jss/               Script JavaScript
