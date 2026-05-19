@@ -1,8 +1,8 @@
 const PF_ALERT_MESSAGES = {
   it: {
     cart_empty: "Il baule e' vuoto! La bacchetta sceglie il mago, ma tu devi prima sceglierne una.",
-    checkout_success_owl: "Transazione di {total} Galleoni approvata dal caveau {vault}!\nTi rimangono {balance} Galleoni.\n\nI tuoi acquisti sono stati affidati a un Gufo Reale.",
-    checkout_success_pickup: "Transazione di {total} Galleoni approvata dal caveau {vault}!\nTi rimangono {balance} Galleoni.\n\nI tuoi acquisti ti aspettano ad Hogwarts.",
+    checkout_success_owl: "Transazione di {total} Galeoni approvata dal caveau {vault}!\nTi rimangono {balance} Galeoni.\n\nI tuoi acquisti sono stati affidati a un Gufo Reale.",
+    checkout_success_pickup: "Transazione di {total} Galeoni approvata dal caveau {vault}!\nTi rimangono {balance} Galeoni.\n\nI tuoi acquisti ti aspettano ad Hogwarts.",
     gringott_error: "ERRORE GRINGOTT: {message}",
     gringott_unreachable: "Impossibile raggiungere la Gringott in questo momento.",
     communication_error: "Errore di comunicazione con il Ministero della Magia.",
