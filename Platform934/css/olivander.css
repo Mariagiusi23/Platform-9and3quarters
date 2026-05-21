@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 
-/* =========================================
-   BASE PAGE
-========================================= */
+ 
 .olivander-page {
   margin: 0;
   font-family: Georgia, serif;
@@ -12,9 +10,7 @@
   min-height: 100vh;
 }
 
-/* =========================================
-   NAVBAR
-========================================= */
+ 
 .navbar {
   position: fixed;
   top: 0;
@@ -60,7 +56,7 @@
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
-/* CART ICON */
+ 
 .nav-actions {
   position: relative;
 }
@@ -98,7 +94,7 @@
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.24) !important;
 }
 
-/* BADGE */
+ 
 #cartCount {
   position: absolute;
   top: -6px;
@@ -115,9 +111,7 @@
   border-radius: 50%;
 }
 
-/* =========================================
-   HERO
-========================================= */
+ 
 .hero {
   text-align: center;
   padding: 2.8rem 2rem 3rem;
@@ -138,9 +132,7 @@
   font-family: Georgia, serif;
 }
 
-/* =========================================
-   SHOP WRAPPER & GRID
-========================================= */
+ 
 .shop {
   padding: 2rem;
   max-width: 1200px;
@@ -154,9 +146,7 @@
   padding: 2rem;
 }
 
-/* =========================================
-   WAND CARD
-========================================= */
+ 
 .wand-card {
   position: relative;
   background: linear-gradient(145deg, #2a1a12, #120a07);
@@ -214,9 +204,7 @@
   font-size: 1.2rem;
 }
 
-/* =========================================
-   BUTTON
-========================================= */
+ 
 .add-btn {
   margin-top: 1rem;
   width: 100%;
@@ -238,9 +226,7 @@
   box-shadow: 0 0 20px rgba(255,200,120,0.2);
 }
 
-/* =========================================
-   MAGIC BACKGROUND DUST
-========================================= */
+ 
 .magic-dust {
   position: fixed;
   inset: 0;
@@ -269,9 +255,7 @@
   to { transform: translateY(-300px); }
 }
 
-/* =========================================
-   CART DRAWER & OVERLAY
-========================================= */
+ 
 .cart-overlay {
   position: fixed;
   inset: 0;
@@ -388,9 +372,7 @@
   box-shadow: 0 0 15px rgba(255,215,0,0.4);
 }
 
-/* =========================================
-   MAGIC CHECKOUT MODAL
-========================================= */
+ 
 .magic-modal-content {
   background: #1a120b;
   width: 90%;
@@ -454,9 +436,7 @@
   box-shadow: 0 0 8px rgba(255,215,0,0.3);
 }
 
-/* =========================================
-   MOBILE
-========================================= */
+ 
 @media (max-width: 768px) {
   .hero h1 { font-size: 2.8rem; }
   .grid { gap: 1rem; padding: 1rem; }

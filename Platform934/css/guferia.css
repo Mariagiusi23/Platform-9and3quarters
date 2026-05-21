@@ -1,22 +1,22 @@
-/* Sfondo più profondo con una texture (opzionale) */
+ 
 .guferia-page {
     background: radial-gradient(circle at top, #2a2146, #151224);
     color: #f3e3c2;
     min-height: 100vh;
-    font-family: 'Crimson Text', Georgia, serif; /* Un font più "antico" */
+    font-family: 'Crimson Text', Georgia, serif;  
 }
 
-/* Fix per la Navbar e spaziatura */
+ 
 .guferia-container {
     padding-top: 28px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra gli elementi figli orizzontalmente */
+    align-items: center;  
     width: 100%;
 }
 
 .guferia-header {
-    width: 100%; /* Importante: deve occupare tutto lo spazio per centrare il testo */
+    width: 100%;  
     text-align: center;
     margin-bottom: 3rem;
 }
@@ -26,14 +26,14 @@
     font-size: 4rem;
     color: #d4af37;
     text-shadow: 2px 2px 4px #000, 0 0 20px rgba(212, 175, 55, 0.6);
-    margin: 0 auto; /* Centra il blocco h1 */
-    display: inline-block; /* Permette al margine auto di funzionare se necessario */
+    margin: 0 auto;  
+    display: inline-block;  
 }
-/* La scrivania (Desk) - Aggiungiamo un effetto profondità */
+ 
 .red-envelope-form {
     background: linear-gradient(145deg, #a30000, #5c0000);
     padding: 3rem;
-    border-radius: 15px; /* Angoli più morbidi */
+    border-radius: 15px;  
     border: 2px solid #d4af37;
     box-shadow: 0 30px 60px rgba(0,0,0,0.8), 
                 inset 0 0 30px rgba(0,0,0,0.4),
@@ -44,12 +44,12 @@
     transition: transform 0.4s ease;
 }
 
-/* Effetto al passaggio del mouse sulla lettera */
+ 
 .red-envelope-form:hover {
     transform: translateY(-5px) rotateX(2deg);
 }
 
-/* Input che sembrano scritti su pergamena scura */
+ 
 .input-group input, .input-group textarea {
     background: rgba(20, 10, 10, 0.6);
     border: 1px solid #7d6b41;
@@ -66,7 +66,7 @@
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.3), inset 0 2px 5px rgba(0,0,0,0.5);
 }
 
-/* Il Bottone "Affida al Gufo" - Rendiamolo epico */
+ 
 .danger-btn {
     width: 100%;
     background: #1a1a1a;
@@ -78,7 +78,7 @@
     letter-spacing: 2px;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border-radius: 50px; /* Forma a pillola più moderna/magica */
+    border-radius: 50px;  
     box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
@@ -89,9 +89,9 @@
     box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
 }
 
-/* Aggiungiamo un sigillo di cera decorativo in un angolo */
+ 
 .red-envelope-form::after {
-    content: 'M'; /* Iniziale del Ministero o Mago */
+    content: 'M';  
     position: absolute;
     top: 20px;
     right: 20px;

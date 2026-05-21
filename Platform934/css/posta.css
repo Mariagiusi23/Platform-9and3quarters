@@ -19,7 +19,7 @@
     gap: 20px;
 }
 
-/* Stile base delle lettere nella griglia */
+ 
 .mail-item {
     padding: 20px;
     border-radius: 8px;
@@ -29,7 +29,7 @@
     border: 2px solid;
 }
 
-/* Lettera NON LETTA (Rossa, minacciosa e tremante) */
+ 
 .mail-unread {
     background: #8b0000;
     border-color: #ff0000;
@@ -38,7 +38,7 @@
 }
 .mail-unread:hover { animation: rage-shake 0.1s infinite; transform: scale(1.05); }
 
-/* Lettera LETTA (Cenere, innocua) */
+ 
 .mail-read {
     background: #2a2a2a;
     border-color: #555;

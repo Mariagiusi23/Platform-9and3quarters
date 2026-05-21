@@ -1,4 +1,4 @@
-/* Sfondo scuro e nebbioso */
+ 
 .pensieve-page {
     background: radial-gradient(circle at center, #111a22, #020508);
     color: #e0f2fe;
@@ -28,7 +28,7 @@
     margin: 0;
 }
 
-/* --- LA BACINELLA --- */
+ 
 .basin-wrapper {
     position: relative;
     width: 500px;
@@ -52,7 +52,7 @@
     cursor: pointer;
 }
 
-/* Effetto liquido turbinante */
+ 
 .water-surface {
     position: absolute;
     top: -50%; left: -50%;
@@ -67,7 +67,7 @@
     100% { transform: rotate(360deg); }
 }
 
-/* --- I RICORDI FLUTTUANTI (Globi di luce) --- */
+ 
 .wisp {
     position: absolute;
     width: 12px;
@@ -91,7 +91,7 @@
     100% { transform: translate(30px, -40px) scale(1.2); opacity: 0.8; }
 }
 
-/* --- BOTTONI E MODALI --- */
+ 
 .magic-btn {
     background: transparent;
     border: 1px solid #b6e2ff;
@@ -130,7 +130,7 @@
     border-radius: 5px;
     position: relative;
     box-shadow: 0 0 30px rgba(0,0,0,0.8);
-    background-image: url('https://www.transparenttextures.com/patterns/old-paper.png'); /* Texture finta pergamena */
+    background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');  
 }
 
 .parchment-modal input, .parchment-modal textarea {

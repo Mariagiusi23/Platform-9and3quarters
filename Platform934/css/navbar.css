@@ -9,27 +9,25 @@
   border-bottom: 1px solid var(--border);
 }
 
-/* Smooth hide/show for reveal-on-demand behavior on non-home pages */
+ 
 .navbar {
   transition: none;
   will-change: auto;
 }
 
-/* When hidden we move the navbar up and disable pointer events so page underneath is usable */
+ 
 .navbar.hidden {
   transform: none;
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Default CSS variable for navbar height.
-   This ensures the page content is pushed below the fixed navbar.
-   The value is updated dynamically by JS so it adapts on wrap/resize. */
+ 
 :root {
   --navbar-height: 78px;
 }
 
-/* Add top padding equal to navbar height so fixed navbar doesn't overlap content. */
+ 
 body {
   padding-top: var(--navbar-height);
   transition: none;
@@ -57,7 +55,7 @@ body {
   font-weight: bold;
   letter-spacing: 1px;
   color: var(--gold);
-  margin-right: auto; /* Spinge via tutto ciò che sta alla sua destra */
+  margin-right: auto;  
 }
 
 .nav-links {
@@ -100,8 +98,8 @@ body {
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 15px; /* Spazio tra i due tasti */
-    margin-left: auto; /* Spinge tutto a destra se sei in un contenitore flex */
+    gap: 15px;  
+    margin-left: auto;  
 }
 .nav-actions a {
   padding: 0.55rem 1rem;
@@ -192,7 +190,7 @@ body {
   cursor: pointer;
 }
 
-/* Settings panel styling appended to navbar.css for better visibility */
+ 
 .settings-panel {
   position: absolute;
   right: 0;
@@ -211,7 +209,7 @@ body {
 .settings-panel button#translate-now { padding:6px 10px; border-radius:6px; border:1px solid var(--border); background:var(--gold); color:#111; cursor:pointer; }
 .settings-wrapper { display:inline-block; }
 
-/* Force settings button always visible (override responsive rules) */
+ 
 .settings-wrapper, .settings-btn {
   display: inline-flex !important;
   visibility: visible !important;
@@ -224,7 +222,7 @@ body {
   border-radius: 8px;
 }
 
-/* On very small screens make sure it doesn't overlap content */
+ 
 @media (max-width: 480px) {
   .nav-actions { gap: 8px; }
   .navbar-logo-mark {
@@ -235,7 +233,7 @@ body {
   .settings-btn { padding: 0.35rem 0.45rem; }
 }
 
-/* Floating settings (used when there is no navbar or on pages where nav is hidden) */
+ 
 .settings-floating {
   position: fixed;
   top: 12px;
@@ -251,17 +249,17 @@ body {
   top: calc(100% + 8px);
 }
 
-/* Stile base per il Dropdown */
+ 
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* Nasconde il contenuto del menu inizialmente */
+ 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #2a2a2a; /* Colore scuro stile magico */
+    background-color: #2a2a2a;  
     min-width: 160px;
     box-shadow: 0px 8px 16px rgba(0,0,0,0.5);
     z-index: 1000;
@@ -270,7 +268,7 @@ body {
     list-style: none;
 }
 
-/* Stile dei link dentro il dropdown */
+ 
 .dropdown-content li a {
     color: gold !important;
     padding: 12px 16px;
@@ -279,18 +277,18 @@ body {
     font-size: 0.9rem;
 }
 
-/* Effetto hover sui link del sottomenu */
+ 
 .dropdown-content li a:hover {
     background-color: #3d3d3d;
     color: white !important;
 }
 
-/* Mostra il menu quando passi il mouse sopra la voce principale */
+ 
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
-/* Piccola freccia opzionale */
+ 
 .dropbtn {
     cursor: pointer;
 }
@@ -310,12 +308,12 @@ body {
 
 .profile-btn:hover {
     background: #f3e3c2;
-    color: #2c1608; /* Cambia colore testo al passaggio */
+    color: #2c1608;  
     transform: scale(1.1) rotate(5deg);
     box-shadow: 0 0 15px rgba(243, 227, 194, 0.5);
 }
 
-/* Settings (theme / language) icon in navbar */
+ 
 .settings-btn {
   background: transparent;
   border: 1px solid transparent;
@@ -335,15 +333,14 @@ body {
 
 .settings-wrapper { position: relative; }
 
-/* Small invisible/visible handle at the very top that reveals the navbar when hovered or focused.
-   It's injected and used on non-home pages. Keeping it subtle but keyboard accessible. */
+ 
 #nav-handle {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 6px;
-  z-index: 2001; /* above navbar to receive pointer when navbar hidden */
+  z-index: 2001;  
   background: linear-gradient(90deg, rgba(255,215,0,0.06), rgba(0,0,0,0));
   cursor: pointer;
 }
@@ -352,9 +349,7 @@ body {
   outline: 2px solid rgba(255,215,0,0.25);
 }
 
-/* =====================================================
-   FIX: navbar sempre visibile, anche con Google Translate
-===================================================== */
+ 
 
 .navbar,
 .navbar.hidden,
@@ -377,7 +372,7 @@ body {
   top: 0 !important;
 }
 
-/* Nasconde la barra superiore automatica di Google Translate */
+ 
 .goog-te-banner-frame,
 .skiptranslate iframe {
   display: none !important;
@@ -391,10 +386,7 @@ body {
   display: none !important;
 }
 
-/* =====================================================
-   NAVBAR UNIFICATA FINALE
-   Tiene la stessa barra su tutte le pagine, Gazzetta inclusa.
-===================================================== */
+ 
 .navbar {
   min-height: var(--navbar-height) !important;
   background: rgba(9, 8, 20, 0.9) !important;

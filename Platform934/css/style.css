@@ -9,9 +9,7 @@
 @import url("responsive.css?v=home-adventure-title-1");
 @import url("guferia.css");
 
-/* =========================================
-   LA STRILLETTERA (OVERLAY E ANIMAZIONI)
-========================================= */
+ 
 
 .howler-overlay {
     position: fixed;
@@ -102,9 +100,7 @@
     font-weight: bold;
 }
 
-/* =====================================================
-   CINEMATIC WAND UNLOCK — LOGIN EFFECT
-===================================================== */
+ 
 
 .wand-cinematic-overlay {
     position: fixed;
@@ -350,9 +346,7 @@
     animation: cinematicClose .55s ease forwards;
 }
 
-/* =========================================
-   KEYFRAMES CINEMATIC LOGIN
-========================================= */
+ 
 
 @keyframes cinematicOverlayIn {
     from {
@@ -538,9 +532,7 @@
     }
 }
 
-/* =========================================
-   RESPONSIVE CINEMATIC LOGIN
-========================================= */
+ 
 
 @media (max-width: 700px) {
     .wand-cinematic-title {

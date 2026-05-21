@@ -1,7 +1,7 @@
 home.css
 header {
-  /* preserve previous spacing but adapt to dynamic navbar height */
-  padding-top: calc(var(--navbar-height) + 46px); /* 110px original -> 46px extra */
+   
+  padding-top: calc(var(--navbar-height) + 46px);  
 }
 
 .hero {
@@ -34,7 +34,7 @@ header {
   flex-wrap: wrap;
 }
 
-/* TITOLI SEZIONI */
+ 
 .section-title,
 .titolo-giornale {
   text-align: center;

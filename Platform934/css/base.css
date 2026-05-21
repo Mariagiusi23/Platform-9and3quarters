@@ -14,11 +14,6 @@
   --max-width: 1200px;
 }
 
-/* ==============================
-   GLOBAL TYPOGRAPHY (harmonization)
-   - Keep colors as-is, unify fonts/sizes/spacing
-   - Safe to override per-page accents (colors, display) later
-================================== */
 :root {
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", system-ui, sans-serif;
   --font-serif: Georgia, "Times New Roman", Times, serif;
@@ -26,10 +21,10 @@
   --base-line-height: 1.6;
   --heading-weight: 700;
   --body-weight: 400;
-  --lead-scale: 1.125; /* slightly larger lead paragraphs */
+  --lead-scale: 1.125;  
 }
 
-/* Base typographic reset / harmony */
+ 
 html { font-size: var(--base-font-size); }
 body {
   font-family: var(--font-sans);
@@ -40,11 +35,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Paragraphs and small text */
+ 
 p { margin-bottom: 1rem; color: var(--muted); }
 p.lead { font-size: calc(1rem * var(--lead-scale)); color: var(--text); }
 
-/* Headings: use a complementary serif for a classic/hieratic look but keep weight consistent */
+ 
 h1, h2, h3, h4, h5 {
   font-family: var(--font-serif);
   color: var(--text);
@@ -58,22 +53,22 @@ h1 { font-size: clamp(1.6rem, 2.8vw, 2.4rem); }
 h2 { font-size: clamp(1.35rem, 2.2vw, 1.8rem); }
 h3 { font-size: clamp(1.1rem, 1.6vw, 1.3rem); }
 
-/* Links and interactive elements inherit font and maintain contrast via color variables */
+ 
 a { color: var(--gold); text-decoration: underline; }
 
-/* Buttons and inputs: inherit the same font to avoid typographic shifts */
+ 
 button, input, textarea, select {
   font-family: inherit;
   font-size: 1rem;
   line-height: 1.3;
 }
 
-/* Small utilities to harmonize spacing across pages */
+ 
 .content { max-width: var(--max-width); margin: 0 auto; padding: 1.2rem; }
 .muted { color: var(--muted); }
 
 
-/* Light theme variables (Lumos) */
+ 
 [data-theme="light"] {
   --bg: #f6f7fb;
   --bg-2: #eef2fb;
@@ -88,7 +83,7 @@ button, input, textarea, select {
   --shadow: 0 10px 30px rgba(23, 32, 64, 0.06);
 }
 
-/* RESET */
+ 
 * {
   box-sizing: border-box;
   margin: 0;
@@ -107,14 +102,14 @@ body {
   background: radial-gradient(circle at top, #34205b 0%, var(--bg-2) 38%, var(--bg) 100%);
 }
 
-/* Smooth transitions when switching themes */
+ 
 html[data-theme-transition] *,
 html[data-theme-transition] *::before,
 html[data-theme-transition] *::after {
   transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease;
 }
 
-/* SFONDO STELLATO */
+ 
 body::before {
   content: "";
   position: fixed;
@@ -130,7 +125,7 @@ body::before {
     radial-gradient(2px 2px at 900px 120px, white, transparent);
 }
 
-/* ELEMENTI BASE */
+ 
 img {
   max-width: 100%;
   display: block;
@@ -169,13 +164,13 @@ section {
   width: 100%;
 }
 
-/* CONTENITORE GENERICO */
+ 
 .container {
   width: min(var(--max-width), 94%);
   margin: 0 auto;
 }
 
-/* SETTINGS PANEL (small popover) */
+ 
 .settings-panel {
   position: absolute;
   right: 0;
@@ -202,9 +197,7 @@ section {
   font: inherit;
 }
 
-/* =========================================
-   ALOHOMORA - effetto apertura magica
-========================================= */
+ 
 .alohomora-overlay {
   position: fixed;
   inset: 0;
@@ -377,7 +370,7 @@ section {
   }
 }
 
-/* WAND UNLOCK ANIMATION */
+ 
 .wand-overlay {
   position: fixed;
   inset: 0;
@@ -427,7 +420,7 @@ section {
 @keyframes wand-swipe {
   0% { transform: translate(-50%,-50%) rotate(-25deg) translateX(0) scale(0.95); opacity: 0 }
   10% { opacity: 1 }
-  /* stay near center for most of the animation */
+   
   60% { transform: translate(-50%,-50%) rotate(-25deg) translateX(0) scale(1); opacity: 1 }
   100% { transform: translate(-50%,-50%) rotate(-5deg) translateX(60vw) scale(1.02); opacity: 1 }
 }
@@ -453,7 +446,7 @@ section {
   will-change: transform, opacity;
 }
 
-/* centered text that appears with the wand */
+ 
 .wand-text {
   position: absolute;
   left: 50%;
@@ -462,7 +455,7 @@ section {
   font-size: 3rem;
   font-weight: 800;
   color: var(--gold);
-  /* try to get a nicer cursive-like look using available fonts */
+   
   font-family: 'Brush Script MT', 'Segoe Script', 'Caveat', 'Pacifico', cursive, serif;
   background: linear-gradient(90deg, #fff8e6 0%, #ffd36a 40%, #f7c66a 60%, #ffd36a 100%);
   -webkit-background-clip: text;
@@ -497,7 +490,7 @@ section {
   100% { opacity: 0; -webkit-transform: translateY(-30vh) scale(0.8); transform: translateY(-30vh) scale(0.8) }
 }
 
-/* BOTTONI */
+ 
 .btn,
 .btn-soft,
 .hero-btn,
@@ -538,10 +531,7 @@ button:hover,
   background: var(--panel);
 }
 
-/* =========================================
-   LUMOS THEME FIX
-   Forza davvero il tema chiaro sulle pagine
-========================================= */
+ 
 
 html[data-theme="light"] {
   --bg: #f7f2df;
@@ -557,14 +547,14 @@ html[data-theme="light"] {
   --shadow: 0 12px 34px rgba(80, 52, 16, 0.16);
 }
 
-/* Corpo pagina chiaro */
+ 
 html[data-theme="light"] body {
   color: var(--text) !important;
   background:
     radial-gradient(circle at top, rgba(255, 248, 218, 0.95), rgba(239, 221, 179, 0.9) 42%, #f7f2df 100%) !important;
 }
 
-/* Riduce stelle/polvere perché su chiaro diventano sporche */
+ 
 html[data-theme="light"] body::before,
 html[data-theme="light"] .magic-dust::before,
 html[data-theme="light"] .magic-dust::after,
@@ -572,7 +562,7 @@ html[data-theme="light"] .magic-particles {
   opacity: 0.12 !important;
 }
 
-/* Navbar Lumos */
+ 
 html[data-theme="light"] .navbar {
   background: rgba(255, 248, 224, 0.88) !important;
   border-bottom: 1px solid rgba(112, 78, 24, 0.24) !important;
@@ -595,7 +585,7 @@ html[data-theme="light"] .dropbtn:hover {
   color: var(--gold) !important;
 }
 
-/* Dropdown chiaro */
+ 
 html[data-theme="light"] .dropdown-content {
   background: #fff4d1 !important;
   border: 1px solid rgba(112, 78, 24, 0.22) !important;
@@ -611,7 +601,7 @@ html[data-theme="light"] .dropdown-content li a:hover {
   color: var(--gold) !important;
 }
 
-/* Rotella impostazioni e pannello */
+ 
 html[data-theme="light"] .settings-btn,
 html[data-theme="light"] .profile-btn,
 html[data-theme="light"] .cart-btn {
@@ -644,7 +634,7 @@ html[data-theme="light"] .settings-panel button#translate-now {
   color: white !important;
 }
 
-/* Card e sezioni generiche */
+ 
 html[data-theme="light"] .auth-card,
 html[data-theme="light"] .quiz-section,
 html[data-theme="light"] .result-card,
@@ -660,7 +650,7 @@ html[data-theme="light"] .auth-box {
   box-shadow: 0 18px 45px rgba(80, 52, 16, 0.14) !important;
 }
 
-/* Testi */
+ 
 html[data-theme="light"] p,
 html[data-theme="light"] .subtitle,
 html[data-theme="light"] .hint,
@@ -675,7 +665,7 @@ html[data-theme="light"] h3 {
   text-shadow: none !important;
 }
 
-/* Input */
+ 
 html[data-theme="light"] input,
 html[data-theme="light"] textarea,
 html[data-theme="light"] select {
@@ -689,7 +679,7 @@ html[data-theme="light"] textarea::placeholder {
   color: #876b4a !important;
 }
 
-/* Bottoni */
+ 
 html[data-theme="light"] button,
 html[data-theme="light"] .magic-btn,
 html[data-theme="light"] .quiz-btn,
@@ -698,7 +688,7 @@ html[data-theme="light"] .hero-btn {
   color: #241706;
 }
 
-/* Pagine con body class specifica: sovrascrive gli sfondi scuri */
+ 
 html[data-theme="light"] body.mystic-page,
 html[data-theme="light"] body.olivander-page,
 html[data-theme="light"] body.pensieve-page,
@@ -710,7 +700,7 @@ html[data-theme="light"] body.gazzetta-page {
   color: #241706 !important;
 }
 
-/* Theme toast */
+ 
 .pf-theme-toast {
   position: fixed;
   left: 50%;

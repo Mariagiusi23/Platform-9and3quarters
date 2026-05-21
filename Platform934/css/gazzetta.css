@@ -1,10 +1,6 @@
-/* =========================================================
-   GAZZETTA DEL PROFETA
-========================================================= */
+ 
 
-/* =========================================================
-   PAGINA
-========================================================= */
+ 
 
 body.gazzetta-page {
   background:
@@ -24,9 +20,7 @@ html[data-theme="dark"] body.gazzetta-page {
     radial-gradient(circle at top, rgba(52, 32, 91, 0.94) 0%, rgba(35, 26, 61, 0.96) 38%, #151224 100%) !important;
 }
 
-/* =========================================================
-   PARTICELLE MAGICHE
-========================================================= */
+ 
 
 .magic-particles {
   position: fixed;
@@ -89,9 +83,7 @@ html[data-theme="dark"] body.gazzetta-page {
   }
 }
 
-/* =========================================================
-   WRAPPER GIORNALE
-========================================================= */
+ 
 
 .gazzetta-wrapper {
 
@@ -136,9 +128,7 @@ html[data-theme="dark"] body.gazzetta-page {
   }
 }
 
-/* =========================================================
-   TEXTURE CARTA
-========================================================= */
+ 
 
 .gazzetta-wrapper::before {
 
@@ -155,9 +145,7 @@ html[data-theme="dark"] body.gazzetta-page {
   pointer-events: none;
 }
 
-/* =========================================================
-   FUMO MAGICO
-========================================================= */
+ 
 
 .gazzetta-wrapper::after {
 
@@ -194,9 +182,7 @@ html[data-theme="dark"] body.gazzetta-page {
   }
 }
 
-/* =========================================================
-   HEADER
-========================================================= */
+ 
 
 .prophet-title {
 
@@ -217,7 +203,7 @@ html[data-theme="dark"] body.gazzetta-page {
   padding-bottom: 1rem;
 }
 
-/* DATA EDIZIONE */
+ 
 
 .edition {
 
@@ -234,7 +220,7 @@ html[data-theme="dark"] body.gazzetta-page {
   text-transform: uppercase;
 }
 
-/* SOTTOTITOLO */
+ 
 
 .headline-sub {
 
@@ -250,9 +236,7 @@ html[data-theme="dark"] body.gazzetta-page {
 
   letter-spacing: 1px;
 }
-/* =========================================================
-   TESTI
-========================================================= */
+ 
 
 .gazzetta-page p,
 .gazzetta-page li,
@@ -274,9 +258,7 @@ html[data-theme="dark"] body.gazzetta-page {
   text-shadow: none;
 }
 
-/* =========================================================
-   BREAKING NEWS
-========================================================= */
+ 
 
 .breaking-news {
 
@@ -310,9 +292,7 @@ html[data-theme="dark"] body.gazzetta-page {
   }
 }
 
-/* =========================================================
-   LAYOUT
-========================================================= */
+ 
 
 .news-layout {
 
@@ -324,9 +304,7 @@ html[data-theme="dark"] body.gazzetta-page {
   gap: 2rem;
 }
 
-/* =========================================================
-   ARTICOLI
-========================================================= */
+ 
 
 .news-paper {
 
@@ -353,7 +331,7 @@ html[data-theme="dark"] body.gazzetta-page {
     0 6px 20px rgba(0,0,0,0.10);
 }
 
-/* LUCE PAGINA */
+ 
 
 .news-paper::after {
 
@@ -384,9 +362,7 @@ html[data-theme="dark"] body.gazzetta-page {
   left: 150%;
 }
 
-/* =========================================================
-   TITOLI ARTICOLI
-========================================================= */
+ 
 
 .news-paper h2 {
 
@@ -402,9 +378,7 @@ html[data-theme="dark"] body.gazzetta-page {
   margin-bottom: .5rem;
 }
 
-/* =========================================================
-   IMMAGINI
-========================================================= */
+ 
 
 .main-image img,
 .news-paper img {
@@ -434,18 +408,14 @@ html[data-theme="dark"] body.gazzetta-page {
     brightness(1);
 }
 
-/* =========================================================
-   FOTO MAGICHE
-========================================================= */
+ 
 
 .moving-photo img {
 
   border: 4px solid #a88a58;
 }
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+ 
 
 @media (max-width: 1000px) {
 

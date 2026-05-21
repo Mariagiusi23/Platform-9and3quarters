@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 
-/* =========================================
-   BASE PAGE & NAVBAR
-========================================= */
+ 
 .mystic-page {
     margin: 0;
     font-family: Georgia, serif;
@@ -59,9 +57,7 @@
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
 }
 
-/* =========================================
-   AUTH CONTAINER & FORMS
-========================================= */
+ 
 .auth-container {
     display: flex;
     justify-content: center;
@@ -193,7 +189,7 @@ h2 {
     color: #fff;
 }
 
-/* Polvere Magica Background */
+ 
 .magic-dust {
     position: fixed;
     inset: 0;
