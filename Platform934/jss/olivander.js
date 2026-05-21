@@ -8,7 +8,7 @@ const wands = [
     { id: 6, name: "Bacchetta di Lord Voldemort", wood: "Tasso", core: "Piuma di Fenice", length: "13 pollici e ½", price: 15 }
 ];
 
-// INIZIALIZZAZIONE CON LOCALSTORAGE
+// Iinizializzo con localstorage
 let cart = JSON.parse(localStorage.getItem('bauleOlivander')) || [];
 
 // Selezione elementi del DOM
@@ -20,7 +20,7 @@ const cartOverlay = document.getElementById('cart-overlay');
 const closeCartBtn = document.getElementById('close-cart');
 const checkoutBtn = document.getElementById('checkout-btn');
 
-// Elementi per la Cassa Magica
+// Elementi per la cassa
 const magicModal = document.getElementById('magic-checkout-modal');
 const closeCassaBtn = document.getElementById('close-cassa');
 const checkoutForm = document.getElementById('magic-checkout-form');
@@ -57,7 +57,7 @@ function addToCart(id) {
     
     updateCartUI();
     
-    // Animazione bottone baule
+    // Animazione bottone carrello
     const currentCartToggle = document.getElementById('cart-toggle');
     if (currentCartToggle) {
         currentCartToggle.style.transform = "scale(1.1)";
@@ -65,7 +65,7 @@ function addToCart(id) {
     }
 }
 
-// Modificare la quantità (+ e -)
+// Modificare la quantità 
 function changeQty(id, amount) {
     const item = cart.find(item => item.id === id);
     if (item) {
@@ -124,7 +124,7 @@ function updateCartUI() {
     localStorage.setItem('bauleOlivander', JSON.stringify(cart));
 }
 
-// Gestione Apertura/Chiusura Drawer
+// Gestione apertura e chiusura carrello
 function toggleCart() {
     cartDrawer.classList.toggle('hidden');
     cartOverlay.classList.toggle('hidden');
@@ -153,14 +153,14 @@ document.addEventListener('click', (e) => {
 closeCartBtn.addEventListener('click', toggleCart);
 cartOverlay.addEventListener('click', toggleCart);
 
-// Apertura della Cassa Gringott
+// Apertura della cassa
 checkoutBtn.addEventListener('click', () => {
     if (cart.length === 0) {
         window.pfAlert("cart_empty");
     } else {
-        toggleCart(); // Chiude il drawer laterale
+        toggleCart(); // Chiude il bauel laterale
         finalTotalSpan.innerText = cartTotal.innerText;
-        magicModal.classList.remove('hidden'); // Apre la modale
+        magicModal.classList.remove('hidden'); // Apre il modale
     }
 });
 
@@ -169,7 +169,7 @@ closeCassaBtn.addEventListener('click', () => {
     magicModal.classList.add('hidden');
 });
 
-// Simulazione Pagamento con connessione al DB
+// Pagamento con connessione al DB
 checkoutForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
@@ -199,7 +199,7 @@ checkoutForm.addEventListener('submit', async (e) => {
         const data = await response.json();
 
         if (data.success) {
-            // PAGAMENTO ACCETTATO
+            // Pagamento accettato 
             window.pfAlert(shippingMethod === "gufo" ? "checkout_success_owl" : "checkout_success_pickup", {
                 total: totaleDaPagare,
                 vault: data.vault,
@@ -212,7 +212,7 @@ checkoutForm.addEventListener('submit', async (e) => {
             magicModal.classList.add('hidden');
             checkoutForm.reset();
         } else {
-            // PAGAMENTO RIFIUTATO (Fondi insufficienti o Password errata)
+            // Pagamento rifiutato
             window.pfAlert("gringott_error", { message: data.message });
         }
     } catch (error) {
@@ -227,5 +227,5 @@ checkoutForm.addEventListener('submit', async (e) => {
 
 // Inizializzazione al caricamento
 renderProducts();
-updateCartUI(); // Importante per visualizzare il carrello salvato appena la pagina si apre
+updateCartUI(); // visualizzare il carrello salvato appena la pagina si apre
 window.addEventListener('DOMContentLoaded', updateCartUI);

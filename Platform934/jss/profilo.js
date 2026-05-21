@@ -4,9 +4,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
     
-    // ==========================================
-    // 1. IMPOSTAZIONI MOTORE 3D (THREE.JS)
-    // ==========================================
+    // Impostazioni per Three.js
     const container = document.getElementById('3d-canvas-container');
     const loadingText = document.getElementById('loading-spell');
     const selectAvatar = document.getElementById('select-avatar');
@@ -16,24 +14,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     // Impostazione telecamera
     const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
-    camera.position.set(0, 1.5, 4); // Posizione iniziale: guarda verso il centro
-    
-    // Renderizzatore magico
+    camera.position.set(0, 1.5, 4); // Posizione iniziale
+
+    // Renderizzatore 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.outputEncoding = THREE.sRGBEncoding;
     container.appendChild(renderer.domElement);
 
-    // Controlli del mouse (OrbitControls)
+    // Controlli del mouse con OrbitControls
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enablePan = false; // Disabilitiamo il pan col mouse per dare precedenza ai nostri bottoni
+    controls.enablePan = true; // Posso muovermi anche con il mouse
     controls.minDistance = 1.5; // Zoom massimo
     controls.maxDistance = 6;   // Zoom minimo
-    controls.target.set(0, 1, 0); // Punta all'altezza del petto del modello
+    controls.target.set(0, 1, 0); 
     controls.update();
 
-    // Luci (Luce ambientale + Luce direzionale per dare profondità)
+    // Luci
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
     const dirLight = new THREE.DirectionalLight(0xffd700, 0.8); 
@@ -47,16 +45,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         renderer.setSize(container.clientWidth, container.clientHeight);
     });
 
-    // Motore di animazione continuo (Loop)
+    // Motore di animazione continuo 
     function animate() {
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
     }
     animate();
 
-    // ==========================================
-    // 2. CARICAMENTO DELL'AVATAR SCELTO
-    // ==========================================
+    //Caricamento dell'avatar
     const loader = new GLTFLoader();
     let currentModel = null; // Memoria per il modello attualmente a schermo
 
@@ -86,9 +82,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Cambia modello in tempo reale appena si fa una scelta dalla tendina
     selectAvatar.addEventListener('change', () => loadAvatar(selectAvatar.value));
 
-    // ==========================================
-    // 3. CONTROLLI A SCHERMO (PULSANTI ZOOM E SPOSTAMENTO)
-    // ==========================================
+    // Pulsanti
     const btnZoomIn = document.getElementById('btn-zoom-in');
     const btnZoomOut = document.getElementById('btn-zoom-out');
     const btnMoveUp = document.getElementById('btn-move-up');
@@ -126,10 +120,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         controls.update();
     });
 
-// ==========================================
-    // 4. DATABASE, INTERFACCIA E PROFILO
-    // ==========================================
-    
     // Elementi dell'interfaccia Avatar
     const viewModeContainer = document.getElementById('view-mode-container');
     const editModeContainer = document.getElementById('edit-mode-container');
@@ -139,7 +129,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Variabile per ricordare quale avatar aveva l'utente prima di iniziare a modificare
     let savedAvatarUrl = "mago_grifondoro.glb";
 
-    // Funzione magica per cambiare la vista dell'interfaccia
+    // Funzione per cambiare la vista dell'interfaccia
     function toggleEditMode(showEdit) {
         if (showEdit) {
             viewModeContainer.classList.add('hidden');
@@ -150,7 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // A. Carica i dati all'apertura della pagina
+    // Carica i dati all'apertura della pagina
     try {
         const res = await fetch('php/get_profile.php');
         const data = await res.json();
@@ -166,9 +156,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (data.user.avatar_url && data.user.avatar_url.includes('.glb')) {
                 savedAvatarUrl = data.user.avatar_url;
                 selectAvatar.value = savedAvatarUrl;
-                toggleEditMode(false); // Mostra la modalità "Visualizzazione"
+                toggleEditMode(false); // Mostra la modalità visualizzazione
             } else {
-                // Se NON ha un avatar salvato (nuovo utente), mostriamo subito l'editor
+                // Se non ha un avatar salvato mostriamo subito l'editor
                 toggleEditMode(true);
             }
             
@@ -179,21 +169,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Errore di connessione al database:", e);
     }
 
-    // B. Gestione dei Pulsanti dell'Interfaccia Avatar
     
-    // Clicca "Modifica"
+    // Clicca modifica
     editAvatarBtn.addEventListener('click', () => {
         toggleEditMode(true);
     });
 
-    // Clicca "Annulla" (Rimette l'avatar precedente)
+    // Clicca annulla
     cancelEditBtn.addEventListener('click', () => {
         selectAvatar.value = savedAvatarUrl; // Torna al valore salvato
         loadAvatar(savedAvatarUrl);          // Ricarica il modello vecchio in 3D
         toggleEditMode(false);               // Torna alla vista chiusa
     });
 
-    // Clicca "Conferma questo Avatar"
+    // Clicca conferma questo aatar
     document.getElementById('save-avatar-btn').addEventListener('click', async () => {
         const newAvatar = selectAvatar.value;
         
@@ -205,7 +194,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         const data = await res.json();
         
-        // Se il salvataggio va a buon fine, aggiorniamo la variabile e chiudiamo l'editor
+        // Se il salvataggio va a buon fine aggiorniamo la variabile e chiudiamo l'editor
         if(data.success) {
             savedAvatarUrl = newAvatar;
             toggleEditMode(false);
@@ -215,7 +204,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // C. Aggiorna Dati Account (Nickname ed Email)
+    // Aggiorna Dati Account 
     document.getElementById('update-profile-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const payload = {
@@ -237,7 +226,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // D. Cambio Password Diretto
+    // Cambio Password Diretto
     document.getElementById('change-password-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const oldPass = document.getElementById('old-pass').value;

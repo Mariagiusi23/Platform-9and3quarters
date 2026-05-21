@@ -43,9 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
             wisp.style.top = `${y}px`;
             wisp.style.animationDelay = `${Math.random() * 5}s`;
 
-            // Colore leggermente diverso per i ricordi "base" (tutti)
+            // Colore leggermente diverso per i ricordi "base" cioè di tutti
             if (mem.username === 'tutti') {
-                wisp.style.boxShadow = "0 0 15px 5px rgba(255, 215, 0, 0.6)"; // Leggero riflesso dorato
+                wisp.style.boxShadow = "0 0 15px 5px rgba(255, 215, 0, 0.6)"; 
             }
 
             wisp.addEventListener('click', () => openReadModal(mem));
@@ -53,10 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Apre la pergamena per leggere
+    // Apre la pergamena per leggere il ricordo
     function openReadModal(memory) {
         document.getElementById('read-title').innerText = memory.titolo;
-        // Se la data c'è, la mostriamo, altrimenti niente
+        // Se la data c'è, la mostriamo se no no 
         document.getElementById('read-date').innerText = memory.data_creazione ? memory.data_creazione.substring(0, 10) : '';
         document.getElementById('read-text').innerText = memory.testo;
         
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     btnExtract.addEventListener('click', () => modalAdd.classList.remove('hidden'));
 
-    // Salva un nuovo ricordo nel DB
+    // Salva un nuovo ricordo nel Database
     formMemory.addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -100,12 +100,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if(data.success) {
             closeModals();
             formMemory.reset();
-            fetchMemories(); // Ricarica la bacinella per far apparire il nuovo globo!
+            fetchMemories(); // Ricarica la bacinella per far apparire il ricordo nuovo
         } else {
-            window.pfAlertMessage(data.message); // Probabilmente l'utente non è loggato
+            window.pfAlertMessage(data.message);
         }
     });
 
-    // All'avvio della pagina, pesca i ricordi
+    // All'avvio della pagina prende i ricordi
     fetchMemories();
 });

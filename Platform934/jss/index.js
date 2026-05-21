@@ -209,7 +209,7 @@ async function playAuthUnlock() {
     await playLocalAuthUnlock();
 }
 
-// --- TRANSIZIONI TRA LOGIN E REGISTRAZIONE ---
+//Transizione tra i form
 goToRegisterBtn.addEventListener('click', () => {
     loginForm.classList.remove('active');
     loginForm.classList.add('hidden');
@@ -224,12 +224,11 @@ goToLoginBtn.addEventListener('click', () => {
     loginForm.classList.add('active');
 });
 
-// --- LOGICA DI REGISTRAZIONE COLLEGATA AL PHP ---
+// Registrazione mandata al php con json
 registerForm.addEventListener('submit', async (e) => {
     e.preventDefault(); 
     
     const username = document.getElementById('reg-username').value.trim();
-    // ECCO LA MODIFICA: Catturiamo anche l'email dal form!
     const email = document.getElementById('reg-email').value.trim();
     const password = document.getElementById('reg-password').value.trim();
     const passwordError = getPasswordValidationError(password);
@@ -250,7 +249,6 @@ registerForm.addEventListener('submit', async (e) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            // ECCO LA MODIFICA: Inseriamo anche l'email nel pacchetto JSON
             body: JSON.stringify({ username, email, password })
         });
         
@@ -275,7 +273,7 @@ registerForm.addEventListener('submit', async (e) => {
     }
 });
 
-// --- LOGICA DI LOGIN COLLEGATA AL PHP ---
+// Login mandato al php
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
@@ -295,7 +293,7 @@ loginForm.addEventListener('submit', async (e) => {
         const data = await response.json();
         
         if(data.success) {
-            // Salva comunque un piccolo dato per il JS (es. per mostrare il nome nella navbar)
+            // Salva comunque l'utente attivo
             sessionStorage.setItem('activeWizard', username);
             await playAuthUnlock();
             window.location.href = 'homepage.html';

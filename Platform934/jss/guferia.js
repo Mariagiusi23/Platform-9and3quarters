@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const destinatario = document.getElementById('howler-to').value;
         const testo = document.getElementById('howler-text').value;
 
-        // Effetto sul bottone durante l'invio
         btnSend.innerText = "Il gufo sta partendo...";
         btnSend.disabled = true;
         statusMsg.classList.add('hidden');

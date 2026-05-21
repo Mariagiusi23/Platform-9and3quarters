@@ -37,28 +37,27 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Apre una vecchia lettera in silenzio
+    // Apre una vecchia strillettera in silenzio
     function openReadAsh(letter) {
         document.getElementById('ash-sender').innerText = letter.mittente;
         document.getElementById('ash-text').innerText = letter.testo;
         ashModal.classList.remove('hidden');
     }
 
-    // Apre una nuova Strillettera urlando!
+    // Apre una nuova strillettera
     function openUnreadHowler(letter) {
         howlerSender.innerText = letter.mittente;
         howlerEnvelope.classList.remove('hidden');
         howlerAshes.classList.add('hidden');
         howlerModal.classList.remove('hidden');
         
-        // Segnala come letta nel database per il futuro
+        // Segnala come letta nel database 
         fetch('php/mark_read.php', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ id: letter.id })
         });
 
-        // Partenza effetto esplosione immediato
         howlerEnvelope.style.transform = 'scale(2)';
         howlerEnvelope.style.opacity = '0';
         howlerEnvelope.style.transition = '0.2s';
@@ -69,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 200);
     }
 
-    // La funzione audio (Migliorata col tuo feedback sul volume)
+    // La funzione audio
     function unleashHowler(text) {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         const audioCtx = new AudioContext();
@@ -103,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     howlerModal.classList.add('hidden');
                     howlerEnvelope.style.opacity = '1';
                     howlerEnvelope.style.transform = 'scale(1)';
-                    loadMailbox(); // Ricarica la griglia, ora la busta diventerà grigia!
+                    loadMailbox(); // Ricarica la griglia e quindi la busta diventa grigia
                 }, 3000);
             };
 

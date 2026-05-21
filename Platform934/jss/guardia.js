@@ -1,4 +1,4 @@
-// Controlla se c'e' un mago attualmente loggato nella sessione
+// Controlla se ce un mago attualmente loggato nella sessione
 const activeWizard = sessionStorage.getItem('activeWizard');
 
 const guardMessages = {
@@ -18,7 +18,7 @@ function getGuardLanguage() {
     return localStorage.getItem('pf_google_lang') || localStorage.getItem('pf_lang') || 'it';
 }
 
-// Se non c'e' nessuno, lancia l'incantesimo di respingimento
+// Se non ce nessuno, lancia l'incantesimo di respingimento
 if (!activeWizard) {
     const lang = getGuardLanguage();
     alert(guardMessages[lang] || guardMessages.it);

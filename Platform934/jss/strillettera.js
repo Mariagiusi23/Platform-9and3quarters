@@ -12,7 +12,7 @@
 
     if (!howlerModal || !howlerEnvelope || !howlerSender || !howlerAshes) return;
 
-    // 1. Controlla ogni 10 secondi se ci sono gufi in arrivo
+    // Controlla ogni 10 secondi se ci sono gufi in arrivo
     setInterval(checkPigeonPost, 10000);
     window.PF_CHECK_HOWLER = checkPigeonPost;
     // Controlla anche subito al caricamento della pagina
@@ -24,11 +24,11 @@
             const data = await res.json();
 
             if (data.success && data.howler) {
-                // Abbiamo ricevuto una strillettera!
+                // Strillettera ricevuta
                 currentHowlerText = data.howler.testo;
                 howlerSender.innerText = data.howler.mittente;
                 
-                // Resetta la UI
+                // Resett UI
                 howlerEnvelope.classList.remove('hidden');
                 howlerAshes.classList.add('hidden');
                 howlerModal.classList.remove('hidden');
@@ -38,10 +38,10 @@
         }
     }
 
-    // 2. Apri e scatena l'audio (Richiede il Click dell'utente!)
+    // Dopo il click dell'utente (apertuta lettera) 
     howlerEnvelope.addEventListener('click', () => {
         howlerEnvelope.style.animation = 'none'; // Smette di tremare
-        howlerEnvelope.style.transform = 'scale(2)'; // Ti salta in faccia
+        howlerEnvelope.style.transform = 'scale(2)';
         howlerEnvelope.style.opacity = '0'; // Scompare
         howlerEnvelope.style.transition = '0.2s';
         
@@ -52,25 +52,25 @@
     });
 
 function unleashHowler(text) {
-        // --- WEB AUDIO API (Effetto ambiente minaccioso, ma controllato) ---
+        // Web audio API
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         const audioCtx = new AudioContext();
         
         const oscillator = audioCtx.createOscillator();
         const gainNode = audioCtx.createGain();
 
-        // Usiamo 'triangle' che è molto meno fastidiosa e gracchiante di 'sawtooth'
+        // Usiamo un oscillatore di tipo triangle 
         oscillator.type = 'triangle';
         oscillator.frequency.setValueAtTime(50, audioCtx.currentTime); 
         
-        // Abbassiamo drasticamente il volume di partenza (0.2 invece di 1)
+        // Abbassiamo il volume di partenza
         gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
 
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
         oscillator.start();
 
-        // --- WEB SPEECH API (La voce urlante) ---
+        // Web Speech API
         if ('speechSynthesis' in window) {
             const synth = window.speechSynthesis;
             const utterance = new SpeechSynthesisUtterance(text);
@@ -80,28 +80,27 @@ function unleashHowler(text) {
             utterance.rate = 1.3;  
             utterance.volume = 1.0; 
 
-            // Cosa fare QUANDO FINISCE DI PARLARE
+            // Cosa fa quando smette di parlare
             utterance.onend = () => {
                 
-                // 1. Spegne l'oscillatore dolcemente in mezzo secondo
+                // Spegne l'oscillatore 
                 gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
                 setTimeout(() => {
                     oscillator.stop();
                 }, 500);
 
-                // 2. Mostra le ceneri
                 howlerAshes.classList.remove('hidden');
                 
-                // 3. Chiudi tutto dopo 3 secondi
+                // Chiude tutto dopo 3 secondi
                 setTimeout(() => {
                     howlerModal.classList.add('hidden');
-                    // Riporta la busta allo stato originale per la prossima volta
+                    // Riporta la busta allo stato iniziale
                     howlerEnvelope.style.opacity = '1';
                     howlerEnvelope.style.transform = 'scale(1)';
                 }, 3000);
             };
 
-            // SCATENA LA VOCE
+            // Parte la voce
             synth.speak(utterance);
         } else {
             window.pfAlert("howler_voice_unsupported", { text });

@@ -9,58 +9,58 @@ const wands = [
 ];
 
 // Le domande del Test
-// Ogni 'wandId' corrisponde all'ID della bacchetta che riceverà 1 punto se viene scelta quell'opzione.
+// Ogni wandId corrisponde all'ID della bacchetta che riceverà 1 punto se viene selezionata quell'opzione
 const questions = [
     {
         question: "Davanti a un pericolo imminente, come reagisci?",
         options: [
-            { text: "Lo affronto a testa alta, costi quel che costi.", wandId: 1 }, // Harry
-            { text: "Cerco una soluzione logica, magari ricordando qualcosa letto in un libro.", wandId: 2 }, // Hermione
-            { text: "Mi preoccupo prima di tutto di proteggere i miei amici.", wandId: 3 }, // Ron
-            { text: "Sfrutto la situazione a mio vantaggio per uscirne vincitore.", wandId: 5 } // Draco
+            { text: "Lo affronto a testa alta, costi quel che costi.", wandId: 1 }, 
+            { text: "Cerco una soluzione logica, magari ricordando qualcosa letto in un libro.", wandId: 2 }, 
+            { text: "Mi preoccupo prima di tutto di proteggere i miei amici.", wandId: 3 },
+            { text: "Sfrutto la situazione a mio vantaggio per uscirne vincitore.", wandId: 5 } 
         ]
     },
     {
         question: "Se potessi scegliere un oggetto magico da portare sempre con te, sceglieresti...",
         options: [
-            { text: "Un mantello dell'invisibilità.", wandId: 1 }, // Harry
-            { text: "Una Giratempo per fare più cose.", wandId: 2 }, // Hermione
-            { text: "Qualcosa di divertente, come i Tiri Vispi Weasley.", wandId: 3 }, // Ron
-            { text: "Un manufatto oscuro e di potere inestimabile.", wandId: 6 } // Voldemort
+            { text: "Un mantello dell'invisibilità.", wandId: 1 }, 
+            { text: "Una Giratempo per fare più cose.", wandId: 2 }, 
+            { text: "Qualcosa di divertente, come i Tiri Vispi Weasley.", wandId: 3 }, 
+            { text: "Un manufatto oscuro e di potere inestimabile.", wandId: 6 } 
         ]
     },
     {
         question: "Quale di queste creature magiche ti affascina maggiormente?",
         options: [
-            { text: "La Fenice, simbolo di rinascita e lealtà.", wandId: 1 }, // Harry (o Voldemort, ma diamolo ad Harry)
-            { text: "Il Drago, fiero e inarrestabile.", wandId: 2 }, // Hermione
-            { text: "Il Thestral, incompreso e misterioso.", wandId: 4 }, // Sambuco
-            { text: "L'Unicorno, puro e sfuggente.", wandId: 5 } // Draco/Ron
+            { text: "La Fenice, simbolo di rinascita e lealtà.", wandId: 1 }, 
+            { text: "Il Drago, fiero e inarrestabile.", wandId: 2 }, 
+            { text: "Il Thestral, incompreso e misterioso.", wandId: 4 }, 
+            { text: "L'Unicorno, puro e sfuggente.", wandId: 5 } 
         ]
     },
     {
         question: "Qual è il tuo ambiente ideale per riflettere?",
         options: [
-            { text: "Il calore della Sala Comune di fronte al fuoco.", wandId: 3 }, // Ron
-            { text: "Il silenzio assoluto della Biblioteca di Hogwarts.", wandId: 2 }, // Hermione
-            { text: "I sotterranei freddi e calcolatori.", wandId: 5 }, // Draco
-            { text: "L'oscurità della Foresta Proibita.", wandId: 6 } // Voldemort
+            { text: "Il calore della Sala Comune di fronte al fuoco.", wandId: 3 }, 
+            { text: "Il silenzio assoluto della Biblioteca di Hogwarts.", wandId: 2 }, 
+            { text: "I sotterranei freddi e calcolatori.", wandId: 5 }, 
+            { text: "L'oscurità della Foresta Proibita.", wandId: 6 } 
         ]
     },
     {
         question: "Qual è la tua ambizione più grande?",
         options: [
-            { text: "Sconfiggere le ingiustizie e proteggere i deboli.", wandId: 1 }, // Harry
-            { text: "Avere una conoscenza sconfinata della magia.", wandId: 2 }, // Hermione
-            { text: "Raggiungere il potere assoluto, a qualunque costo.", wandId: 6 }, // Voldemort
-            { text: "Possedere una magia imbattibile e leggendaria.", wandId: 4 } // Sambuco
+            { text: "Sconfiggere le ingiustizie e proteggere i deboli.", wandId: 1 }, 
+            { text: "Avere una conoscenza sconfinata della magia.", wandId: 2 },
+            { text: "Raggiungere il potere assoluto, a qualunque costo.", wandId: 6 },
+            { text: "Possedere una magia imbattibile e leggendaria.", wandId: 4 } 
         ]
     }
 ];
 
-// Variabili di stato del Test
+
 let currentQuestionIndex = 0;
-// Oggetto per tenere traccia dei punti di ogni bacchetta { idBacchetta: punteggio }
+// Oggetto per tenere traccia dei punti di ogni bacchetta, ho id bacchetta : punteggio
 let scores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
 
 // Elementi del DOM
