@@ -23,7 +23,7 @@
     <script>
         document.getElementById('reset-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            // Prende il token dalla barra degli indirizzi (URL)
+            // Prende il token dalla barra degli indirizzi 
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
             const newPassword = document.getElementById('new-password').value;

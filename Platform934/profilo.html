@@ -11,10 +11,9 @@
     <link rel="stylesheet" href="css/profilo.css?v=home-adventure-title-1">
     <link rel="stylesheet" href="css/style.css?v=home-adventure-title-1">
     
-    <!-- Incantesimo di protezione per bloccare i babbani -->
     <script src="jss/guardia.js?v=i18n-1"></script>
 
-    <!-- Mappa magica per dire al browser dove trovare i libri di Three.js -->
+    <!-- Mappa per Three.js -->
     <script type="importmap">
       {
         "imports": {
@@ -74,7 +73,6 @@
         <section class="avatar-section quiz-section">
             <h2>Il tuo Avatar Magico</h2>
             
-            <!-- Il palcoscenico 3D -->
             <div id="3d-canvas-container" class="avatar-preview-3d">
                 <div id="loading-spell" class="loading-text">Caricamento Avatar...</div>
                 
@@ -87,13 +85,13 @@
                 </div>
             </div>
 
-            <!-- MODALITA' VISUALIZZAZIONE (Inizialmente attiva se c'è un avatar) -->
+            <!-- Modalità visualizza -->
             <div id="view-mode-container" class="customization-controls">
                 <p style="color: #aaa; font-style: italic; text-align: center; margin-bottom: 1rem;">Ecco come ti vedono gli altri maghi!</p>
                 <button id="edit-avatar-btn" class="quiz-btn" style="background: #3c1e64; color: white;">Modifica Avatar</button>
             </div>
 
-            <!-- MODALITA' MODIFICA (Nascosta di default, si mostra cliccando "Modifica") -->
+            <!-- Modalità modifica -->
             <div id="edit-mode-container" class="customization-controls hidden">
                 <div class="input-group">
                     <label>Scegli il tuo Mago o Strega:</label>
@@ -166,7 +164,6 @@
         </div>
         <div id="howler-ashes" class="hidden">🔥 La lettera si è incenerita... 🔥</div>
     </div>
-    <!-- Lo script principale del profilo caricato come "modulo" -->
     <script src="script.js?v=home-adventure-title-1"></script>
 	    <script type="module" src="jss/profilo.js?v=alerts-i18n-1"></script>
 </body>
