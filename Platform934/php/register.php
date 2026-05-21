@@ -1,5 +1,4 @@
 <?php
-// php/register.php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -98,13 +97,13 @@ function isDuplicateEmailError(PDOException $e) {
     return stripos($message, 'email') !== false;
 }
 
-// Controlla che non manchi nulla
+// Controlla che non manca niente
 if (empty($username) || empty($email) || empty($password)) {
     echo json_encode(["success" => false, "message" => "Dati mancanti. Compila tutti i campi!"]);
     exit;
 }
 
-// Requisiti validi solo per le nuove registrazioni.
+// RPer le nuove registrazioni
 if (strlen($password) < 8) {
     echo json_encode(["success" => false, "message" => "La parola d'ordine deve avere almeno 8 caratteri."]);
     exit;
@@ -126,7 +125,6 @@ if (usernameAlreadyExists($pdo, $username)) {
     exit;
 }
 
-// L'email puo' essere riusata da piu' profili: l'unico vincolo di registrazione e' lo username.
 allowRepeatedEmails($pdo);
 
 // Cripta la password per la sicurezza

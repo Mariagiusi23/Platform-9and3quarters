@@ -1,18 +1,19 @@
 <?php
+
 header('Content-Type: application/json');
 
-//PHPMailer
+// Evoco PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Colleghiamo i file della libreria
+// Colleghiamo i file della libreria che si trovano nella cartella src
 require 'src/Exception.php';
 require 'src/PHPMailer.php';
 require 'src/SMTP.php';
 
 require 'db.php';
 
-// Lettura di nome da mago ed email inseriti nella pagina recupero.html
+// Lettura di nome ed email inseriti nella pagina recupero.html
 $data = json_decode(file_get_contents("php://input"));
 $username = trim($data->username ?? '');
 $email = trim($data->email ?? '');
@@ -22,7 +23,7 @@ if ($username === '' || $email === '' || !filter_var($email, FILTER_VALIDATE_EMA
     exit;
 }
 
-//  Cerchiamo il profilo esatto: la stessa email puo' appartenere a piu' maghi
+// Cerchiamo il profilo esatto
 $stmt = $pdo->prepare("SELECT id, username, email FROM users WHERE username = ? AND LOWER(TRIM(email)) = LOWER(?) LIMIT 1");
 $stmt->execute([$username, $email]);
 $user = $stmt->fetch();
@@ -32,17 +33,17 @@ if ($user) {
     $token = bin2hex(random_bytes(32)); 
     $expires = date("Y-m-d H:i:s", strtotime('+1 hour'));
 
-    // Salviamo il token solo sul profilo selezionato, non su tutti quelli con la stessa email
+    // Salviamo il token solo sul profilo selezionato
     $updateStmt = $pdo->prepare("UPDATE users SET reset_token = ?, reset_expires = ? WHERE id = ?");
     $updateStmt->execute([$token, $expires, $user['id']]);
 
+    // Il link punta alla cartella reale in cui si trova il progetto
     $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
     $hostName = $_SERVER['HTTP_HOST'] ?? 'localhost';
     $basePath = rtrim(dirname(dirname($_SERVER['SCRIPT_NAME'] ?? '/Platform934/php/forgot_password.php')), '/\\');
     $resetLink = $scheme . '://' . $hostName . $basePath . '/reset.html?token=' . urlencode($token);
     $safeUsername = htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8');
 
-    // PRreparazione invio email
     $mail = new PHPMailer(true);
 
     try {
@@ -51,11 +52,10 @@ if ($user) {
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
         
-
-        // Mail che manda le mail
+        //Mail da cui arrivano l email
         $mail->Username   = 'aurorawattpad1981@gmail.com'; 
         
-        //  LA PASSWORD PER LE APP DI GOOGLE DI 16 CARATTERI 
+        // Password per le app di google
         $mail->Password   = 'ezbzlbmpdlmkmyks'; 
         
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
@@ -63,8 +63,6 @@ if ($user) {
 
         $mail->setFrom('aurorawattpad1981@gmail.com', 'Platform 9 3/4');
         
-        // =========================================================================
-
         // Destinatario: l'email verificata sul profilo trovato
         $mail->addAddress($user['email'], $user['username']);
 
@@ -84,7 +82,7 @@ if ($user) {
             </div>
         ";
 
-        // Spedisci l'email
+        // Spedisco l'email
         $mail->send();
         
         // Messaggio di successo che appare sulla pagina recupero.html
@@ -94,7 +92,7 @@ if ($user) {
         ]);
 
     } catch (Exception $e) {
-        // Se c'è un errore nella spedizione
+        // Se c'è un errore nella spedizione 
         echo json_encode([
             "success" => false, 
             "message" => "Il gufo si è perso a causa di un'interferenza babbana."

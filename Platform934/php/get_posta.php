@@ -11,7 +11,7 @@ if (!isset($_SESSION['activeWizard'])) {
 $destinatario = $_SESSION['activeWizard'];
 
 try {
-    // Peschiamo tutte le lettere, dalle più recenti alle più vecchie
+    // Peschiamo tutte le lettere
     $stmt = $pdo->prepare("SELECT * FROM strillettere WHERE destinatario = ? ORDER BY data_invio DESC");
     $stmt->execute([$destinatario]);
     $lettere = $stmt->fetchAll(PDO::FETCH_ASSOC);

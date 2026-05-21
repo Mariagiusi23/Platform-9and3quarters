@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost';
 $db   = 'platform934';
-$user = 'root'; // Utente di default di XAMPP
-$pass = '';     // Password di default vuota su XAMPP
+$user = 'root'; 
+$pass = '';     
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
