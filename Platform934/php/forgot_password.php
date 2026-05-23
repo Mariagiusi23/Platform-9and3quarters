@@ -53,15 +53,13 @@ if ($user) {
         $mail->SMTPAuth   = true;
         
         //Mail da cui arrivano l email
-        $mail->Username   = 'aurorawattpad1981@gmail.com'; 
+        $mail->Username   = ''; 
         
         // Password per le app di google
-        $mail->Password   = 'ezbzlbmpdlmkmyks'; 
+        $mail->Password   = ''; 
         
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
-
-        $mail->setFrom('aurorawattpad1981@gmail.com', 'Platform 9 3/4');
+        $mail->Port       = '', 'Platform 9 3/4');
         
         // Destinatario: l'email verificata sul profilo trovato
         $mail->addAddress($user['email'], $user['username']);
